@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Header"] = "Songs";
+}
+
+@model List<MusicInside.ModelView.SongRowViewModel>
+
+<h2>@ViewData["Header"]</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Title
+            </th>
+            <th>
+                Artist
+            </th>
+            <th>
+                Album
+            </th>
+            <th>
+                Genre
+            </th>
+            <th>
+                Year
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("Detail", "Song", new { id = item.SongId })" title="Go to Song Details">
+                        <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                    </a>
+                    @Html.DisplayFor(modelItem => item.TitleLabel)
+                </td>
+                <td>
+                    <a href="@Url.Action("Detail", "Artist", new { id = item.ArtistId })" title="Go to Artist Details">
+                        <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                    </a>
+                    @Html.DisplayFor(modelItem => item.ArtistLabel)
+                </td>
+                <td>
+                    <a href="@Url.Action("Detail", "Album", new { id = item.AlbumId })" title="Go to Album Details">
+                        <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                    </a>
+                    @Html.DisplayFor(modelItem => item.AlbumLabel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GenreLabel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YearNumber)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

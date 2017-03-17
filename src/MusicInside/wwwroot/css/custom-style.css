@@ -1,0 +1,26 @@
+body .site-header {
+  background: black;
+  position: relative;
+  bottom: 50px;
+}
+body .site-content {
+  position: relative;
+  bottom: 50px;
+}
+body #page-content-wrapper .detail-common .container-fluid .row .img-reduced {
+  width: 100%;
+}
+body #page-content-wrapper .detail-common .container-fluid .row .audio-streaming {
+  width: 100%;
+}
+body #page-content-wrapper .detail-common .container-fluid .spaced {
+  padding-top: 25px;
+}
+body #page-content-wrapper .footer {
+  width: 100%;
+  position: fixed;
+  bottom: 0px;
+}
+body #page-content-wrapper .table tbody tr td.border-right-solid {
+  border-right: 1px solid #ddd;
+}

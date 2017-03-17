@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="author" content="Alessandro Gargiulo">
+    <title>@ViewData["Title"] - MusicInside</title>
+
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <!-- Custom CSS -->
+        <link href="~/css/simple-sidebar.css" rel="stylesheet" />
+        <link href="~/css/custom-style.css" rel="stylesheet" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <!-- Custom CSS -->
+        <link href="~/css/simple-sidebar.css" rel="stylesheet" />
+        <link href="~/css/custom-style.css" rel="stylesheet" />
+    </environment>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row site-header">
+            <div class="col-md-12">
+                <div class="page-header">
+                    <h1>MUSIC INSIDE</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row site-content">
+            <div id="wrapper">
+                <!-- Sidebar -->
+                <div id="sidebar-wrapper">
+                    <ul class="sidebar-nav">
+                        <li class="sidebar-brand">
+                            <a href="@Url.Action("Index","Home")">
+                                Home Page
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index","Song")">Songs</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index","Artist")">Artists</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index","Album")">Albums</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index","Search")">Advanced Search</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Contact","Home")">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /#sidebar-wrapper -->
+                <!-- Page Content -->
+                <div id="page-content-wrapper">
+                    @RenderBody()
+                    <div class="footer">
+                        <hr />
+                        <footer>
+                            <p>&copy; 2017 - MusicInside</p>
+                        </footer>
+                    </div>
+                </div>
+                <!-- /#page-content-wrapper -->
+            </div>
+            <!-- /#wrapper -->
+        </div>
+    </div>
+
+
+    <environment names="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

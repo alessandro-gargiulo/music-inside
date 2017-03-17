@@ -1,0 +1,65 @@
+﻿@{
+
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Details
+            </th>
+            <th>
+                Picture
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>
+                <p>Art Name: Laura Pausini</p>
+                <p>Name: Laura</p>
+                <p>Surname: Pausini</p>        
+                <p>Birth Year: 23/07/1981</p>
+            </th>
+            <th>
+                Here, an'image, if possible.
+            </th>
+        </tr>
+    </tbody>
+    <tbody>
+        <tr>
+            <td class="border-right-solid">
+                <b>Songs</b>
+            </td>
+            <td>
+                <b>Albums</b>
+            </td>
+        </tr>
+        <tr>
+            <td class="border-right-solid">
+                <a href="@Url.Action("Detail", "Song", new { id = 0 })" title="Go to Song Details">
+                    <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                </a>
+                Tra Te ed Il Mare<br />
+                <a href="@Url.Action("Detail", "Song", new { id = 0 })" title="Go to Song Details">
+                    <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                </a>
+                Destinazione Paradiso<br />
+                <a href="@Url.Action("Detail", "Song", new { id = 0 })" title="Go to Song Details">
+                    <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                </a>
+                Strani Amori<br />
+            </td>
+            <td>
+                <a href="@Url.Action("Detail", "Album", new { id = 0 })" title="Go to Album Details">
+                    <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                </a>
+                Album 1<br />
+                <a href="@Url.Action("Detail", "Album", new { id = 0 })" title="Go to Album Details">
+                    <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                </a>
+                Album 2<br />
+            </td>
+        </tr>
+    </tbody>
+</table>

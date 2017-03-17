@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Artists";
+}
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Art Name
+            </th>
+            <th>
+                Number of Songs
+            </th>
+            <th>
+                Go to Details
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                Laura Pausini
+            </td>
+            <td>
+                3
+            </td>
+            <td>
+                <a href="@Url.Action("Detail", "Artist", new { id = 0 })">
+                    <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Vasco Rossi
+            </td>
+            <td>
+                5
+            </td>
+            <td>
+                <a href="@Url.Action("Detail", "Artist", new { id = 0 })">
+                    <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>

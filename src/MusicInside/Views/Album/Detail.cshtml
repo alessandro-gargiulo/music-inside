@@ -1,0 +1,54 @@
+﻿@{
+}
+
+@{
+
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Details
+            </th>
+            <th>
+                Cover
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>
+                <p>Title: Tra te e Il Mare</p>
+                <p>Artist: Laura Pausini</p>
+                <p>Tipo: Album/Singolo</p>
+            </th>
+            <th>
+                Here, the cover.
+            </th>
+        </tr>
+    </tbody>
+    <tbody>
+        <tr>
+            <td colspan="2">
+                <b>Songs</b>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <a href="@Url.Action("Detail", "Song", new { id = 0 })" title="Go to Song Details">
+                    <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                </a>
+                Tra Te ed Il Mare<br />
+                <a href="@Url.Action("Detail", "Song", new { id = 0 })" title="Go to Song Details">
+                    <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                </a>
+                Destinazione Paradiso<br />
+                <a href="@Url.Action("Detail", "Song", new { id = 0 })" title="Go to Song Details">
+                    <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                </a>
+                Strani Amori<br />
+            </td>
+        </tr>
+    </tbody>
+</table>
