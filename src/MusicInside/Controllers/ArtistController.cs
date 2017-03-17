@@ -4,15 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MusicInside.ManagerInterfaces;
+using log4net;
 
 namespace MusicInside.Controllers
 {
     public class ArtistController : Controller
     {
         private readonly IArtistManager _artistManager;
-        public ArtistController(IArtistManager manager)
+        private readonly ILog _logger;
+        public ArtistController(IArtistManager manager, ILog logger)
         {
             _artistManager = manager;
+            _logger = logger;
         }
         // GET: /<controller>/
         public IActionResult Index()

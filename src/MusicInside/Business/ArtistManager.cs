@@ -1,4 +1,5 @@
-﻿using MusicInside.DataAccessInterfaces;
+﻿using log4net;
+using MusicInside.DataAccessInterfaces;
 using MusicInside.ManagerInterfaces;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,12 @@ namespace MusicInside.Business
     public class ArtistManager : IArtistManager
     {
         private readonly IArtistDataAccess _artistDataAccess;
+        private readonly ILog _logger;
 
-        public ArtistManager(IArtistDataAccess dataAccess)
+        public ArtistManager(IArtistDataAccess dataAccess, ILog logger)
         {
             _artistDataAccess = dataAccess;
+            _logger = logger;
         }
     }
 }

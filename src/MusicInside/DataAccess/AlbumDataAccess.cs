@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using log4net;
+using Microsoft.Extensions.Configuration;
 using MusicInside.DataAccessInterfaces;
 using MusicInside.Models;
 using System;
@@ -10,6 +11,6 @@ namespace MusicInside.DataAccess
 {
     public class AlbumDataAccess : BaseDataAccess, IAlbumDataAccess
     {
-        public AlbumDataAccess(SongDBContext context, IConfiguration conf) : base(context, conf) { }
+        public AlbumDataAccess(SongDBContext context, IConfiguration conf, ILog logger) : base(context, conf, logger) { }
     }
 }

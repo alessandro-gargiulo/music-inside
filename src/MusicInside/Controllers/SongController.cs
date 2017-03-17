@@ -6,14 +6,17 @@ using Microsoft.AspNetCore.Mvc;
 using MusicInside.Models;
 using MusicInside.ManagerInterfaces;
 using MusicInside.ModelView;
+using log4net;
 
 namespace MusicInside.Controllers
 {
     public class SongController : Controller
     {
         private readonly ISongManager _songManager;
-        public SongController(ISongManager manager) {
+        private readonly ILog _logger;
+        public SongController(ISongManager manager, ILog logger) {
             _songManager = manager;
+            _logger = logger;
         }
 
         public IActionResult Index()

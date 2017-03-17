@@ -7,12 +7,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using MusicInside.ModelView;
 using System.Data.SqlClient;
+using log4net;
 
 namespace MusicInside.DataAccess
 {
     public class SongDataAccess : BaseDataAccess, ISongDataAccess
     {
-        public SongDataAccess(SongDBContext context, IConfiguration conf) : base(context, conf) { }
+        public SongDataAccess(SongDBContext context, IConfiguration conf, ILog logger) : base(context, conf, logger) { }
 
         /// <summary>
         /// Call a stored procedure which return all the song from the database formatted as the view model.
@@ -23,7 +24,7 @@ namespace MusicInside.DataAccess
             List<SongRowViewModel> songs = new List<SongRowViewModel>();
             try
             {
-                SqlConnection _connection = new SqlConnection(connString);
+                SqlConnection _connection = new SqlConnection(_connString);
                 SqlCommand _cmd = new SqlCommand();
                 SqlDataReader _reader;
 

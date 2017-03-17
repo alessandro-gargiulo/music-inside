@@ -4,16 +4,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MusicInside.ManagerInterfaces;
+using log4net;
 
 namespace MusicInside.Controllers
 {
     public class AlbumController : Controller
     {
         private readonly IAlbumManager _albumManager;
+        private readonly ILog _logger;
 
-        public AlbumController(IAlbumManager manager)
+        public AlbumController(IAlbumManager manager, ILog logger)
         {
             _albumManager = manager;
+            _logger = logger;
         }
 
         public IActionResult Index()

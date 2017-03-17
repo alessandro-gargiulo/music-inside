@@ -55,6 +55,8 @@ namespace MusicInside
 
             // Dependency injection for Configuration File
             services.AddSingleton<IConfiguration>(Configuration);
+            // Dependency injection for Log
+            services.AddSingleton<log4net.ILog>(log);
 
             // Dependency injection for Application Classes
             // Data Access Layer
