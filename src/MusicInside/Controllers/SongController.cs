@@ -21,12 +21,13 @@ namespace MusicInside.Controllers
 
         public IActionResult Index()
         {
-            List<SongRowViewModel> allSong = _songManager.getAllSongs();
+            List<SongRowViewModel> allSong = _songManager.GetAllSongs();
             return View(allSong);
         }
 
         public IActionResult Detail(int id = -1)
         {
+            //SongDetailViewModel songDetail = _songManager
             return View();
         }
 
