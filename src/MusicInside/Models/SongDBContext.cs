@@ -17,6 +17,8 @@ namespace MusicInside.Models
         public DbSet<Moment> Moments { get; set; }
         public DbSet<Statistic> Statistics { get; set; }
         public DbSet<Featuring> Featurings { get; set; }
+        public DbSet<SongGenre> SongGenres { get; set; }
+        public DbSet<SongMoment> SongMoments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
