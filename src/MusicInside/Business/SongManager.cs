@@ -42,7 +42,7 @@ namespace MusicInside.Business
             {
                 // Prepairing data
                 Song song = _songDataAccess.GetSongById(id);
-                Album album = _albumDataAccess.GetAlbumById(song.AlbumId);
+                Album album = _albumDataAccess.GetAlbumById(song.AlbumId.GetValueOrDefault());
                 Artist artist = _artistDataAccess.GetArtistById(album.ArtistId);
                 List<Genre> genres = _genreDataAccess.GetGenresBySongId(id);
                 string genreLabel = String.Join(", ", genres.Select(des => des.Description).ToArray());
