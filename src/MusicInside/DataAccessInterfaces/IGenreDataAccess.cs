@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MusicInside.DataAccessInterfaces
 {
-    interface IGenreDataAccess
+    public interface IGenreDataAccess
     {
         List<Genre> GetGenresBySongId(int id);
     }

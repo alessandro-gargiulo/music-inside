@@ -17,13 +17,25 @@ namespace MusicInside.DataAccess
         public List<Genre> GetGenresBySongId(int id)
         {
             if (id < 0) throw new InvalidIdException("Invalid song id");
-            List<Genre> query = _db.SongGenres.Join(_db.Genres,
-                x => x.GenreId,
-                y => y.ID, (x, y) => new
-                {
-                    SG = x,
-                    G = y
-                }).Where(z => z.SG.SongId == id).Select(s => new Genre { ID = s.G.ID, Description = s.G.Description }).ToList();
+            List<Genre> query = null;
+            try
+            {
+                query = _db.SongGenres.Join(_db.Genres,
+                    x => x.GenreId,
+                    y => y.ID, (x, y) => new
+                    {
+                        SG = x,
+                        G = y
+                    })
+                    .Where(z => z.SG.SongId == id)
+                    .Select(s => new Genre { ID = s.G.ID, Description = s.G.Description })
+                    .ToList();
+                if (query == null) throw new EntryNotPresentException("Did not found song id into the database");
+            }
+            catch (ArgumentException anex)
+            {
+                _logger.Error("GenreDataAccess | GenreDataAccess: Cannot execute query with null argument: " + anex.Message);
+            }
             return query;
         }
     }
