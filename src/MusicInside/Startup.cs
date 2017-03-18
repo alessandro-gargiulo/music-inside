@@ -63,6 +63,7 @@ namespace MusicInside
             services.AddScoped(typeof(ISongDataAccess), typeof(SongDataAccess));
             services.AddScoped(typeof(IArtistDataAccess), typeof(ArtistDataAccess));
             services.AddScoped(typeof(IAlbumDataAccess), typeof(AlbumDataAccess));
+            services.AddScoped(typeof(IGenreDataAccess), typeof(GenreDataAccess));
             // Business Layer
             services.AddScoped(typeof(ISongManager), typeof(SongManager));
             services.AddScoped(typeof(IArtistManager), typeof(ArtistManager));
