@@ -43,7 +43,7 @@ namespace MusicInside.DataAccess
             }
             catch (Exception ex)
             {
-                _logger.Error("SongDataAccess | GetAllSong: generico problem have occurred: " + ex.Message);
+                _logger.Error("SongDataAccess | GetAllSong: A generic problem have occurred: " + ex.Message);
             }
             return songs;
         }

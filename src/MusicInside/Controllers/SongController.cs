@@ -7,6 +7,7 @@ using MusicInside.Models;
 using MusicInside.ManagerInterfaces;
 using MusicInside.ModelView;
 using log4net;
+using MusicInside.Exceptions;
 
 namespace MusicInside.Controllers
 {
@@ -27,8 +28,21 @@ namespace MusicInside.Controllers
 
         public IActionResult Detail(int id = -1)
         {
-            //SongDetailViewModel songDetail = _songManager
-            return View();
+            try
+            {
+                SongDetailViewModel songDetail = _songManager.GetDetailOfSong(id);
+                return View(songDetail);
+            }
+            catch (InvalidIdException iiex)
+            {
+                _logger.Error("SongController | Detail: Invalid id exception " + iiex.Message);
+                return null;
+            }
+            catch (EntryNotPresentException enpex)
+            {
+                _logger.Error("SongController | Detail: entry not present exception " + enpex.Message);
+                return null;
+            }
         }
 
         [HttpGet]
