@@ -1,16 +1,17 @@
 ﻿@{
-    
+    @model MusicInside.ModelView.SongDetailViewModel
 }
 <div class="detail-common">
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-9">
-                <h2>Laura Pausini - Tra Te e Il Mare</h2>
-                <p>Album: Tra Te e Il Mare</p>
-                <p>Anno: 2001</p>
-                <p>Genere: Leggera</p>
-                <p>Last Play: 12/03/2017</p>
-                <p>Number Of Play: 30</p>
+                <h2>@Html.DisplayFor(x => x.ArtistLabel) - @Html.DisplayFor(x => x.TitleLabel)</h2>
+                <p>Album: @Html.DisplayFor(x => x.AlbumLabel)</p>
+                <p>Anno: @Html.DisplayFor(x => x.Year)</p>
+                <p>Track #: @Html.DisplayFor(x => x.TrackNo)</p>
+                <p>Genere: @Html.DisplayFor(x => x.GenreLabel)</p>
+                <p>Last Play: @Html.DisplayFor(x => x.LastPlay)</p>
+                <p>Number Of Play: @Html.DisplayFor(x => x.NumOfPlays)</p>
             </div>
             <div class="col-xs-3">
                 <img class="img-rounded img-reduced" src="~/images/sampleAlbum.jpg" />
