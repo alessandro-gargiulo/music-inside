@@ -1,16 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A5084416-D371-43B3-9B90-B698C1968E69}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2E87A0F1-3325-473D-AB60-1D6393B52307}"
-	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
-	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MusicInside", "src\MusicInside\MusicInside.xproj", "{5C50E0E6-FC23-49D1-ADD1-D6EAA666E810}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicInside", "src\MusicInside\MusicInside.csproj", "{5C50E0E6-FC23-49D1-ADD1-D6EAA666E810}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
