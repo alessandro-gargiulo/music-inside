@@ -13,7 +13,7 @@ namespace MusicInside.DataAccess
     {
         protected SongDBContext _db;
         protected readonly string _connString;
-        private readonly ILog _logger;
+        protected readonly ILog _logger;
 
         public BaseDataAccess(SongDBContext context, IConfiguration conf, ILog logger)
         {

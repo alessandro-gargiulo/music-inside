@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using MusicInside.ModelView;
 using System.Data.SqlClient;
 using log4net;
+using MusicInside.Exceptions;
 
 namespace MusicInside.DataAccess
 {
@@ -15,11 +16,7 @@ namespace MusicInside.DataAccess
     {
         public SongDataAccess(SongDBContext context, IConfiguration conf, ILog logger) : base(context, conf, logger) { }
 
-        /// <summary>
-        /// Call a stored procedure which return all the song from the database formatted as the view model.
-        /// </summary>
-        /// <returns>A list of songs formatted as the view model want</returns>
-        public List<SongRowViewModel> getAllSong()
+        public List<SongRowViewModel> GetAllSong()
         {
             List<SongRowViewModel> songs = new List<SongRowViewModel>();
             try
@@ -40,11 +37,34 @@ namespace MusicInside.DataAccess
                 }
                 _connection.Close();
             }
-            catch (Exception e)
+            catch (SqlException sqlex)
             {
-                
+                _logger.Error("SongDataAccess | GetAllSong: SQL problem have occurred: " + sqlex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("SongDataAccess | GetAllSong: generico problem have occurred: " + ex.Message);
             }
             return songs;
+        }
+
+        public Song GetSongById(int id)
+        {
+            if (id < 0) throw new InvalidIdException("Invalid song id value. Value must be non-negative");
+            Song song = null;
+            try
+            {
+                song = _db.Songs.Where(x => x.ID == id).FirstOrDefault();
+                if(song == null)
+                {
+                    throw new EntryNotPresentException("Can't found a song with chosen id");
+                }
+            }
+            catch(ArgumentNullException anex)
+            {
+                _logger.Error("SongDataAccess | GetSongById: Cannot execute query with null argument: " + anex.Message);
+            }
+            return song;
         }
     }
 }
