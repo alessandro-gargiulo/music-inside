@@ -7,5 +7,6 @@ namespace MusicInside.ManagerInterfaces
 {
     public interface IAlbumManager
     {
+        byte[] GetAlbumCoverFile(int id);
     }
 }

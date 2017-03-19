@@ -34,5 +34,30 @@ namespace MusicInside.DataAccess
                 return album;
             }
         }
+
+        public byte[] GetCoverFile(int id)
+        {
+            if (id < 0) throw new InvalidIdException("Invalid album id value. Value must be non-negative");
+            byte[] arrayByte = null;
+            try
+            {
+                File file = _db.Files.Where(x => x.ID == id).FirstOrDefault();
+                if(file == null)
+                {
+                    throw new EntryNotPresentException("Can't found an album cover with chosen id");
+                }
+                string path = System.IO.Path.Combine(file.Path, file.FileName + "." + file.Extension);
+                arrayByte = System.IO.File.ReadAllBytes(path);
+            }
+            catch(System.IO.FileNotFoundException fnfex)
+            {
+                _logger.Error("AlbumDataAccess | GetCoverFile: Cannot found file at given path: " + fnfex.Message);
+            }
+            catch(Exception ex)
+            {
+                _logger.Error("AlbumDataAccess | GetCoverFile: A generic exception occurred " + ex.Message);
+            }
+            return arrayByte;
+        }
     }
 }

@@ -8,13 +8,13 @@
                 <h2>@Html.DisplayFor(x => x.ArtistLabel) - @Html.DisplayFor(x => x.TitleLabel)</h2>
                 <p>Album: @Html.DisplayFor(x => x.AlbumLabel)</p>
                 <p>Anno: @Html.DisplayFor(x => x.Year)</p>
-                <p>Track #: @Html.DisplayFor(x => x.TrackNo)</p>
+                <p>Track # @Html.DisplayFor(x => x.TrackNo)</p>
                 <p>Genere: @Html.DisplayFor(x => x.GenreLabel)</p>
                 <p>Last Play: @Html.DisplayFor(x => x.LastPlay)</p>
-                <p>Number Of Play: @Html.DisplayFor(x => x.NumOfPlays)</p>
+                <p>Played @Html.DisplayFor(x => x.NumOfPlays) times</p>
             </div>
             <div class="col-xs-3">
-                <img class="img-rounded img-reduced" src="~/images/sampleAlbum.jpg" />
+                <img class="img-rounded img-reduced" src="@Url.Action("GetCoverImage", "Album", new { id = Model.AlbumCoverFileId})" />
             </div>
         </div>
         <div class="row spaced">
