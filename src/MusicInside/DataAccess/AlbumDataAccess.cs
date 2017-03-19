@@ -46,7 +46,7 @@ namespace MusicInside.DataAccess
                 {
                     throw new EntryNotPresentException("Can't found an album cover with chosen id");
                 }
-                string path = System.IO.Path.Combine(file.Path, file.FileName + "." + file.Extension);
+                string path = System.IO.Path.Combine(_fileMusicRoot, file.Path, file.FileName + "." + file.Extension);
                 arrayByte = System.IO.File.ReadAllBytes(path);
             }
             catch(System.IO.FileNotFoundException fnfex)
