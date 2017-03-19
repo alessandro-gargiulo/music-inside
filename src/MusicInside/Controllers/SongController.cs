@@ -35,12 +35,16 @@ namespace MusicInside.Controllers
             }
             catch (InvalidIdException iiex)
             {
-                _logger.Error("SongController | Detail: Invalid id exception " + iiex.Message);
-                return null;
+                _logger.Error("SongController | Detail: " + iiex.Message);
+                return null; // Redirect to error screen
             }
             catch (EntryNotPresentException enpex)
             {
-                _logger.Error("SongController | Detail: entry not present exception " + enpex.Message);
+                _logger.Error("SongController | Detail: " + enpex.Message);
+                return null; // Redirect to error screen
+            }catch(Exception ex)
+            {
+                _logger.Error("SongController | Detail: A generic error occurred " + ex.Message);
                 return null;
             }
         }

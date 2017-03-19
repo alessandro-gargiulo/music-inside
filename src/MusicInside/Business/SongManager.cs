@@ -21,11 +21,12 @@ namespace MusicInside.Business
         private readonly IStatisticDataAccess _statisticDataAccess;
         private readonly ILog _logger;
 
-        public SongManager(ISongDataAccess songDataAccess, IAlbumDataAccess albumDataAccess, IArtistDataAccess artistDataAccess, IGenreDataAccess genreDataAccess, IStatisticDataAccess statistiDataAccess, ILog logger) {
+        public SongManager(ISongDataAccess songDataAccess, IAlbumDataAccess albumDataAccess, IArtistDataAccess artistDataAccess, IGenreDataAccess genreDataAccess, IStatisticDataAccess statisticDataAccess, ILog logger) {
             _songDataAccess = songDataAccess;
             _albumDataAccess = albumDataAccess;
             _artistDataAccess = artistDataAccess;
             _genreDataAccess = genreDataAccess;
+            _statisticDataAccess = statisticDataAccess;
             _logger = logger;
         }
 
@@ -57,6 +58,7 @@ namespace MusicInside.Business
                 sdvm.GenreLabel = genreLabel;
                 sdvm.LastPlay = stat.LastPlay;
                 sdvm.NumOfPlays = stat.NumPlay;
+                sdvm.AlbumCoverFileId = album.FileId.GetValueOrDefault();
             }
             catch(InvalidIdException iiex)
             {
