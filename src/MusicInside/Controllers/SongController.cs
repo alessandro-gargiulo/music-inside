@@ -8,6 +8,10 @@ using MusicInside.ManagerInterfaces;
 using MusicInside.ModelView;
 using log4net;
 using MusicInside.Exceptions;
+using Microsoft.Net.Http.Headers;
+using System.IO;
+using System.Net.Http;
+using System.Net;
 
 namespace MusicInside.Controllers
 {
@@ -52,8 +56,30 @@ namespace MusicInside.Controllers
         [HttpGet]
         public ActionResult GetStreamingAudio(int id = -1)
         {
-            byte[] stream = System.IO.File.ReadAllBytes("../MusicInside/Data/FlipsydeSomeday.mp3");
-            return File(stream, "audio/mp3");
+            byte[] song = System.IO.File.ReadAllBytes("../MusicInside/Data/FlipsydeSomeday.mp3");
+            //MediaTypeHeaderValue _mediaType = MediaTypeHeaderValue.Parse("audio/mp3");
+
+            //MemoryStream memStream = new MemoryStream(song);
+            //string rangeHeader = Request.Headers["Range"];
+            ////Stream stream = new MemoryStream(byteArray);
+            //if (rangeHeader != null)
+            //{
+            //    try
+            //    {
+            //        HttpResponseMessage partialResponse = new HttpResponseMessage();
+            //        partialResponse.Content = new StreamContent(memStream);
+            //        partialResponse.StatusCode = HttpStatusCode.PartialContent;
+            //        partialResponse.Content = new ByteRangeStreamContent(memStream, rangeHeader, _mediaType);
+            //        return partialResponse;
+            //    }
+            //    catch (InvalidByteRangeException invalidByteRangeException)
+            //    {
+            //        return Request.CreateErrorResponse(invalidByteRangeException);
+            //    }
+            //}
+
+            return File(song, "audio/mp3");
+
         }
     }
 }
