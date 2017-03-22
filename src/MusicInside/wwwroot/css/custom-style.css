@@ -24,3 +24,6 @@ body #page-content-wrapper .footer {
 body #page-content-wrapper .table tbody tr td.border-right-solid {
   border-right: 1px solid #ddd;
 }
+body #page-content-wrapper .table tbody tr td a:hover {
+  text-decoration: none;
+}

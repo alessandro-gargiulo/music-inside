@@ -73,6 +73,7 @@ namespace MusicInside.Business
             catch(Exception ex)
             {
                 _logger.Error("SongManager | GetDetailOfSong: A generic error occurred " + ex.Message);
+                throw ex;
             }
 
             return sdvm;
