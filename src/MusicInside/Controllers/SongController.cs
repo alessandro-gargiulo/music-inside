@@ -57,29 +57,39 @@ namespace MusicInside.Controllers
         public ActionResult GetStreamingAudio(int id = -1)
         {
             byte[] song = System.IO.File.ReadAllBytes("../MusicInside/Data/FlipsydeSomeday.mp3");
-            //MediaTypeHeaderValue _mediaType = MediaTypeHeaderValue.Parse("audio/mp3");
+            long fSize = song.Length;
+            long startByte = 0;
+            long endByte = 0;
+            int statusCode = 200;
 
-            //MemoryStream memStream = new MemoryStream(song);
-            //string rangeHeader = Request.Headers["Range"];
-            ////Stream stream = new MemoryStream(byteArray);
-            //if (rangeHeader != null)
-            //{
-            //    try
-            //    {
-            //        HttpResponseMessage partialResponse = new HttpResponseMessage();
-            //        partialResponse.Content = new StreamContent(memStream);
-            //        partialResponse.StatusCode = HttpStatusCode.PartialContent;
-            //        partialResponse.Content = new ByteRangeStreamContent(memStream, rangeHeader, _mediaType);
-            //        return partialResponse;
-            //    }
-            //    catch (InvalidByteRangeException invalidByteRangeException)
-            //    {
-            //        return Request.CreateErrorResponse(invalidByteRangeException);
-            //    }
-            //}
+            var rangeRequest = Request.Headers["Range"].ToString();
 
-            return File(song, "audio/mp3");
+            if(rangeRequest != "")
+            {
+                string[] range = Request.Headers["Range"].ToString().Split(new char[] { '=', '-' });
+                startByte = Convert.ToInt64(range[1]);
+                if(range.Length > 2 && range[2] != "")
+                {
+                    endByte = Convert.ToInt64(range[2]);
+                }
+                if (startByte != 0 || endByte != fSize - 1 || range.Length > 2 && range[2] == "")
+                {
+                    statusCode = 206;
+                }
+            }
 
+            long desSize = endByte == 0 ? fSize - startByte : endByte - startByte + 1;
+
+            Response.StatusCode = statusCode;
+            Response.ContentType = "audio/mp3";
+            Response.Headers.Add("Content-Accept", Response.ContentType);
+            Response.Headers.Add("Content-Length", desSize.ToString());
+            Response.Headers.Add("Content-Range", string.Format("bytes {0}-{1}/{2}", startByte, endByte, fSize));
+            Response.Headers.Add("Accept-Ranges", "bytes");
+            Response.Headers.Remove("Cache-Control");
+
+            var stream = new MemoryStream(song, (int)startByte, (int)desSize);
+            return File(stream, Response.ContentType);
         }
     }
 }
