@@ -26,7 +26,7 @@ namespace MusicInside.Controllers
 
         public IActionResult Index()
         {
-            List<SongRowViewModel> allSong = _songManager.GetAllSongs();
+            List<SongRowViewModel> allSong = _songManager.GetAllTable();
             return View(allSong);
         }
 
@@ -34,7 +34,7 @@ namespace MusicInside.Controllers
         {
             try
             {
-                SongDetailViewModel songDetail = _songManager.GetDetailOfSong(id);
+                SongDetailViewModel songDetail = _songManager.GetDetailById(id);
                 return View(songDetail);
             }
             catch (InvalidIdException iiex)
@@ -57,6 +57,7 @@ namespace MusicInside.Controllers
         public ActionResult GetStreamingAudio(int id = -1)
         {
             byte[] song = System.IO.File.ReadAllBytes("../MusicInside/Data/FlipsydeSomeday.mp3");
+            //byte[] song = _songManager.GetFileBytesById(id);
             long fSize = song.Length;
             long startByte = 0;
             long endByte = 0;

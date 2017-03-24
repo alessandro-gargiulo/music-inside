@@ -8,8 +8,10 @@ namespace MusicInside.ManagerInterfaces
 {
     public interface ISongManager
     {
-        List<SongRowViewModel> GetAllSongs();
+        List<SongRowViewModel> GetAllTable();
 
-        SongDetailViewModel GetDetailOfSong(int id);
+        SongDetailViewModel GetDetailById(int id);
+
+        byte[] GetFileBytesById(int id);
     }
 }

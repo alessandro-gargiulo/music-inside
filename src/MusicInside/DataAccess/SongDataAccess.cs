@@ -16,7 +16,7 @@ namespace MusicInside.DataAccess
     {
         public SongDataAccess(SongDBContext context, IConfiguration conf, ILog logger) : base(context, conf, logger) { }
 
-        public List<SongRowViewModel> GetAllSong()
+        public List<SongRowViewModel> GetAll()
         {
             List<SongRowViewModel> songs = new List<SongRowViewModel>();
             try
@@ -48,7 +48,7 @@ namespace MusicInside.DataAccess
             return songs;
         }
 
-        public Song GetSongById(int id)
+        public Song GetById(int id)
         {
             if (id < 0) throw new InvalidIdException("Invalid song id value. Value must be non-negative");
             Song song = null;

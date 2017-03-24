@@ -19,30 +19,38 @@ namespace MusicInside.Business
         private readonly IArtistDataAccess _artistDataAccess;
         private readonly IGenreDataAccess _genreDataAccess;
         private readonly IStatisticDataAccess _statisticDataAccess;
+        private readonly IFileDataAccess _fileDataAccess;
         private readonly ILog _logger;
 
-        public SongManager(ISongDataAccess songDataAccess, IAlbumDataAccess albumDataAccess, IArtistDataAccess artistDataAccess, IGenreDataAccess genreDataAccess, IStatisticDataAccess statisticDataAccess, ILog logger) {
+        public SongManager(ISongDataAccess songDataAccess, 
+                            IAlbumDataAccess albumDataAccess,
+                            IArtistDataAccess artistDataAccess,
+                            IGenreDataAccess genreDataAccess,
+                            IStatisticDataAccess statisticDataAccess,
+                            IFileDataAccess fileDataAccess,
+                            ILog logger) {
             _songDataAccess = songDataAccess;
             _albumDataAccess = albumDataAccess;
             _artistDataAccess = artistDataAccess;
             _genreDataAccess = genreDataAccess;
             _statisticDataAccess = statisticDataAccess;
+            _fileDataAccess = fileDataAccess;
             _logger = logger;
         }
 
-        public List<SongRowViewModel> GetAllSongs()
+        public List<SongRowViewModel> GetAllTable()
         {
-            List<SongRowViewModel> songs = _songDataAccess.GetAllSong();
+            List<SongRowViewModel> songs = _songDataAccess.GetAll();
             return songs;
         }
 
-        public SongDetailViewModel GetDetailOfSong(int id)
+        public SongDetailViewModel GetDetailById(int id)
         {
             SongDetailViewModel sdvm = new SongDetailViewModel();
             try
             {
                 // Prepairing data
-                Song song = _songDataAccess.GetSongById(id);
+                Song song = _songDataAccess.GetById(id);
                 Album album = _albumDataAccess.GetAlbumById(song.AlbumId.GetValueOrDefault());
                 Artist artist = _artistDataAccess.GetArtistById(album.ArtistId);
                 List<Genre> genres = _genreDataAccess.GetGenresBySongId(id);
@@ -77,6 +85,11 @@ namespace MusicInside.Business
             }
 
             return sdvm;
+        }
+
+        public byte[] GetFileBytesById(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
