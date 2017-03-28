@@ -5,10 +5,7 @@ namespace MusicInside.Models
 {
     public class SongDBContext : DbContext
     {
-        public SongDBContext(DbContextOptions<SongDBContext> options) : base(options)
-        {
-
-        }
+        public SongDBContext(DbContextOptions<SongDBContext> options) : base(options) { }
         public DbSet<Song> Songs { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Artist> Artists { get; set; }

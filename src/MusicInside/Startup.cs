@@ -22,6 +22,7 @@ namespace MusicInside
     public class Startup
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(typeof(Program));
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
