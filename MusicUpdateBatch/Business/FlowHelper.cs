@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using MusicUpdateBatch.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,7 +9,7 @@ using System.Text.RegularExpressions;
 
 namespace MusicUpdateBatch.Business
 {
-    public class FlowHelper : IDisposable
+    public class FlowHelper : IDisposable, IFlowHelper
     {
         private readonly log4net.ILog _logger;
         private readonly IConfiguration _configuration;
