@@ -3,10 +3,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MusicInside.Models;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml;
 
 namespace MusicUpdateBatch
@@ -19,6 +21,7 @@ namespace MusicUpdateBatch
 
         static void Main(string[] args)
         {
+            #region Program Info
             Console.OutputEncoding = Encoding.UTF8;
             Console.WriteLine("-------------------------------------------------");
             Console.WriteLine("--------Welcome to the Music Update Batch--------");
@@ -26,7 +29,9 @@ namespace MusicUpdateBatch
             Console.WriteLine("--------MusicInside WebApp database      --------");
             Console.WriteLine("--------Author: Alessandro Gargiulo      --------");
             Console.WriteLine("-------------------------------------------------");
+            #endregion
 
+            #region Environment Configuration With Dependency Injection
             var services = new ServiceCollection();
 
             string BasePath = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
@@ -53,29 +58,28 @@ namespace MusicUpdateBatch
             // Dependency injection for DBContext
             services.AddDbContext<SongDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MusicInsideDatabase")));
-
-            services.AddTransient<Prova>();
-
+            // Add Business class to container
+            services.AddTransient<Business.FlowHelper>();
             var provider = services.BuildServiceProvider();
+            #endregion
 
-            using(var prova = provider.GetService<Prova>())
+            #region Update Process
+            // Start process here
+            using (var flow = provider.GetService<Business.FlowHelper>())
             {
-
+                List<string> subFolders = flow.GetValidSubFolders();
+                log.Info("MusicUpdateBatch | MainProgram: Attempt to loop over " + subFolders.Count + " folders");
+                foreach(string folder in subFolders)
+                {
+                    List<string> fileNameList = flow.GetValidFileNameInFolder(folder);
+                    log.Info("MusicUpdateBatch | MainProgram: In folder /" + folder + " - Found " + fileNameList.Count + " files");
+                    foreach(string file in fileNameList)
+                    {
+                        var fileTag = flow.GetTagFromFileNameInFolder(folder, file);
+                    }
+                }
             }
-        }
-    }
-
-    public class Prova : IDisposable
-    {
-        public Prova(log4net.ILog log, SongDBContext context)
-        {
-            log.Info("Ci sono riuscito");
-            log.Info(context.Songs.Where(x => x.Title == "Albachiara").Select(y => y.Year));
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
+            #endregion
         }
     }
 }
