@@ -50,7 +50,6 @@ namespace MusicUpdateBatch.Business
                 _logger.ErrorFormat("FlowHelper | GetValidSubFolders: Can't read directories in /{0} due to exception [{1}]", _fileMusicRoot, ex.Message);
                 return null;
             }
-
         }
 
         public List<string> GetValidFileNameInFolder(string folder)
