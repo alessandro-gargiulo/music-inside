@@ -27,5 +27,27 @@ namespace MusicUpdateBatch.Interfaces
         /// <param name="artistId">The identifier of the artist</param>
         /// <returns>The identifier of inserted/founded album if success, -1 otherwise</returns>
         int TryToInsertAlbumForArtist(TagLib.Tag songTag, int artistId);
+
+        /// <summary>
+        /// Update the field AlbumId of a Song identified by its id
+        /// </summary>
+        /// <param name="songId">Song identifier</param>
+        /// <param name="albumId">Album identifier</param>
+        void UpdateSongAlbum(int songId, int albumId);
+
+        /// <summary>
+        /// Insert a genre or retrieve its id if it already exist in the database
+        /// </summary>
+        /// <param name="songTag">Tag Id3v2 of the song</param>
+        /// <param name="songId">Song identifier</param>
+        TryToInsertGenre(TagLib.Tag songTag, int songId);
+
+        /// <summary>
+        /// Insert a file entry in the database
+        /// </summary>
+        /// <param name="folder">Name of the folder</param>
+        /// <param name="fileName">File name</param>
+        /// <param name="songId">Song identifier</param>
+        void InsertPhysicalFile(string folder, string fileName, int songId);
     }
 }

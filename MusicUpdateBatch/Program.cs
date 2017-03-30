@@ -76,6 +76,14 @@ namespace MusicUpdateBatch
                     foreach(string file in fileNameList)
                     {
                         var fileTag = flow.GetTagFromFileNameInFolder(folder, file);
+                        // Instantiate DbHelper
+                        using(var data = provider.GetService<Business.DbHelper>())
+                        {
+                            int songId = data.InsertSong(fileTag);
+                            int artistId = data.TryToInsertArtist(fileTag);
+                            int albumId = data.TryToInsertAlbumForArtist(fileTag, artistId);
+                            data.UpdateSongAlbum(songId, albumId);
+                        }
                     }
                 }
             }
