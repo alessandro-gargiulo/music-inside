@@ -1,5 +1,4 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MusicInside.Models
@@ -14,6 +13,5 @@ namespace MusicInside.Models
         public int? AlbumId { get; set; }
         public Song Song { get; set; }
         public Album Album { get; set; }
-
     }
 }

@@ -40,7 +40,7 @@ namespace MusicUpdateBatch.Interfaces
         /// </summary>
         /// <param name="songTag">Tag Id3v2 of the song</param>
         /// <param name="songId">Song identifier</param>
-        TryToInsertGenre(TagLib.Tag songTag, int songId);
+        void TryToInsertGenre(TagLib.Tag songTag, int songId);
 
         /// <summary>
         /// Insert a file entry in the database
@@ -49,5 +49,12 @@ namespace MusicUpdateBatch.Interfaces
         /// <param name="fileName">File name</param>
         /// <param name="songId">Song identifier</param>
         void InsertPhysicalFile(string folder, string fileName, int songId);
+
+        /// <summary>
+        /// Retrieve the cover picture from the tag and save both on file-system and database
+        /// </summary>
+        /// <param name="songTag">Tag Id3v2 of the song</param>
+        /// <param name="albumId">Album identifier</param>
+        void KeepCoverFile(TagLib.Tag songTag, int albumId);
     }
 }

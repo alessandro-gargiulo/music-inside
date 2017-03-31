@@ -1,7 +1,9 @@
-﻿using MusicInside.Models;
+﻿using Microsoft.Extensions.Configuration;
+using MusicInside.Models;
 using MusicUpdateBatch.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using TagLib;
@@ -12,11 +14,17 @@ namespace MusicUpdateBatch.Business
     {
         private readonly SongDBContext _context;
         private readonly log4net.ILog _logger;
+        private readonly string _fileMusicRoot;
+        private readonly string _coverPath;
 
-        public DbHelper(log4net.ILog log, SongDBContext context)
+        public DbHelper(log4net.ILog log, SongDBContext context, IConfiguration conf)
         {
             _context = context;
             _logger = log;
+            // Retrieve root directory from configuration
+            _fileMusicRoot = conf.GetSection("MusicFiles").GetValue<string>("RootDirectory");
+            // Retrieve cover root directory from configuration
+            _coverPath = conf.GetSection("MusicFiles").GetValue<string>("CoverDirectory");
         }
 
         public int InsertSong(Tag songTag)
@@ -176,6 +184,31 @@ namespace MusicUpdateBatch.Business
             catch (Exception ex)
             {
                 _logger.ErrorFormat("DbHelper | InsertPhysicalFile: Can't insert physical file /{0}/{1} associated to songId={2} due to exception [{3}]", folder, fileName, songId, ex.Message);
+            }
+        }
+
+        public void KeepCoverFile(Tag songTag, int albumId)
+        {
+            if (albumId < 1) throw new Exception("Invalid albumId");
+            try
+            {
+                // Retrieve image and store in an object
+                if(songTag.Pictures[0] != null)
+                {
+                    // Check if file exist
+                    MemoryStream ms = new MemoryStream(songTag.Pictures[0].Data.Data);
+                    using(FileStream fs = new FileStream(Path.Combine(_fileMusicRoot, _coverPath, "title"), FileMode.Create, System.IO.FileAccess.Write))
+                    {
+                        byte[] bytes = new byte[ms.Length];
+                        ms.Read(bytes, 0, (int)ms.Length);
+                        fs.Write(bytes, 0, bytes.Length);
+                        ms.Dispose();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.ErrorFormat("DbHelper | RetrieveCoverFile: Can't retrieve image bytes for song titled {0} of artist {1} due to exception [{2}]", songTag.Title, songTag.FirstAlbumArtist, ex.Message);
             }
         }
 
