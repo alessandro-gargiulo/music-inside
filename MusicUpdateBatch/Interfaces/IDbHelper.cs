@@ -55,6 +55,14 @@ namespace MusicUpdateBatch.Interfaces
         /// </summary>
         /// <param name="songTag">Tag Id3v2 of the song</param>
         /// <param name="albumId">Album identifier</param>
-        void KeepCoverFile(TagLib.Tag songTag, int albumId);
+        /// <returns>The identifier of inserted/founded cover file id, if success, -1 otherwise</returns>
+        int KeepCoverFile(TagLib.Tag songTag, int albumId);
+
+        /// <summary>
+        /// Update the field fileId of an Album identified by its id
+        /// </summary>
+        /// <param name="albumId">Album identifier</param>
+        /// <param name="fileId">Cover file identifier</param>
+        void UpdateAlbumCoverFileId(int albumId, int fileId);
     }
 }

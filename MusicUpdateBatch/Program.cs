@@ -59,7 +59,8 @@ namespace MusicUpdateBatch
             services.AddDbContext<SongDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MusicInsideDatabase")));
             // Add Business class to container
-            services.AddTransient<Business.FlowHelper>();
+            services.AddSingleton<Business.FlowHelper>();
+            services.AddSingleton<Business.DbHelper>();
             var provider = services.BuildServiceProvider();
             #endregion
 
@@ -79,10 +80,14 @@ namespace MusicUpdateBatch
                         // Instantiate DbHelper
                         using(var data = provider.GetService<Business.DbHelper>())
                         {
-                            int songId = data.InsertSong(fileTag);
+                            int songId = data.InsertOrUpdateSong(fileTag);
                             int artistId = data.TryToInsertArtist(fileTag);
                             int albumId = data.TryToInsertAlbumForArtist(fileTag, artistId);
                             data.UpdateSongAlbum(songId, albumId);
+                            data.TryToInsertGenre(fileTag, songId);
+                            data.InsertPhysicalFile(folder, file, songId);
+                            int fileCoverId = data.KeepCoverFile(fileTag, albumId);
+                            data.UpdateAlbumCoverFileId(albumId, fileCoverId);
                         }
                     }
                 }
