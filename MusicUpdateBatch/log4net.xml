@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <log4net>
+  <appender name="Console" type="log4net.Appender.ConsoleAppender">
+    <layout type="log4net.Layout.PatternLayout">
+      <conversionPattern value="%-5p %d{HH:mm:ss} %message%newline" />
+    </layout>
+  </appender>
   <appender name="RollingFile" type="log4net.Appender.FileAppender">
     <file type="log4net.Util.PatternString" value="C:\Logs\MusicInside-BatchSync\sync-log-%utcdate{dd-MM-yyyy}.log"/>
     <rollingStyle value="Date"/>
@@ -10,6 +15,7 @@
   </appender>
   <root>
     <level value="ALL" />
+    <appender-ref ref="Console"/>
     <appender-ref ref="RollingFile"/>
   </root>
 </log4net>
