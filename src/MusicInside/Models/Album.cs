@@ -11,7 +11,7 @@ namespace MusicInside.Models
     {
         public int ID { get; set; }
         public string Title { get; set; }
-        public bool IsSingle { get; set; }
+        public bool IsSingle { get; set; } // TO DELETE
         public int? FileId { get; set; }
         public int ArtistId { get; set; }
         public File File { get; set; }
