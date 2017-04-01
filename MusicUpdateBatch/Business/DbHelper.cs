@@ -27,17 +27,39 @@ namespace MusicUpdateBatch.Business
             _coverPath = conf.GetSection("MusicFiles").GetValue<string>("CoverDirectory");
         }
 
-        public int InsertSong(Tag songTag)
+        public int InsertOrUpdateSong(Tag songTag)
         {
             try
             {
-                Song newSong = new Song();
-                newSong.Title = songTag.Title;
-                newSong.TrackNo = (int)songTag.Track;
-                newSong.Year = (int)songTag.Year;
-                _context.Songs.Add(newSong);
-                _context.SaveChanges();
-                return newSong.ID;
+                int existingSongId = CheckSongExistence(songTag);
+                // Check if a song already exist in database...
+                if (existingSongId == 0)
+                {
+                    _logger.InfoFormat("DbHelper | InsertSong: Song with title <{0}> will be created", songTag.Title);
+                    // If song doesn't exist, create a new one
+                    Song newSong = new Song();
+                    newSong.Title = songTag.Title;
+                    newSong.TrackNo = (int)songTag.Track;
+                    newSong.Year = (int)songTag.Year;
+                    _context.Songs.Add(newSong);
+                    _context.SaveChanges();
+                    existingSongId = newSong.ID;
+                    _logger.InfoFormat("DbHelper | InsertSong: Song with title <{0}> was correctly insert with id={1}", songTag.Title, existingSongId);
+                }
+                else
+                {
+                    _logger.InfoFormat("DbHelper | InsertSong: Song with title <{0}> will be updated", songTag.Title);
+                    // If song exist, update its informations
+                    Song existingSong = _context.Songs.Where(x => x.ID == existingSongId).FirstOrDefault();
+                    if (existingSong == null) throw new Exception("Something goes wrong when retrieving declared existing song from database");
+                    existingSong.Title = songTag.Title;
+                    existingSong.TrackNo = (int)songTag.Track;
+                    existingSong.Year = (int)songTag.Year;
+                    _context.Songs.Update(existingSong);
+                    _context.SaveChanges();
+                    _logger.InfoFormat("DbHelper | InsertSong: Song with id={0} was correctly updated", existingSongId);
+                }
+                return existingSongId;
             }
             catch (Exception ex)
             {
@@ -189,11 +211,11 @@ namespace MusicUpdateBatch.Business
 
         public void KeepCoverFile(Tag songTag, int albumId)
         {
-            if (albumId < 1) throw new Exception("Invalid albumId");
             try
             {
+                if (albumId < 1) throw new Exception("Invalid albumId");
                 // Retrieve image and store in an object
-                if(songTag.Pictures[0] != null)
+                if (songTag.Pictures[0] != null)
                 {
                     // Check if file exist
                     MemoryStream ms = new MemoryStream(songTag.Pictures[0].Data.Data);
@@ -214,7 +236,40 @@ namespace MusicUpdateBatch.Business
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            GC.SuppressFinalize(this);
+        }
+
+        // Private Service Methods
+        private int CheckSongExistence(Tag songTag)
+        {
+            _logger.DebugFormat("DbHelper | CheckSongExistence: Attempt to find a duplicate of song <{0}> performed by {1}", songTag.Title, songTag.FirstAlbumArtist);
+            int control = 0;
+            // Retrieve all possible Song contained into database with same track number
+            List<Song> exSong = _context.Songs
+                .Where(x => x.Title == songTag.Title)
+                .Where(y => y.TrackNo == songTag.Track)
+                .ToList();
+            // For each one of these...
+            foreach(Song sng in exSong)
+            {
+                // Retrieve album informations
+                int albumId = sng.AlbumId.GetValueOrDefault();
+                Album exAlbum = _context.Albums.Where(x => x.ID == albumId).FirstOrDefault();
+                if(exAlbum != null && exAlbum.Title == songTag.Album)
+                {
+                    // Exist a song with same title, track number and album. Attempt to evaluate artist.
+                    int artistId = exAlbum.ArtistId;
+                    // Retrieve artist informations
+                    Artist artist = _context.Artists.Where(x => x.ID == artistId).FirstOrDefault();
+                    if(artist.ArtName == songTag.FirstAlbumArtist)
+                    {
+                        // Find a duplicate
+                        control = sng.ID;
+                        break;
+                    }
+                }
+            }
+            return control;
         }
     }
 }
