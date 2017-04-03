@@ -64,5 +64,11 @@ namespace MusicUpdateBatch.Interfaces
         /// <param name="albumId">Album identifier</param>
         /// <param name="fileId">Cover file identifier</param>
         void UpdateAlbumCoverFileId(int albumId, int fileId);
+
+        /// <summary>
+        /// Initialize an empty statistic entry
+        /// </summary>
+        /// <param name="songId">Song identifier</param>
+        void InitializeStatisticForSongId(int songId);
     }
 }

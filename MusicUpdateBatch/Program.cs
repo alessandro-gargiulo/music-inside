@@ -88,6 +88,7 @@ namespace MusicUpdateBatch
                             data.InsertPhysicalFile(folder, file, songId);
                             int fileCoverId = data.KeepCoverFile(fileTag, albumId);
                             data.UpdateAlbumCoverFileId(albumId, fileCoverId);
+                            data.InitializeStatisticForSongId(songId);
                         }
                     }
                 }

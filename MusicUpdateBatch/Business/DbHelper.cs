@@ -291,7 +291,7 @@ namespace MusicUpdateBatch.Business
                                 fs.Write(bytes, 0, bytes.Length);
                                 ms.Dispose();
                             }
-                            _logger.InfoFormat("DbHelper | KeepCoverFile: Created new file on file system under directory /{0}/{1} using name {2}.png", _fileMusicRoot, _coverPath, newCoverFileName);
+                            _logger.InfoFormat("DbHelper | KeepCoverFile: Created new file on file system under directory {0}\\{1} using name {2}.png", _fileMusicRoot, _coverPath, newCoverFileName);
                             existingCoverFile.FileName = newCoverFileName;
                             _context.Files.Update(existingCoverFile);
                             _context.SaveChanges();
@@ -336,7 +336,36 @@ namespace MusicUpdateBatch.Business
             }catch(Exception ex)
             {
                 _logger.ErrorFormat("DbHelper | UpdateAlbumCoverFileId: Can't update album cover fileId for albumId={0} due to exception [{1}]", albumId, ex.Message);
+            }
+        }
 
+        public void InitializeStatisticForSongId(int songId)
+        {
+            try
+            {
+                if (songId < 1) throw new Exception("Invalid songId");
+                Statistic stat = _context.Statistics.Where(x => x.SongId == songId).FirstOrDefault();
+                if(stat == null)
+                {
+                    _logger.InfoFormat("DbHelper | InitializeStatisticForSongId: songId={0} doesn't have a statistic, attempt to create a new one", songId);
+                    // Initialize new empty statistic
+                    stat = new Statistic
+                    {
+                        NumPlay = 0,
+                        SongId = songId
+                    };
+                    _context.Statistics.Add(stat);
+                    _context.SaveChanges();
+                    _logger.InfoFormat("DbHelper | InitializeStatisticForSongId: Statistic for songId={0} succesfully created", songId);
+                }
+                else
+                {
+                    _logger.WarnFormat("DbHelper | InitializeStatisticForSongId: An existing statistic with id={0} was already found for songId={1}", stat.ID, songId);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.ErrorFormat("DbHelper | UpdateAlbumCoverFileId: Something goes wrong on statistic creation for songId={0} due to exception [{1}]", songId, ex.Message);
             }
         }
 
