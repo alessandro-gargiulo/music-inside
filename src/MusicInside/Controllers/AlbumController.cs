@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using MusicInside.ManagerInterfaces;
 using log4net;
 using MusicInside.Exceptions;
+using MusicInside.ModelView;
 
 namespace MusicInside.Controllers
 {
@@ -14,9 +15,9 @@ namespace MusicInside.Controllers
         private readonly IAlbumManager _albumManager;
         private readonly ILog _logger;
 
-        public AlbumController(IAlbumManager manager, ILog logger)
+        public AlbumController(IAlbumManager albumManager, ILog logger)
         {
-            _albumManager = manager;
+            _albumManager = albumManager;
             _logger = logger;
         }
 
@@ -27,7 +28,26 @@ namespace MusicInside.Controllers
 
         public IActionResult Detail(int id = -1)
         {
-            return View();
+            try
+            {
+                AlbumDetailViewModel albumDetail = _albumManager.GetDetailById(id);
+                return View(albumDetail);
+            }
+            catch (InvalidIdException iiex)
+            {
+                _logger.Error("AlbumController | Detail: " + iiex.Message);
+                return null; // Redirect to error screen
+            }
+            catch (EntryNotPresentException enpex)
+            {
+                _logger.Error("AlbumController | Detail: " + enpex.Message);
+                return null; // Redirect to error screen
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("AlbumController | Detail: A generic error occurred " + ex.Message);
+                return null;
+            }
         }
 
         public ActionResult GetCoverImage(int id = -1)
@@ -35,7 +55,7 @@ namespace MusicInside.Controllers
             try
             {
                 byte[] imageBytes = _albumManager.GetAlbumCoverFile(id);
-                return base.File(imageBytes, "image/jpg");
+                return base.File(imageBytes, "image/png");
             }
             catch (InvalidIdException iiex)
             {

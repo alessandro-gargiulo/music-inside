@@ -15,6 +15,8 @@ namespace MusicInside.DataAccessInterfaces
         /// <returns>An object Album</returns>
         Album GetAlbumById(int id);
 
+        List<Song> GetListSongById(int id);
+
         /// <summary>
         /// Get the file of a cover
         /// </summary>
