@@ -47,7 +47,7 @@ namespace MusicInside.DataAccess
                 }
                 else
                 {
-                    string path = _fileMusicRoot + file.Path + file.FileName + file.Extension;
+                    string path = System.IO.Path.Combine(_fileMusicRoot, file.Path, file.FileName + "." + file.Extension);
                     bytes = System.IO.File.ReadAllBytes(path);
                 }
             }

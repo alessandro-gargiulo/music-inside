@@ -8,6 +8,7 @@ namespace MusicInside.ModelView
 {
     public class SongDetailViewModel
     {
+        public int SongId { get; set; }
         public string ArtistLabel { get; set; }
         public string TitleLabel { get; set; }
         public string AlbumLabel { get; set; }

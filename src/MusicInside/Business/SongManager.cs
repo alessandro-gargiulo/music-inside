@@ -58,6 +58,7 @@ namespace MusicInside.Business
                 Statistic stat = _statisticDataAccess.GetStatisticBySongId(id);
 
                 // Fill the object
+                sdvm.SongId = id;
                 sdvm.ArtistLabel = artist.ArtName;
                 sdvm.TitleLabel = song.Title;
                 sdvm.AlbumLabel = album.Title;
@@ -89,7 +90,16 @@ namespace MusicInside.Business
 
         public byte[] GetFileBytesById(int id)
         {
-            throw new NotImplementedException();
+            byte[] bytes = null;
+            try
+            {
+                bytes = _fileDataAccess.GetFileBytesById(id);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return bytes;
         }
     }
 }
