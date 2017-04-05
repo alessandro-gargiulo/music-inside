@@ -32,5 +32,24 @@ namespace MusicInside.DataAccess
             }
             return artist;
         }
+
+        public List<Song> GetListSongOfArtist(int id)
+        {
+            if (id < 0) throw new InvalidIdException("Invalid artist id value. Value must be non-negative");
+            List<Song> songs = new List<Song>();
+            try
+            {
+                //songs = _db.Songs
+                if (songs.Count() == 0)
+                {
+                    throw new EntryNotPresentException("Can't found a list of song with chosen id");
+                }
+            }
+            catch (ArgumentNullException anex)
+            {
+                _logger.Error("ArtistDataAccess | GetListSongOfArtist: Cannot execute query with null argument: " + anex.Message);
+            }
+            return songs;
+        }
     }
 }

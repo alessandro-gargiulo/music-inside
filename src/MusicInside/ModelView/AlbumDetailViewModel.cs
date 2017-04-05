@@ -9,19 +9,13 @@ namespace MusicInside.ModelView
     {
         public AlbumDetailViewModel()
         {
-            SongInfos = new List<SongShortInfo>();
+            SongInfos = new List<ShortInfoViewModel>();
         }
 
         public int AlbumId { get; set; }
         public string Title { get; set; }
         public string Artist { get; set; }
         public int AlbumCoverFileId { get; set; }
-        public List<SongShortInfo> SongInfos { get; set; }
-
-        public class SongShortInfo
-        {
-            public int ID { get; set; }
-            public string Title { get; set; }
-        }
+        public List<ShortInfoViewModel> SongInfos { get; set; }
     }
 }

@@ -14,5 +14,7 @@ namespace MusicInside.DataAccessInterfaces
         /// <param name="id">The identifier of the artist</param>
         /// <returns>An object Artist</returns>
         Artist GetArtistById(int id);
+
+        List<Song> GetListSongOfArtist(int id);
     }
 }

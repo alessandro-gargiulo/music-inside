@@ -54,6 +54,11 @@ namespace MusicInside.DataAccess
             return songs;
         }
 
+        public List<Album> GetListAlbumByArtistId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public byte[] GetCoverFile(int id)
         {
             if (id < 0) throw new InvalidIdException("Invalid album id value. Value must be non-negative");

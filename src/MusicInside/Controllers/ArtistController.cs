@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MusicInside.ManagerInterfaces;
 using log4net;
+using MusicInside.ModelView;
+using MusicInside.Exceptions;
 
 namespace MusicInside.Controllers
 {
@@ -12,12 +14,13 @@ namespace MusicInside.Controllers
     {
         private readonly IArtistManager _artistManager;
         private readonly ILog _logger;
-        public ArtistController(IArtistManager manager, ILog logger)
+
+        public ArtistController(IArtistManager artistManager, ILog logger)
         {
-            _artistManager = manager;
+            _artistManager = artistManager;
             _logger = logger;
         }
-        // GET: /<controller>/
+
         public IActionResult Index()
         {
             return View();
@@ -25,7 +28,26 @@ namespace MusicInside.Controllers
 
         public IActionResult Detail(int id = -1)
         {
-            return View();
+            try
+            {
+                ArtistDetailViewModel artistDetail = _artistManager.GetDetailById(id);
+                return View(artistDetail);
+            }
+            catch (InvalidIdException iiex)
+            {
+                _logger.Error("ArtistController | Detail: " + iiex.Message);
+                return null; // Redirect to error screen
+            }
+            catch (EntryNotPresentException enpex)
+            {
+                _logger.Error("ArtistController | Detail: " + enpex.Message);
+                return null; // Redirect to error screen
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("ArtistController | Detail: A generic error occurred " + ex.Message);
+                return null;
+            }
         }
     }
 }

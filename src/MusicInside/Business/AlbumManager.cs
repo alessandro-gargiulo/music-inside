@@ -40,7 +40,7 @@ namespace MusicInside.Business
                 advm.AlbumCoverFileId = album.FileId.GetValueOrDefault();
                 foreach (Song sng in songs)
                 {
-                    advm.SongInfos.Add(new AlbumDetailViewModel.SongShortInfo
+                    advm.SongInfos.Add(new ShortInfoViewModel
                     {
                         ID = sng.ID,
                         Title = sng.Title
