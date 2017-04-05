@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MusicInside.Models;
 using Microsoft.EntityFrameworkCore;
-using MusicInside.Data;
 using MusicInside.ManagerInterfaces;
 using MusicInside.DataAccessInterfaces;
 using MusicInside.DataAccess;
@@ -96,8 +95,6 @@ namespace MusicInside
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            DbInitializer.Initialize(context);
         }
     }
 }
