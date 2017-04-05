@@ -389,8 +389,8 @@ namespace MusicUpdateBatch.Business
             {
                 // Retrieve album informations
                 int albumId = sng.AlbumId.GetValueOrDefault();
-                Album exAlbum = _context.Albums.Where(x => x.ID == albumId).FirstOrDefault();
-                if(exAlbum != null && exAlbum.Title == songTag.Album)
+                Album exAlbum = _context.Albums.Where(x => x.ID == albumId).FirstOrDefault();        
+                if (exAlbum != null && String.Equals(exAlbum.Title, songTag.Album, StringComparison.OrdinalIgnoreCase))
                 {
                     // Exist a song with same title, track number and album. Attempt to evaluate artist.
                     int artistId = exAlbum.ArtistId;
