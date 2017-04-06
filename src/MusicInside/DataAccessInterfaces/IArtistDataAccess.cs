@@ -1,4 +1,5 @@
 ﻿using MusicInside.Models;
+using MusicInside.ModelView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,7 @@ namespace MusicInside.DataAccessInterfaces
         Artist GetArtistById(int id);
 
         List<Song> GetListSongOfArtist(int id);
+
+        List<ArtistRowViewModel> GetAll();
     }
 }

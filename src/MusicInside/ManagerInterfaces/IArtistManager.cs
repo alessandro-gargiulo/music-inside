@@ -9,5 +9,7 @@ namespace MusicInside.ManagerInterfaces
     public interface IArtistManager
     {
         ArtistDetailViewModel GetDetailById(int id);
+
+        List<ArtistRowViewModel> GetAllTable();
     }
 }

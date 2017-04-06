@@ -26,8 +26,16 @@ namespace MusicInside.Controllers
 
         public IActionResult Index()
         {
-            List<SongRowViewModel> allSong = _songManager.GetAllTable();
-            return View(allSong);
+            try
+            {
+                List<SongRowViewModel> allSong = _songManager.GetAllTable();
+                return View(allSong);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("SongController | Index: " + ex.Message);
+                return null;
+            }
         }
 
         public IActionResult Detail(int id = -1)

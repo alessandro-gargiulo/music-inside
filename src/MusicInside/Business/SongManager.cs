@@ -40,8 +40,17 @@ namespace MusicInside.Business
 
         public List<SongRowViewModel> GetAllTable()
         {
-            List<SongRowViewModel> songs = _songDataAccess.GetAll();
-            return songs;
+            List<SongRowViewModel> songs = new List<SongRowViewModel>();
+            try
+            {
+                songs = _songDataAccess.GetAll();
+                return songs;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("SongManager | GetAllTable: A generic error occurred " + ex.Message);
+                throw ex;
+            }
         }
 
         public SongDetailViewModel GetDetailById(int id)

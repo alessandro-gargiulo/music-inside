@@ -7,12 +7,46 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MusicInside.ModelView;
+using System.Data.SqlClient;
 
 namespace MusicInside.DataAccess
 {
     public class ArtistDataAccess : BaseDataAccess, IArtistDataAccess
     {
         public ArtistDataAccess(SongDBContext context, IConfiguration conf, ILog logger) : base(context, conf, logger) { }
+
+        public List<ArtistRowViewModel> GetAll()
+        {
+            List<ArtistRowViewModel> artists = new List<ArtistRowViewModel>();
+            try
+            {
+                SqlConnection _connection = new SqlConnection(_connString);
+                SqlCommand _cmd = new SqlCommand();
+                SqlDataReader _reader;
+
+                _cmd.CommandText = "sp_getAllArtist";
+                _cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                _cmd.Connection = _connection;
+
+                _connection.Open();
+                _reader = _cmd.ExecuteReader();
+                while (_reader.Read())
+                {
+                    artists.Add(ArtistRowViewModel.Fill(_reader));
+                }
+                _connection.Close();
+            }
+            catch (SqlException sqlex)
+            {
+                _logger.Error("ArtistDataAccess | GetAllSong: SQL problem have occurred: " + sqlex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("ArtistDataAccess | GetAllSong: A generic problem have occurred: " + ex.Message);
+            }
+            return artists;
+        }
 
         public Artist GetArtistById(int id)
         {

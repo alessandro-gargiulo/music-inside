@@ -24,6 +24,21 @@ namespace MusicInside.Business
             _logger = logger;
         }
 
+        public List<ArtistRowViewModel> GetAllTable()
+        {
+            List<ArtistRowViewModel> artists = new List<ArtistRowViewModel>();
+            try
+            {
+                artists = _artistDataAccess.GetAll();
+                return artists;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("ArtistManager | GetAllTable: A generic error occurred " + ex.Message);
+                throw ex;
+            }
+        }
+
         public ArtistDetailViewModel GetDetailById(int id)
         {
             ArtistDetailViewModel advm = new ArtistDetailViewModel();
