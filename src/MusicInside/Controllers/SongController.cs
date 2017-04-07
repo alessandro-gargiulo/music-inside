@@ -64,7 +64,6 @@ namespace MusicInside.Controllers
         [HttpGet]
         public ActionResult GetStreamingAudio(int id = -1)
         {
-            //byte[] song = System.IO.File.ReadAllBytes("../MusicInside/Data/FlipsydeSomeday.mp3");
             byte[] song = _songManager.GetFileBytesById(id);
             long fSize = song.Length;
             long startByte = 0;

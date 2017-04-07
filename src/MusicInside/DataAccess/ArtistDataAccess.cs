@@ -73,7 +73,22 @@ namespace MusicInside.DataAccess
             List<Song> songs = new List<Song>();
             try
             {
-                //songs = _db.Songs
+                songs = _db.Songs.Join(_db.Featurings,
+                    sng => sng.ID,
+                    feat => feat.SongId,
+                    (sng, feat) => new
+                    {
+                        S = sng,
+                        F = feat
+                    }).Where(x => x.F.ArtistId == id)
+                    .Select(y => new Song
+                    {
+                        ID = y.S.ID,
+                        Title = y.S.Title,
+                        TrackNo = y.S.TrackNo,
+                        Year = y.S.Year,
+                        AlbumId = y.S.AlbumId
+                    }).ToList();
                 if (songs.Count() == 0)
                 {
                     throw new EntryNotPresentException("Can't found a list of song with chosen id");

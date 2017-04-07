@@ -48,7 +48,7 @@ namespace MusicInside.Business
             }
             catch (Exception ex)
             {
-                _logger.Error("SongManager | GetAllTable: A generic error occurred " + ex.Message);
+                _logger.ErrorFormat("SongManager | GetAllTable: A generic error occurred [{0}]", ex.Message);
                 throw ex;
             }
         }
@@ -80,17 +80,17 @@ namespace MusicInside.Business
             }
             catch(InvalidIdException iiex)
             {
-                _logger.Error("SongManager | GetDetailOfSong: Invalid id exception, throws at the top level");
+                _logger.ErrorFormat("SongManager | GetDetailOfSong: Invalid id exception, throws at the top level");
                 throw iiex;
             }
             catch(EntryNotPresentException enpex)
             {
-                _logger.Error("SongManager | GetDetailOfSong: entry not present exception, throws at the top level");
+                _logger.ErrorFormat("SongManager | GetDetailOfSong: entry not present exception, throws at the top level");
                 throw enpex;
             }
             catch(Exception ex)
             {
-                _logger.Error("SongManager | GetDetailOfSong: A generic error occurred " + ex.Message);
+                _logger.ErrorFormat("SongManager | GetDetailOfSong: A generic error occurred [{0}]", ex.Message);
                 throw ex;
             }
 
@@ -106,7 +106,7 @@ namespace MusicInside.Business
             }
             catch (Exception ex)
             {
-
+                _logger.ErrorFormat("SongManager | GetFileBytesById: Exception occurred when retrieving byte of songId={0} [{1}]", id, ex.Message);
             }
             return bytes;
         }
