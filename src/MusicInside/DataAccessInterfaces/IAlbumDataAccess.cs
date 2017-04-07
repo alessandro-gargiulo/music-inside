@@ -15,8 +15,18 @@ namespace MusicInside.DataAccessInterfaces
         /// <returns>An object Album</returns>
         Album GetAlbumById(int id);
 
+        /// <summary>
+        /// Get all the song contained into an album
+        /// </summary>
+        /// <param name="id">The identifier of the album</param>
+        /// <returns>A list of Song</returns>
         List<Song> GetListSongById(int id);
 
+        /// <summary>
+        /// Return all the album composed by an artist
+        /// </summary>
+        /// <param name="id">The identifier of the artist</param>
+        /// <returns>A list of Album</returns>
         List<Album> GetListAlbumByArtistId(int id);
 
         /// <summary>
