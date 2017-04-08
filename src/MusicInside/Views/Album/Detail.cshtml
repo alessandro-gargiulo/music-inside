@@ -1,43 +1,37 @@
 ﻿@model MusicInside.ModelView.AlbumDetailViewModel
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
+<div class="detail-common">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-9">
                 Details
-            </th>
-            <th>
-                Cover
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
+            </div>
+            <div class="col-xs-3"></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-9">
                 <p>Title: @Model.Title</p>
                 <p>Artist: @Model.Artist</p>
-            </td>
-            <td>
+            </div>
+            <div class="col-xs-3">
                 <img class="img-rounded img-reduced" src="@Url.Action("GetCoverImage", "Album", new { id = Model.AlbumCoverFileId})" />
-            </td>
-        </tr>
-    </tbody>
-    <tbody>
-        <tr>
-            <td colspan="2">
-                <b>Songs</b>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                Songs
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
                 @foreach (var info in Model.SongInfos)
                 {
                     <a href="@Url.Action("Detail", "Song", new { id = info.ID })" title="Go to Song Details">
                         <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
                     </a>
-                    @info.Title <br/>
+                    @info.Title <br />
                 }
-            </td>
-        </tr>
-    </tbody>
-</table>
+            </div>
+        </div>
+    </div>
+</div>

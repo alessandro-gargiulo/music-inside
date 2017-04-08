@@ -9,7 +9,17 @@
                 <p>Anno: @Html.DisplayFor(x => x.Year)</p>
                 <p>Track # @Html.DisplayFor(x => x.TrackNo)</p>
                 <p>Genere: @Html.DisplayFor(x => x.GenreLabel)</p>
-                <p>Last Play: @Html.DisplayFor(x => x.LastPlay)</p>
+                <p>
+                    Last Play: 
+                    @if(Model.LastPlay.Year == 1)
+                    {
+                        <i> Never</i>
+                    }
+                    else
+                    {
+                        Html.DisplayFor(x => x.LastPlay);
+                    }
+                </p>
                 <p>Played @Html.DisplayFor(x => x.NumOfPlays) times</p>
             </div>
             <div class="col-xs-3">
