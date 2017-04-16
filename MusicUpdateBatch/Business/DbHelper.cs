@@ -369,6 +369,62 @@ namespace MusicUpdateBatch.Business
             }
         }
 
+        public void InsertFeaturingsUsingFileName(Tag songTag, int songId, string fileName, int artistId)
+        { //Elvis Preasly Feat. Jxl - A Little Less Conversation
+            try
+            {
+                // Retrieve principal artist and other featurings
+                string principalArtist = songTag.FirstAlbumArtist;
+                // Attempt to split after keyword "Feat."
+                int featIndex = fileName.IndexOf("Feat.");
+                int delimitatorIndex = fileName.IndexOf("-");
+                if(featIndex != -1)
+                {
+                    // Found a featuring, attempt to retrieve featurings from fileName
+                    string[] feats = fileName.Substring(featIndex, delimitatorIndex - featIndex).Split(',');
+                    foreach(string feat in feats)
+                    {
+                        // Attempt to find the artist in the database
+                        Artist artistFeats = _context.Artists.Where(x => x.ArtName == feat).FirstOrDefault();
+                        if(artistFeats == null)
+                        {
+                            // If artist does not exist, create a new one
+                            artistFeats = new Artist()
+                            {
+                                ArtName = feat
+                            };
+                        }
+                        // Add and save changes to obtain its ID
+                        _context.Artists.Add(artistFeats);
+                        _context.SaveChanges();
+                        Featuring featuringObject = new Featuring()
+                        {
+                            ArtistId = artistFeats.ID,
+                            SongId = songId,
+                            IsPrincipalArtist = false
+                        };
+                    }
+                    // Attempt to insert principal artist
+                    Featuring principalFeatObject = new Featuring()
+                    {
+                        ArtistId = artistId,
+                        SongId = songId,
+                        IsPrincipalArtist = true
+                    };
+                    _context.Add(principalArtist);
+                    _context.SaveChanges();
+                }
+            }
+            catch (ArgumentOutOfRangeException aoorex)
+            {
+                _logger.ErrorFormat("DbHelper | InsertFeaturingsUsingFileName: Something goes wrong when inserting featurings for songId={0} due to exception [{1}]; indexes out of range!", songId, aoorex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.ErrorFormat("DbHelper | InsertFeaturingsUsingFileName: Something goes wrong when inserting featurings for songId={0} due to exception [{1}]", songId, ex.Message);
+            }
+        }
+
         public void Dispose()
         {
             GC.SuppressFinalize(this);
