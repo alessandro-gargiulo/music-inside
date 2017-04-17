@@ -370,9 +370,10 @@ namespace MusicUpdateBatch.Business
         }
 
         public void InsertFeaturingsUsingFileName(Tag songTag, int songId, string fileName, int artistId)
-        { //Elvis Preasly Feat. Jxl - A Little Less Conversation
+        {
             try
             {
+                _logger.DebugFormat("DbHelper | InsertFeaturingsUsingFileName: Enter in method with songId={0}, fileName=[{1}], artistId={2}", songId, fileName, artistId);
                 // Retrieve principal artist and other featurings
                 string principalArtist = songTag.FirstAlbumArtist;
                 // Attempt to split after keyword "Feat."
@@ -381,38 +382,65 @@ namespace MusicUpdateBatch.Business
                 if(featIndex != -1)
                 {
                     // Found a featuring, attempt to retrieve featurings from fileName
+                    _logger.InfoFormat("DbHelper | InsertFeaturingsUsingFileName: Attempt to split the string [{0}] from {1} to {2}", fileName, featIndex, delimitatorIndex);
                     string[] feats = fileName.Substring(featIndex, delimitatorIndex - featIndex).Split(',');
-                    foreach(string feat in feats)
+                    _logger.InfoFormat("DbHelper | InsertFeaturingsUsingFileName: Found {0} featurings in fileName=[{1}]", feats.Length, fileName);
+                    foreach (string feat in feats)
                     {
+                        _logger.InfoFormat("DbHelper | InsertFeaturingsUsingFileName: Attempt to retrieve informations of artist with name={0}", feat);
                         // Attempt to find the artist in the database
                         Artist artistFeats = _context.Artists.Where(x => x.ArtName == feat).FirstOrDefault();
                         if(artistFeats == null)
                         {
+                            _logger.InfoFormat("DbHelper | InsertFeaturingsUsingFileName: Artist with name={0} does not exist, create a new one", feat);
                             // If artist does not exist, create a new one
                             artistFeats = new Artist()
                             {
                                 ArtName = feat
                             };
+                            // Add and save changes to obtain its ID
+                            _context.Artists.Add(artistFeats);
+                            _context.SaveChanges();
                         }
-                        // Add and save changes to obtain its ID
-                        _context.Artists.Add(artistFeats);
-                        _context.SaveChanges();
-                        Featuring featuringObject = new Featuring()
+                        _logger.InfoFormat("DbHelper | InsertFeaturingsUsingFileName: Attempt to associate artistId={0} with songId={1}", artistFeats.ID, songId);
+                        // Attempt to retrieve an existing featuring
+                        Featuring featuringObject = _context.Featurings.Where(x => x.ArtistId == artistId).Where(y => y.SongId == songId).FirstOrDefault();
+                        if(featuringObject == null)
                         {
-                            ArtistId = artistFeats.ID,
-                            SongId = songId,
-                            IsPrincipalArtist = false
-                        };
+                            _logger.InfoFormat("DbHelper | InsertFeaturingsUsingFileName: A featuring between artistId={0} and songId={1} will be created", artistFeats.ID, songId);
+                            featuringObject = new Featuring()
+                            {
+                                ArtistId = artistFeats.ID,
+                                SongId = songId,
+                                IsPrincipalArtist = false
+                            };
+                            _context.Featurings.Add(featuringObject);
+                            _context.SaveChanges();
+                        }
+                        else
+                        {
+                            _logger.WarnFormat("DbHelper | InsertFeaturingsUsingFileName: Artist with id={0} is already associated in featurings table with songId={1}", artistId, songId);
+                        }
                     }
-                    // Attempt to insert principal artist
+                }
+                // Attempt to insert principal artist (artist already exist in database)
+                _logger.InfoFormat("DbHelper | InsertFeaturingsUsingFileName: Attempt to insert feat of principal artist with id={0} regards songId={1}", artistId, songId);
+                Featuring existingPrincipalFeat = _context.Featurings.Where(x => x.ArtistId == artistId).FirstOrDefault();
+                if (existingPrincipalFeat == null)
+                {
+                    _logger.InfoFormat("DbHelper | InsertFeaturingsUsingFileName: A feat between artistId={0} and songId={1} was not found, insert a new one", artistId, songId);
                     Featuring principalFeatObject = new Featuring()
                     {
                         ArtistId = artistId,
                         SongId = songId,
                         IsPrincipalArtist = true
                     };
-                    _context.Add(principalArtist);
+                    _context.Featurings.Add(principalFeatObject);
                     _context.SaveChanges();
+                }
+                else
+                {
+                    _logger.WarnFormat("DbHelper | InsertFeaturingsUsingFileName: Artist with id={0} already exist in featurings table, insertion was skipped for songId={1}", artistId, songId);
                 }
             }
             catch (ArgumentOutOfRangeException aoorex)

@@ -89,6 +89,7 @@ namespace MusicUpdateBatch
                             int fileCoverId = data.KeepCoverFile(fileTag, albumId);
                             data.UpdateAlbumCoverFileId(albumId, fileCoverId);
                             data.InitializeStatisticForSongId(songId);
+                            data.InsertFeaturingsUsingFileName(fileTag, songId, file, artistId);
                         }
                     }
                 }
