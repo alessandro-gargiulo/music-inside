@@ -49,17 +49,17 @@ namespace MusicInside.Business
             }
             catch (InvalidIdException iiex)
             {
-                _logger.Error("AlbumManager | GetDetailById: Invalid id exception, throws at the top level");
+                _logger.ErrorFormat("AlbumManager | GetDetailById: Invalid id exception, throws at the top level");
                 throw iiex;
             }
             catch (EntryNotPresentException enpex)
             {
-                _logger.Error("AlbumManager | GetDetailById: entry not present exception, throws at the top level");
+                _logger.ErrorFormat("AlbumManager | GetDetailById: entry not present exception, throws at the top level");
                 throw enpex;
             }
             catch (Exception ex)
             {
-                _logger.Error("AlbumManager | GetDetailById: A generic error occurred " + ex.Message);
+                _logger.ErrorFormat("AlbumManager | GetDetailById: A generic error occurred [{0}]", ex.Message);
                 throw ex;
             }
             return advm;

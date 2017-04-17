@@ -35,17 +35,17 @@ namespace MusicInside.Controllers
             }
             catch (InvalidIdException iiex)
             {
-                _logger.Error("AlbumController | Detail: " + iiex.Message);
+                _logger.ErrorFormat("AlbumController | Detail: Error occurred [{0}]", iiex.Message);
                 return null; // Redirect to error screen
             }
             catch (EntryNotPresentException enpex)
             {
-                _logger.Error("AlbumController | Detail: " + enpex.Message);
+                _logger.ErrorFormat("AlbumController | Detail: Error occurred [{0}]", enpex.Message);
                 return null; // Redirect to error screen
             }
             catch (Exception ex)
             {
-                _logger.Error("AlbumController | Detail: A generic error occurred " + ex.Message);
+                _logger.ErrorFormat("AlbumController | Detail: A generic error occurred [{0}]", ex.Message);
                 return null;
             }
         }
@@ -59,20 +59,19 @@ namespace MusicInside.Controllers
             }
             catch (InvalidIdException iiex)
             {
-                _logger.Error("AlbumController | GetCoverImage: " + iiex.Message);
-                return null;
+                _logger.ErrorFormat("AlbumController | GetCoverImage: Error occurred [{0}]", iiex.Message);
+                return null; // Redirect to error screen
             }
             catch (EntryNotPresentException enpex)
             {
-                _logger.Error("AlbumController | GetCoverImage: " + enpex.Message);
-                return null;
+                _logger.ErrorFormat("AlbumController | GetCoverImage: Error occurred [{0}]", enpex.Message);
+                return null; // Redirect to error screen
             }
             catch (Exception ex)
             {
-                _logger.Error("AlbumController | GetCoverImage: A generic error occurred " + ex.Message);
+                _logger.ErrorFormat("AlbumController | GetCoverImage: A generic error occurred [{0}]", ex.Message);
                 return null;
             }
-
         }
     }
 }

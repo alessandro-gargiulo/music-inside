@@ -33,7 +33,7 @@ namespace MusicInside.Controllers
             }
             catch (Exception ex)
             {
-                _logger.Error("SongController | Index: " + ex.Message);
+                _logger.ErrorFormat("SongController | Index: Error occurred [{0}]", ex.Message);
                 return null;
             }
         }
@@ -47,16 +47,16 @@ namespace MusicInside.Controllers
             }
             catch (InvalidIdException iiex)
             {
-                _logger.Error("SongController | Detail: " + iiex.Message);
+                _logger.ErrorFormat("SongController | Detail: Error occurred [{0}]", iiex.Message);
                 return null; // Redirect to error screen
             }
             catch (EntryNotPresentException enpex)
             {
-                _logger.Error("SongController | Detail: " + enpex.Message);
+                _logger.ErrorFormat("SongController | Detail: Error occurred [{0}]", enpex.Message);
                 return null; // Redirect to error screen
             }catch(Exception ex)
             {
-                _logger.Error("SongController | Detail: A generic error occurred " + ex.Message);
+                _logger.ErrorFormat("SongController | Detail: A generic error occurred [{0}]", ex.Message);
                 return null;
             }
         }
