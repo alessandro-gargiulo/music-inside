@@ -56,7 +56,21 @@ namespace MusicInside.DataAccess
 
         public List<Album> GetListAlbumByArtistId(int id)
         {
-            throw new NotImplementedException();
+            if (id < 0) throw new InvalidIdException("Invalid album id value. Value must be non-negative");
+            List<Album> albums = new List<Album>();
+            try
+            {
+                albums = _db.Albums.Where(x => x.ArtistId == id).ToList();
+                if (albums.Count() == 0)
+                {
+                    throw new EntryNotPresentException("Can't found a list of album with chosen artist id");
+                }
+            }
+            catch (ArgumentNullException anex)
+            {
+                _logger.Error("AlbumDataAccess | GetListAlbumByArtistId: Cannot execute query with null argument: " + anex.Message);
+            }
+            return albums;
         }
 
         public byte[] GetCoverFile(int id)
