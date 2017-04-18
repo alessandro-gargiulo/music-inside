@@ -377,8 +377,8 @@ namespace MusicUpdateBatch.Business
                 // Retrieve principal artist and other featurings
                 string principalArtist = songTag.FirstAlbumArtist;
                 // Attempt to split after keyword "Feat."
-                int featIndex = fileName.IndexOf("Feat.");
-                int delimitatorIndex = fileName.IndexOf("-");
+                int featIndex = fileName.IndexOf("Feat.") != -1? fileName.IndexOf("Feat.") + 6 : -1;
+                int delimitatorIndex = fileName.IndexOf("-", featIndex) - 1;
                 if(featIndex != -1)
                 {
                     // Found a featuring, attempt to retrieve featurings from fileName
@@ -425,7 +425,10 @@ namespace MusicUpdateBatch.Business
                 }
                 // Attempt to insert principal artist (artist already exist in database)
                 _logger.InfoFormat("DbHelper | InsertFeaturingsUsingFileName: Attempt to insert feat of principal artist with id={0} regards songId={1}", artistId, songId);
-                Featuring existingPrincipalFeat = _context.Featurings.Where(x => x.ArtistId == artistId).FirstOrDefault();
+                Featuring existingPrincipalFeat = _context.Featurings
+                    .Where(x => x.ArtistId == artistId)
+                    .Where(y => y.SongId == songId)
+                    .FirstOrDefault();
                 if (existingPrincipalFeat == null)
                 {
                     _logger.InfoFormat("DbHelper | InsertFeaturingsUsingFileName: A feat between artistId={0} and songId={1} was not found, insert a new one", artistId, songId);
