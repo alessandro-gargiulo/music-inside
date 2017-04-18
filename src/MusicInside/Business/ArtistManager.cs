@@ -34,7 +34,7 @@ namespace MusicInside.Business
             }
             catch (Exception ex)
             {
-                _logger.Error("ArtistManager | GetAllTable: A generic error occurred " + ex.Message);
+                _logger.ErrorFormat("ArtistManager | GetAllTable: A generic error occurred [{0}]", ex.Message);
                 throw ex;
             }
         }
@@ -72,17 +72,17 @@ namespace MusicInside.Business
             }
             catch (InvalidIdException iiex)
             {
-                _logger.Error("ArtistManager | GetDetailById: Invalid id exception, throws at the top level");
+                _logger.ErrorFormat("ArtistManager | GetDetailById: Invalid id exception, throws at the top level");
                 throw iiex;
             }
             catch (EntryNotPresentException enpex)
             {
-                _logger.Error("ArtistManager | GetDetailById: entry not present exception, throws at the top level");
+                _logger.ErrorFormat("ArtistManager | GetDetailById: entry not present exception, throws at the top level");
                 throw enpex;
             }
             catch (Exception ex)
             {
-                _logger.Error("ArtistManager | GetDetailById: A generic error occurred " + ex.Message);
+                _logger.ErrorFormat("ArtistManager | GetDetailById: A generic error occurred [{0}]", ex.Message);
                 throw ex;
             }
             return advm;

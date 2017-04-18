@@ -54,7 +54,8 @@ namespace MusicInside.Controllers
             {
                 _logger.ErrorFormat("SongController | Detail: Error occurred [{0}]", enpex.Message);
                 return null; // Redirect to error screen
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 _logger.ErrorFormat("SongController | Detail: A generic error occurred [{0}]", ex.Message);
                 return null;
