@@ -378,9 +378,9 @@ namespace MusicUpdateBatch.Business
                 string principalArtist = songTag.FirstAlbumArtist;
                 // Attempt to split after keyword "Feat."
                 int featIndex = fileName.IndexOf("Feat.") != -1? fileName.IndexOf("Feat.") + 6 : -1;
-                int delimitatorIndex = fileName.IndexOf("-", featIndex) - 1;
                 if(featIndex != -1)
                 {
+                    int delimitatorIndex = fileName.IndexOf("-", featIndex) - 1;
                     // Found a featuring, attempt to retrieve featurings from fileName
                     _logger.InfoFormat("DbHelper | InsertFeaturingsUsingFileName: Attempt to split the string [{0}] from {1} to {2}", fileName, featIndex, delimitatorIndex);
                     string[] feats = fileName.Substring(featIndex, delimitatorIndex - featIndex).Split(',');
@@ -404,7 +404,7 @@ namespace MusicUpdateBatch.Business
                         }
                         _logger.InfoFormat("DbHelper | InsertFeaturingsUsingFileName: Attempt to associate artistId={0} with songId={1}", artistFeats.ID, songId);
                         // Attempt to retrieve an existing featuring
-                        Featuring featuringObject = _context.Featurings.Where(x => x.ArtistId == artistId).Where(y => y.SongId == songId).FirstOrDefault();
+                        Featuring featuringObject = _context.Featurings.Where(x => x.ArtistId == artistFeats.ID).Where(y => y.SongId == songId).FirstOrDefault();
                         if(featuringObject == null)
                         {
                             _logger.InfoFormat("DbHelper | InsertFeaturingsUsingFileName: A featuring between artistId={0} and songId={1} will be created", artistFeats.ID, songId);
