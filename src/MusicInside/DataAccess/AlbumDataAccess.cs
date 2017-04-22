@@ -29,7 +29,7 @@ namespace MusicInside.DataAccess
                 }
                 catch (ArgumentNullException anex)
                 {
-                    _logger.Error("AlbumDataAccess | GetAlbumById: Cannot execute query with null argument: " + anex.Message);
+                    _logger.ErrorFormat("AlbumDataAccess | GetAlbumById: Cannot execute query with null argument: [{0}]", anex.Message);
                 }
                 return album;
             }
@@ -49,7 +49,7 @@ namespace MusicInside.DataAccess
             }
             catch (ArgumentNullException anex)
             {
-                _logger.Error("AlbumDataAccess | GetListSongById: Cannot execute query with null argument: " + anex.Message);
+                _logger.ErrorFormat("AlbumDataAccess | GetListSongById: Cannot execute query with null argument: [{0}]", anex.Message);
             }
             return songs;
         }
@@ -68,7 +68,7 @@ namespace MusicInside.DataAccess
             }
             catch (ArgumentNullException anex)
             {
-                _logger.Error("AlbumDataAccess | GetListAlbumByArtistId: Cannot execute query with null argument: " + anex.Message);
+                _logger.ErrorFormat("AlbumDataAccess | GetListAlbumByArtistId: Cannot execute query with null argument: [{0}]", anex.Message);
             }
             return albums;
         }
@@ -89,11 +89,11 @@ namespace MusicInside.DataAccess
             }
             catch(System.IO.FileNotFoundException fnfex)
             {
-                _logger.Error("AlbumDataAccess | GetCoverFile: Cannot found file at given path: " + fnfex.Message);
+                _logger.ErrorFormat("AlbumDataAccess | GetCoverFile: Cannot found file at given path: [{0}]", fnfex.Message);
             }
             catch(Exception ex)
             {
-                _logger.Error("AlbumDataAccess | GetCoverFile: A generic exception occurred " + ex.Message);
+                _logger.ErrorFormat("AlbumDataAccess | GetCoverFile: A generic exception occurred [{0}]", ex.Message);
             }
             return arrayByte;
         }

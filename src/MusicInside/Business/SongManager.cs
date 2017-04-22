@@ -20,6 +20,7 @@ namespace MusicInside.Business
         private readonly IGenreDataAccess _genreDataAccess;
         private readonly IStatisticDataAccess _statisticDataAccess;
         private readonly IFileDataAccess _fileDataAccess;
+        private readonly IFeaturingDataAccess _featuringDataAccess;
         private readonly ILog _logger;
 
         public SongManager(ISongDataAccess songDataAccess, 
@@ -28,6 +29,7 @@ namespace MusicInside.Business
                             IGenreDataAccess genreDataAccess,
                             IStatisticDataAccess statisticDataAccess,
                             IFileDataAccess fileDataAccess,
+                            IFeaturingDataAccess featuringDataAccess,
                             ILog logger) {
             _songDataAccess = songDataAccess;
             _albumDataAccess = albumDataAccess;
@@ -35,6 +37,7 @@ namespace MusicInside.Business
             _genreDataAccess = genreDataAccess;
             _statisticDataAccess = statisticDataAccess;
             _fileDataAccess = fileDataAccess;
+            _featuringDataAccess = featuringDataAccess;
             _logger = logger;
         }
 
@@ -62,13 +65,22 @@ namespace MusicInside.Business
                 Song song = _songDataAccess.GetById(id);
                 Album album = _albumDataAccess.GetAlbumById(song.AlbumId.GetValueOrDefault());
                 Artist artist = _artistDataAccess.GetArtistById(album.ArtistId);
-                List<Genre> genres = _genreDataAccess.GetGenresBySongId(id);
+                List<int> featsArtistIdList = _featuringDataAccess.GetOnlyFeatsArtistId(id);
+                string artistLabel = artist.ArtName;
+                artistLabel = featsArtistIdList.Count != 0 ? artistLabel + " Feat. " : artistLabel;
+                foreach(int featId in featsArtistIdList)
+                {
+                    Artist featArtist = _artistDataAccess.GetArtistById(featId);
+                    artistLabel = artistLabel + featArtist.ArtName + ",";
+                }
+                artistLabel = featsArtistIdList.Count != 0 ? artistLabel.Substring(0, artistLabel.Length - 1) : artistLabel;
+                List <Genre> genres = _genreDataAccess.GetGenresBySongId(id);
                 string genreLabel = String.Join(", ", genres.Select(des => des.Description).ToArray());
                 Statistic stat = _statisticDataAccess.GetStatisticBySongId(id);
 
                 // Fill the object
                 sdvm.SongId = id;
-                sdvm.ArtistLabel = artist.ArtName;
+                sdvm.ArtistLabel = artistLabel;
                 sdvm.TitleLabel = song.Title;
                 sdvm.AlbumLabel = album.Title;
                 sdvm.Year = song.Year;
