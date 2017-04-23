@@ -34,7 +34,7 @@ namespace MusicInside.DataAccess
             }
             catch (ArgumentException anex)
             {
-                _logger.Error("GenreDataAccess | GenreDataAccess: Cannot execute query with null argument: " + anex.Message);
+                _logger.ErrorFormat("GenreDataAccess | GenreDataAccess: Cannot execute query with null argument [{0}]", anex.Message);
             }
             return query;
         }

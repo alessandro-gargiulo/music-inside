@@ -24,7 +24,7 @@ namespace MusicInside.DataAccess
             }
             catch (ArgumentNullException anex)
             {
-                _logger.ErrorFormat("FeaturingDataAccess | GetBothPrincipalAndFeatsArtistId: Cannot execute query with null argument: [{0}]", anex.Message);
+                _logger.ErrorFormat("FeaturingDataAccess | GetBothPrincipalAndFeatsArtistId: Cannot execute query with null argument [{0}]", anex.Message);
             }
             return ids;
         }
@@ -39,7 +39,7 @@ namespace MusicInside.DataAccess
             }
             catch (ArgumentNullException anex)
             {
-                _logger.ErrorFormat("FeaturingDataAccess | GetOnlyFeatsArtistId: Cannot execute query with null argument: [{0}]", anex.Message);
+                _logger.ErrorFormat("FeaturingDataAccess | GetOnlyFeatsArtistId: Cannot execute query with null argument [{0}]", anex.Message);
             }
             return ids;
         }
@@ -54,7 +54,7 @@ namespace MusicInside.DataAccess
             }
             catch (ArgumentNullException anex)
             {
-                _logger.ErrorFormat("FeaturingDataAccess | GetPrincipalArtistId: Cannot execute query with null argument: [{0}]", anex.Message);
+                _logger.ErrorFormat("FeaturingDataAccess | GetPrincipalArtistId: Cannot execute query with null argument [{0}]", anex.Message);
             }
             return id;
         }

@@ -100,5 +100,18 @@ namespace MusicInside.Controllers
             var stream = new MemoryStream(song, (int)startByte, (int)desSize);
             return File(stream, Response.ContentType);
         }
+
+        public ActionResult DoPlaySong(int id = -1)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                _logger.ErrorFormat("SongController | DoPlaySong: A generic error occurred [{0}]", ex.Message);
+                return Json(-1);
+            }
+        }
     }
 }

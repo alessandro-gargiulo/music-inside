@@ -122,5 +122,28 @@ namespace MusicInside.Business
             }
             return bytes;
         }
+
+        public void AddPlayToSongId(int id)
+        {
+            try
+            {
+                _statisticDataAccess.UpdateStatisticForSongId(id);
+            }
+            catch (InvalidIdException iiex)
+            {
+                _logger.ErrorFormat("SongManager | AddPlayToSongId: Invalid id exception, throws at the top level");
+                throw iiex;
+            }
+            catch (EntryNotPresentException enpex)
+            {
+                _logger.ErrorFormat("SongManager | AddPlayToSongId: entry not present exception, throws at the top level");
+                throw enpex;
+            }
+            catch (Exception ex)
+            {
+                _logger.ErrorFormat("SongManager | AddPlayToSongId: A generic error occurred [{0}]", ex.Message);
+                throw ex;
+            }
+        }
     }
 }

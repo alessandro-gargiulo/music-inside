@@ -39,11 +39,11 @@ namespace MusicInside.DataAccess
             }
             catch (SqlException sqlex)
             {
-                _logger.Error("ArtistDataAccess | GetAllSong: SQL problem have occurred: " + sqlex.Message);
+                _logger.ErrorFormat("ArtistDataAccess | GetAllSong: SQL problem have occurred [{0}]", sqlex.Message);
             }
             catch (Exception ex)
             {
-                _logger.Error("ArtistDataAccess | GetAllSong: A generic problem have occurred: " + ex.Message);
+                _logger.ErrorFormat("ArtistDataAccess | GetAllSong: A generic problem have occurred [{0}]", ex.Message);
             }
             return artists;
         }
@@ -62,7 +62,7 @@ namespace MusicInside.DataAccess
             }
             catch (ArgumentNullException anex)
             {
-                _logger.Error("ArtistDataAccess | GetArtistById: Cannot execute query with null argument: " + anex.Message);
+                _logger.ErrorFormat("ArtistDataAccess | GetArtistById: Cannot execute query with null argument [{0}]", anex.Message);
             }
             return artist;
         }
@@ -96,7 +96,7 @@ namespace MusicInside.DataAccess
             }
             catch (ArgumentNullException anex)
             {
-                _logger.Error("ArtistDataAccess | GetListSongOfArtist: Cannot execute query with null argument: " + anex.Message);
+                _logger.ErrorFormat("ArtistDataAccess | GetListSongOfArtist: Cannot execute query with null argument [{0}]", anex.Message);
             }
             return songs;
         }

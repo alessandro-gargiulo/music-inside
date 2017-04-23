@@ -29,7 +29,7 @@ namespace MusicInside.DataAccess
                 }
                 catch (ArgumentNullException anex)
                 {
-                    _logger.ErrorFormat("AlbumDataAccess | GetAlbumById: Cannot execute query with null argument: [{0}]", anex.Message);
+                    _logger.ErrorFormat("AlbumDataAccess | GetAlbumById: Cannot execute query with null argument [{0}]", anex.Message);
                 }
                 return album;
             }
@@ -49,7 +49,7 @@ namespace MusicInside.DataAccess
             }
             catch (ArgumentNullException anex)
             {
-                _logger.ErrorFormat("AlbumDataAccess | GetListSongById: Cannot execute query with null argument: [{0}]", anex.Message);
+                _logger.ErrorFormat("AlbumDataAccess | GetListSongById: Cannot execute query with null argument [{0}]", anex.Message);
             }
             return songs;
         }
@@ -68,7 +68,7 @@ namespace MusicInside.DataAccess
             }
             catch (ArgumentNullException anex)
             {
-                _logger.ErrorFormat("AlbumDataAccess | GetListAlbumByArtistId: Cannot execute query with null argument: [{0}]", anex.Message);
+                _logger.ErrorFormat("AlbumDataAccess | GetListAlbumByArtistId: Cannot execute query with null argument [{0}]", anex.Message);
             }
             return albums;
         }
@@ -89,7 +89,7 @@ namespace MusicInside.DataAccess
             }
             catch(System.IO.FileNotFoundException fnfex)
             {
-                _logger.ErrorFormat("AlbumDataAccess | GetCoverFile: Cannot found file at given path: [{0}]", fnfex.Message);
+                _logger.ErrorFormat("AlbumDataAccess | GetCoverFile: Cannot found file at given path [{0}]", fnfex.Message);
             }
             catch(Exception ex)
             {

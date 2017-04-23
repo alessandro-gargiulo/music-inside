@@ -28,7 +28,7 @@ namespace MusicInside.DataAccess
             }
             catch (ArgumentNullException anex)
             {
-                _logger.Error("FileDataAccess | GetFileById: Cannot execute query with null argument: " + anex.Message);
+                _logger.ErrorFormat("FileDataAccess | GetFileById: Cannot execute query with null argument [{0}]", anex.Message);
             }
             return file;
         }
@@ -53,7 +53,7 @@ namespace MusicInside.DataAccess
             }
             catch (Exception ex)
             {
-
+                _logger.ErrorFormat("FileDataAccess | GetFileBytesById: Generic exception occurred [{0}]", ex.Message);
             }
             return bytes;
         }
