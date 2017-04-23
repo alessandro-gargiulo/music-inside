@@ -245,7 +245,13 @@ namespace MusicUpdateBatch.Business
                 }
                 else
                 {
-                    _logger.InfoFormat("DbHelper | InsertPhysicalFile: The file {0}/{1} with songId={2} was already found in database", folder, fileName, songId);
+                    // If database file entry exist, update its phisical path
+                    existingFile.Path = folder;
+                    existingFile.FileName = Path.GetFileNameWithoutExtension(fileName);
+                    existingFile.Extension = extension;
+                    _context.Files.Update(existingFile);
+                    _context.SaveChanges();
+                    _logger.InfoFormat("DbHelper | InsertPhysicalFile: The file {0}/{1} with songId={2} was already found in database, its informations were updated", folder, fileName, songId);
                 }
 
             }
