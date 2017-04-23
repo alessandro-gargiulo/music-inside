@@ -12,5 +12,9 @@ namespace MusicInside.DataAccessInterfaces
         int GetPrincipalArtistId(int songId);
 
         List<int> GetBothPrincipalAndFeatsArtistId(int songId);
+
+        List<int> GetSongFeaturingOfArtistId(int artistId);
+
+        List<int> GetBothSongAndFeaturingOfArtistId(int artistId);
     }
 }

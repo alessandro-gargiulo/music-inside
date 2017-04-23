@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MusicInside.ModelView;
+using System.Data.SqlClient;
 
 namespace MusicInside.DataAccess
 {
@@ -61,10 +63,6 @@ namespace MusicInside.DataAccess
             try
             {
                 albums = _db.Albums.Where(x => x.ArtistId == id).ToList();
-                if (albums.Count() == 0)
-                {
-                    throw new EntryNotPresentException("Can't found a list of album with chosen artist id");
-                }
             }
             catch (ArgumentNullException anex)
             {
@@ -96,6 +94,38 @@ namespace MusicInside.DataAccess
                 _logger.ErrorFormat("AlbumDataAccess | GetCoverFile: A generic exception occurred [{0}]", ex.Message);
             }
             return arrayByte;
+        }
+
+        public List<AlbumRowViewModel> GetAll()
+        {
+            List<AlbumRowViewModel> albums = new List<AlbumRowViewModel>();
+            try
+            {
+                SqlConnection _connection = new SqlConnection(_connString);
+                SqlCommand _cmd = new SqlCommand();
+                SqlDataReader _reader;
+
+                _cmd.CommandText = "sp_GetAllAlbum";
+                _cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                _cmd.Connection = _connection;
+
+                _connection.Open();
+                _reader = _cmd.ExecuteReader();
+                while (_reader.Read())
+                {
+                    albums.Add(AlbumRowViewModel.Fill(_reader));
+                }
+                _connection.Close();
+            }
+            catch (SqlException sqlex)
+            {
+                _logger.ErrorFormat("AlbumDataAccess | GetAll: SQL problem have occurred [{0}]", sqlex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.ErrorFormat("AlbumDataAccess | GetAll: A generic problem have occurred [{0}]", ex.Message);
+            }
+            return albums;
         }
     }
 }

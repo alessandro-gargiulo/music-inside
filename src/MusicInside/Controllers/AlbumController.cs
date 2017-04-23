@@ -23,7 +23,16 @@ namespace MusicInside.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            try
+            {
+                List<AlbumRowViewModel> allAlbums = _albumManager.GetAllTable();
+                return View(allAlbums);
+            }
+            catch (Exception ex)
+            {
+                _logger.ErrorFormat("AlbumController | Index: Error occurred [{0}]", ex.Message);
+                return null;
+            }
         }
 
         public IActionResult Detail(int id = -1)

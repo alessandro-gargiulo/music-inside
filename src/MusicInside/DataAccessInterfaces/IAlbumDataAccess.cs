@@ -1,4 +1,5 @@
 ﻿using MusicInside.Models;
+using MusicInside.ModelView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,5 +36,11 @@ namespace MusicInside.DataAccessInterfaces
         /// <param name="id">The identifier of the album cover file</param>
         /// <returns>Representation of the image in byte array</returns>
         byte[] GetCoverFile(int id);
+
+        /// <summary>
+        /// Get the list of all albums in the database
+        /// </summary>
+        /// <returns>List of all album</returns>
+        List<AlbumRowViewModel> GetAll();
     }
 }

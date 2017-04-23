@@ -88,5 +88,20 @@ namespace MusicInside.Business
             }
             return data;
         }
+
+        public List<AlbumRowViewModel> GetAllTable()
+        {
+            List<AlbumRowViewModel> albums = new List<AlbumRowViewModel>();
+            try
+            {
+                albums = _albumDataAccess.GetAll();
+                return albums;
+            }
+            catch (Exception ex)
+            {
+                _logger.ErrorFormat("AlbumManager | GetAllTable: A generic error occurred [{0}]", ex.Message);
+                throw ex;
+            }
+        }
     }
 }

@@ -39,11 +39,11 @@ namespace MusicInside.DataAccess
             }
             catch (SqlException sqlex)
             {
-                _logger.ErrorFormat("SongDataAccess | GetAllSong: SQL problem have occurred [{0}]", sqlex.Message);
+                _logger.ErrorFormat("SongDataAccess | GetAll: SQL problem have occurred [{0}]", sqlex.Message);
             }
             catch (Exception ex)
             {
-                _logger.ErrorFormat("SongDataAccess | GetAllSong: A generic problem have occurred [{0}]", ex.Message);
+                _logger.ErrorFormat("SongDataAccess | GetAll: A generic problem have occurred [{0}]", ex.Message);
             }
             return songs;
         }
@@ -62,7 +62,7 @@ namespace MusicInside.DataAccess
             }
             catch(ArgumentNullException anex)
             {
-                _logger.ErrorFormat("SongDataAccess | GetSongById: Cannot execute query with null argument [{0}]", anex.Message);
+                _logger.ErrorFormat("SongDataAccess | GetById: Cannot execute query with null argument [{0}]", anex.Message);
             }
             return song;
         }

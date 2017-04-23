@@ -15,12 +15,16 @@ namespace MusicInside.Business
     {
         private readonly IArtistDataAccess _artistDataAccess;
         private readonly IAlbumDataAccess _albumDataAccess;
+        private readonly IFeaturingDataAccess _featuringDataAccess;
+        private readonly ISongDataAccess _songDataAccess;
         private readonly ILog _logger;
 
-        public ArtistManager(IArtistDataAccess artistDataAccess, IAlbumDataAccess albumDataAccess, ILog logger)
+        public ArtistManager(IArtistDataAccess artistDataAccess, IAlbumDataAccess albumDataAccess, IFeaturingDataAccess featuringDataAccess, ISongDataAccess songDataAccess, ILog logger)
         {
             _artistDataAccess = artistDataAccess;
             _albumDataAccess = albumDataAccess;
+            _featuringDataAccess = featuringDataAccess;
+            _songDataAccess = songDataAccess;
             _logger = logger;
         }
 
@@ -47,7 +51,7 @@ namespace MusicInside.Business
                 // Retrieving data
                 Artist artist = _artistDataAccess.GetArtistById(id);
                 List<Song> songs = _artistDataAccess.GetListSongOfArtist(id);
-                List<Album> albums = _albumDataAccess.GetListAlbumByArtistId(id);
+                List <Album> albums = _albumDataAccess.GetListAlbumByArtistId(id);
                 // Fill the object
                 advm.ArtistId = artist.ID;
                 advm.ArtName = artist.ArtName;

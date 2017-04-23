@@ -58,5 +58,35 @@ namespace MusicInside.DataAccess
             }
             return id;
         }
+
+        public List<int> GetSongFeaturingOfArtistId(int artistId)
+        {
+            if (artistId < 0) throw new InvalidIdException("Invalid artist id value. Value must be non-negative");
+            List<int> ids = new List<int>();
+            try
+            {
+                ids = _db.Featurings.Where(x => x.ArtistId == artistId).Where(y => y.IsPrincipalArtist == false).Select(w => w.SongId).ToList();
+            }
+            catch (ArgumentNullException anex)
+            {
+                _logger.ErrorFormat("FeaturingDataAccess | GetSongFeaturingOfArtistId: Cannot execute query with null argument [{0}]", anex.Message);
+            }
+            return ids;
+        }
+
+        public List<int> GetBothSongAndFeaturingOfArtistId(int artistId)
+        {
+            if (artistId < 0) throw new InvalidIdException("Invalid artist id value. Value must be non-negative");
+            List<int> ids = new List<int>();
+            try
+            {
+                ids = _db.Featurings.Where(x => x.ArtistId == artistId).Select(w => w.SongId).ToList();
+            }
+            catch (ArgumentNullException anex)
+            {
+                _logger.ErrorFormat("FeaturingDataAccess | GetSongFeaturingOfArtistId: Cannot execute query with null argument [{0}]", anex.Message);
+            }
+            return ids;
+        }
     }
 }
