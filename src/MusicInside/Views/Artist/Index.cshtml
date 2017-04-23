@@ -1,35 +1,37 @@
 ﻿@model List<MusicInside.ModelView.ArtistRowViewModel>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Art Name
-            </th>
-            <th>
-                Number of Songs
-            </th>
-            <th>
-                Go to Details
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var artist in Model)
-        {
+<div class="row">
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => artist.ArtName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => artist.NumberSong)
-                </td>
-                <td>
-                    <a href="@Url.Action("Detail", "Artist", new { id = artist.ArtistId })">
-                        <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
-                    </a>
-                </td>
+                <th>
+                    Art Name
+                </th>
+                <th>
+                    Number of Songs
+                </th>
+                <th>
+                    Go to Details
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var artist in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => artist.ArtName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => artist.NumberSong)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Detail", "Artist", new { id = artist.ArtistId })">
+                            <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

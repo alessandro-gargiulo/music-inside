@@ -13,5 +13,7 @@ namespace MusicInside.ManagerInterfaces
         SongDetailViewModel GetDetailById(int id);
 
         byte[] GetFileBytesById(int id);
+
+        void AddPlayToSongId(int id);
     }
 }

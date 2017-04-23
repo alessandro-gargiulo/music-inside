@@ -105,7 +105,8 @@ namespace MusicInside.Controllers
         {
             try
             {
-
+                _songManager.AddPlayToSongId(id);
+                return Json(0);
             }
             catch (Exception ex)
             {

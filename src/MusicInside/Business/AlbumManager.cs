@@ -74,17 +74,17 @@ namespace MusicInside.Business
             }
             catch (InvalidIdException iiex)
             {
-                _logger.Error("AlbumManager | GetAlbumCoverFile: Invalid id exception, throws at the top level");
+                _logger.ErrorFormat("AlbumManager | GetAlbumCoverFile: Invalid id exception, throws at the top level");
                 throw iiex;
             }
             catch (EntryNotPresentException enpex)
             {
-                _logger.Error("AlbumManager | GetAlbumCoverFile: entry not present exception, throws at the top level");
+                _logger.ErrorFormat("AlbumManager | GetAlbumCoverFile: entry not present exception, throws at the top level");
                 throw enpex;
             }
             catch (Exception ex)
             {
-                _logger.Error("AlbumManager | GetAlbumCoverFile: A generic error occurred " + ex.Message);
+                _logger.ErrorFormat("AlbumManager | GetAlbumCoverFile: A generic error occurred [{0}]", ex.Message);
             }
             return data;
         }
