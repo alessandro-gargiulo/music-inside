@@ -31,7 +31,7 @@
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/lib/angular-js/angular.min.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
-        <script src="~/js/app.module.js" asp-append-version="true"></script>
+        <script src="~/app/app.module.js" asp-append-version="true"></script>
     </environment>
     <environment names="Staging,Production">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
@@ -46,10 +46,10 @@
                 asp-fallback-src="~/lib/angular-js/angular.min.js">
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
-        <script src="~/js/app.module.js" asp-append-version="true"></script>
+        <script src="~/app/app.module.js" asp-append-version="true"></script>
     </environment>
 </head>
-<body>
+<body ng-app="MusicInsideApp">
     <div class="container-fluid">
         <div class="row site-header">
             <div class="col-md-12">

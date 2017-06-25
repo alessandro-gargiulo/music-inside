@@ -25,11 +25,12 @@ namespace MusicInside.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string firstLetter = "A")
         {
             try
             {
-                List<SongRowViewModel> allSong = _songManager.GetAllTable();
+                //List<SongRowViewModel> allSong = _songManager.GetAllTable();
+                List<SongRowViewModel> allSong = _songManager.GetTablePart(firstLetter);
                 return View(allSong);
             }
             catch (Exception ex)

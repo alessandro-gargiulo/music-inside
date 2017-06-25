@@ -1,137 +1,165 @@
 ﻿@model List<MusicInside.ModelView.SongRowViewModel>
 
-<div class="row">
-    <div class="col-md-12">
-        <ul class="pagination pagination-sm">
-            <li>
-                <a href="#">A</a>
-            </li>
-            <li>
-                <a href="#">B</a>
-            </li>
-            <li>
-                <a href="#">C</a>
-            </li>
-            <li>
-                <a href="#">D</a>
-            </li>
-            <li>
-                <a href="#">E</a>
-            </li>
-            <li>
-                <a href="#">F</a>
-            </li>
-            <li>
-                <a href="#">G</a>
-            </li>
-            <li>
-                <a href="#">J</a>
-            </li>
-            <li>
-                <a href="#">I</a>
-            </li>
-            <li>
-                <a href="#">K</a>
-            </li>
-            <li>
-                <a href="#">L</a>
-            </li>
-            <li>
-                <a href="#">M</a>
-            </li>
-            <li>
-                <a href="#">N</a>
-            </li>
-            <li>
-                <a href="#">O</a>
-            </li>
-            <li>
-                <a href="#">P</a>
-            </li>
-            <li>
-                <a href="#">Q</a>
-            </li>
-            <li>
-                <a href="#">R</a>
-            </li>
-            <li>
-                <a href="#">S</a>
-            </li>
-            <li>
-                <a href="#">T</a>
-            </li>
-            <li>
-                <a href="#">U</a>
-            </li>
-            <li>
-                <a href="#">V</a>
-            </li>
-            <li>
-                <a href="#">W</a>
-            </li>
-            <li>
-                <a href="#">X</a>
-            </li>
-            <li>
-                <a href="#">Y</a>
-            </li>
-            <li>
-                <a href="#">Z</a>
-            </li>
-        </ul>
+@section scripts{
+    <script src="~/app/components/song/songSearchController.js"></script>
+}
+
+<section class="page-list song-list" 
+         ng-controller="SongSearchController"
+         ng-init="init(@Newtonsoft.Json.JsonConvert.SerializeObject(Model))">
+    <div class="row">
+        <!-- Navigation by letter Section -->
+        <div class="col-md-12">
+            <ul class="pagination pagination-sm">
+                <li>
+                    <a href="#">A</a>
+                </li>
+                <li>
+                    <a href="#">B</a>
+                </li>
+                <li>
+                    <a href="#">C</a>
+                </li>
+                <li>
+                    <a href="#">D</a>
+                </li>
+                <li>
+                    <a href="#">E</a>
+                </li>
+                <li>
+                    <a href="#">F</a>
+                </li>
+                <li>
+                    <a href="#">G</a>
+                </li>
+                <li>
+                    <a href="#">J</a>
+                </li>
+                <li>
+                    <a href="#">I</a>
+                </li>
+                <li>
+                    <a href="#">K</a>
+                </li>
+                <li>
+                    <a href="#">L</a>
+                </li>
+                <li>
+                    <a href="#">M</a>
+                </li>
+                <li>
+                    <a href="#">N</a>
+                </li>
+                <li>
+                    <a href="#">O</a>
+                </li>
+                <li>
+                    <a href="#">P</a>
+                </li>
+                <li>
+                    <a href="#">Q</a>
+                </li>
+                <li>
+                    <a href="#">R</a>
+                </li>
+                <li>
+                    <a href="#">S</a>
+                </li>
+                <li>
+                    <a href="#">T</a>
+                </li>
+                <li>
+                    <a href="#">U</a>
+                </li>
+                <li>
+                    <a href="#">V</a>
+                </li>
+                <li>
+                    <a href="#">W</a>
+                </li>
+                <li>
+                    <a href="#">X</a>
+                </li>
+                <li>
+                    <a href="#">Y</a>
+                </li>
+                <li>
+                    <a href="#">Z</a>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
-<div class="row">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Title
-                </th>
-                <th>
-                    Artist
-                </th>
-                <th>
-                    Album
-                </th>
-                <th>
-                    Genre
-                </th>
-                <th>
-                    Year
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+    <div class="row">
+        <!-- Content box Section -->
+        <table class="table">
+            <thead>
                 <tr>
+                    <th>
+                        Title<br />
+                        <input type="text"
+                               placeholder="Search.."
+                               ng-model="userInputFilterTitle" />
+                    </th>
+                    <th>
+                        Artist<br />
+                        <input type="text"
+                               placeholder="Search.."
+                               ng-model="userInputFilterArtist" />
+                    </th>
+                    <th>
+                        Album<br />
+                        <input type="text"
+                               placeholder="Search.."
+                               ng-model="userInputFilterAlbum" />
+                    </th>
+                    <th>
+                        Genre<br />
+                        <input type="text"
+                               placeholder="Search.."
+                               ng-model="userInputFilterGenre" />
+                    </th>
+                    <th>
+                        Year<br />
+                        <!--Metti direttiva per inserire solo numeri (4 numeri)-->
+                        <input type="text"
+                               placeholder="Search.."
+                               ng-model="userInputFilterYear" />
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="song in songList | filter : {TitleLabel : userInputFilterTitle, 
+                                                            ArtistLabel : userInputFilterArtist, 
+                                                            AlbumLabel : userInputFilterAlbum,
+                                                            GenreLabel : userInputFilterGenre,
+                                                            YearNumber : userInputFilterYear}">
                     <td>
-                        <a href="@Url.Action("Detail", "Song", new { id = item.SongId })" title="Go to Song Details">
+                        <a ng-href="{{song.songDetailLink}}" title="Go to Song Details">
                             <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
                         </a>
-                        @Html.DisplayFor(modelItem => item.TitleLabel)
+                        {{song.TitleLabel}}
                     </td>
                     <td>
-                        <a href="@Url.Action("Detail", "Artist", new { id = item.ArtistId })" title="Go to Artist Details">
+                        <a ng-href="{{song.artistDetailLink}}" title="Go to Artist Details">
                             <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
                         </a>
-                        @Html.DisplayFor(modelItem => item.ArtistLabel)
+                        {{song.ArtistLabel}}
                     </td>
                     <td>
-                        <a href="@Url.Action("Detail", "Album", new { id = item.AlbumId })" title="Go to Album Details">
+                        <a ng-href="{{song.albumDetailLink}}" title="Go to Album Details">
                             <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
                         </a>
-                        @Html.DisplayFor(modelItem => item.AlbumLabel)
+                        {{song.AlbumLabel}}
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.GenreLabel)
+                        {{song.GenreLabel}}
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.YearNumber)
+                        {{song.YearNumber}}
                     </td>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+            </tbody>
+        </table>
+    </div>
+</section>
+

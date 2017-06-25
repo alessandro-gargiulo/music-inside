@@ -16,10 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\app\app.module.js" />
+    <Content Include="wwwroot\app\components\home\homeController.js" />
+    <Content Include="wwwroot\app\components\song\songSearchController.js" />
     <Content Include="wwwroot\js\app.module.js" />
-    <Content Include="wwwroot\js\components\homeController.js" />
-    <Content Include="wwwroot\js\components\home\homeController.js" />
-    <Content Include="wwwroot\js\components\landingPageController.js" />
+    <Content Include="wwwroot\app\components\homeController.js" />
+    <Content Include="wwwroot\app\components\landingPageController.js" />
     <Content Include="wwwroot\js\musicInsideAngularApp.js" />
   </ItemGroup>
 
@@ -64,7 +66,7 @@
   <ItemGroup>
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Properties\PublishProfiles\" />
-    <Folder Include="wwwroot\app\" />
+    <Folder Include="wwwroot\images\icons\" />
   </ItemGroup>
 
 </Project>

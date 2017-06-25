@@ -3,13 +3,11 @@
 }
 
 <!DOCTYPE html>
-<html ng-app="MusicInsideApp" ng-controller="HomeController">
-<head>
-    <title ng-bind="try"></title>
-    <script src="~/js/components/home/homeController.js"></script>
-</head>
-<body>
-    <input type="text" ng-model="try" />
-    <h1>{{try}}</h1>
-</body>
+<html>
+    <head>
+        <script src="~/app/components/home/homeController.js"></script>
+    </head>
+    <body ng-controller="HomeController">
+        <h1>Welcome to Music Inside App</h1>
+    </body>
 </html>

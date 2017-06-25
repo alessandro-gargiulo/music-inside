@@ -1,0 +1,1 @@
+﻿var MusicInsideApp = angular.module('MusicInsideApp', []);
