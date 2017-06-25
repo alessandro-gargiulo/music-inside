@@ -16,6 +16,13 @@ namespace MusicInside.DataAccessInterfaces
         List<SongRowViewModel> GetAll();
 
         /// <summary>
+        /// Get all the song from database which starts with given letter
+        /// </summary>
+        /// <param name="letter">The first letter of song title</param>
+        /// <returns>A list of songs formatted as the view model want</returns>
+        List<SongRowViewModel> GetAllByLetter(string letter);
+
+        /// <summary>
         /// Get a particular song indexed by its id
         /// </summary>
         /// <param name="id">The identifier of the song</param>

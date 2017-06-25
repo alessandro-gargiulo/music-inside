@@ -48,6 +48,41 @@ namespace MusicInside.DataAccess
             return songs;
         }
 
+        public List<SongRowViewModel> GetAllByLetter(string letter)
+        {
+            List<SongRowViewModel> songs = new List<SongRowViewModel>();
+            try
+            {
+                SqlConnection _connection = new SqlConnection(_connString);
+                SqlCommand _cmd = new SqlCommand();
+                SqlDataReader _reader;
+
+                var storedParameter = new SqlParameter("@letter", letter);
+
+                _cmd.CommandText = "sp_GetAllSongStartsWith";
+                _cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                _cmd.Parameters.Add(storedParameter);
+                _cmd.Connection = _connection;
+
+                _connection.Open();
+                _reader = _cmd.ExecuteReader();
+                while (_reader.Read())
+                {
+                    songs.Add(SongRowViewModel.Fill(_reader));
+                }
+                _connection.Close();
+            }
+            catch (SqlException sqlex)
+            {
+                _logger.ErrorFormat("SongDataAccess | GetAllByLetter: SQL problem have occurred [{0}]", sqlex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.ErrorFormat("SongDataAccess | GetAllByLetter: A generic problem have occurred [{0}]", ex.Message);
+            }
+            return songs;
+        }
+
         public Song GetById(int id)
         {
             if (id < 0) throw new InvalidIdException("Invalid song id value. Value must be non-negative");

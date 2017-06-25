@@ -10,6 +10,8 @@ namespace MusicInside.ManagerInterfaces
     {
         List<SongRowViewModel> GetAllTable();
 
+        List<SongRowViewModel> GetTablePart(string letter);
+
         SongDetailViewModel GetDetailById(int id);
 
         byte[] GetFileBytesById(int id);

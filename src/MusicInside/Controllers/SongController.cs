@@ -19,6 +19,7 @@ namespace MusicInside.Controllers
     {
         private readonly ISongManager _songManager;
         private readonly ILog _logger;
+
         public SongController(ISongManager manager, ILog logger) {
             _songManager = manager;
             _logger = logger;

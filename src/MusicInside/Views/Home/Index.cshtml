@@ -1,3 +1,15 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+
+<!DOCTYPE html>
+<html ng-app="MusicInsideApp" ng-controller="HomeController">
+<head>
+    <title ng-bind="try"></title>
+    <script src="~/js/components/home/homeController.js"></script>
+</head>
+<body>
+    <input type="text" ng-model="try" />
+    <h1>{{try}}</h1>
+</body>
+</html>

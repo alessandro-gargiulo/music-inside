@@ -145,5 +145,20 @@ namespace MusicInside.Business
                 throw ex;
             }
         }
+
+        public List<SongRowViewModel> GetTablePart(string letter)
+        {
+            List<SongRowViewModel> songs = new List<SongRowViewModel>();
+            try
+            {
+                songs = _songDataAccess.GetAllByLetter(letter);
+                return songs;
+            }
+            catch(Exception ex)
+            {
+                _logger.ErrorFormat("SongManager | GetTablePart: A generic error occurred [{0}]", ex.Message);
+                throw ex;
+            }
+        }
     }
 }
