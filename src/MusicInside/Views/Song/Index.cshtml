@@ -1,165 +1,166 @@
-﻿@model List<MusicInside.ModelView.SongRowViewModel>
-
-@section scripts{
+﻿@section scripts{
     <script src="~/app/components/song/songSearchController.js"></script>
+    <script src="~/app/components/song/songSearchServices.js"></script>
 }
 
 <section class="page-list song-list" 
          ng-controller="SongSearchController"
-         ng-init="init(@Newtonsoft.Json.JsonConvert.SerializeObject(Model))">
+         ng-init="clickOnLetter('A')">
     <div class="row">
         <!-- Navigation by letter Section -->
         <div class="col-md-12">
             <ul class="pagination pagination-sm">
                 <li>
-                    <a href="#">A</a>
+                    <a href="#" ng-click="clickOnLetter('A')">A</a>
                 </li>
                 <li>
-                    <a href="#">B</a>
+                    <a href="#" ng-click="clickOnLetter('B')">B</a>
                 </li>
                 <li>
-                    <a href="#">C</a>
+                    <a href="#" ng-click="clickOnLetter('C')">C</a>
                 </li>
                 <li>
-                    <a href="#">D</a>
+                    <a href="#" ng-click="clickOnLetter('D')">D</a>
                 </li>
                 <li>
-                    <a href="#">E</a>
+                    <a href="#" ng-click="clickOnLetter('E')">E</a>
                 </li>
                 <li>
-                    <a href="#">F</a>
+                    <a href="#" ng-click="clickOnLetter('F')">F</a>
                 </li>
                 <li>
-                    <a href="#">G</a>
+                    <a href="#" ng-click="clickOnLetter('G')">G</a>
                 </li>
                 <li>
-                    <a href="#">J</a>
+                    <a href="#" ng-click="clickOnLetter('J')">J</a>
                 </li>
                 <li>
-                    <a href="#">I</a>
+                    <a href="#" ng-click="clickOnLetter('I')">I</a>
                 </li>
                 <li>
-                    <a href="#">K</a>
+                    <a href="#" ng-click="clickOnLetter('K')">K</a>
                 </li>
                 <li>
-                    <a href="#">L</a>
+                    <a href="#" ng-click="clickOnLetter('L')">L</a>
                 </li>
                 <li>
-                    <a href="#">M</a>
+                    <a href="#" ng-click="clickOnLetter('M')">M</a>
                 </li>
                 <li>
-                    <a href="#">N</a>
+                    <a href="#" ng-click="clickOnLetter('N')">N</a>
                 </li>
                 <li>
-                    <a href="#">O</a>
+                    <a href="#" ng-click="clickOnLetter('O')">O</a>
                 </li>
                 <li>
-                    <a href="#">P</a>
+                    <a href="#" ng-click="clickOnLetter('P')">P</a>
                 </li>
                 <li>
-                    <a href="#">Q</a>
+                    <a href="#" ng-click="clickOnLetter('Q')">Q</a>
                 </li>
                 <li>
-                    <a href="#">R</a>
+                    <a href="#" ng-click="clickOnLetter('R')">R</a>
                 </li>
                 <li>
-                    <a href="#">S</a>
+                    <a href="#" ng-click="clickOnLetter('S')">S</a>
                 </li>
                 <li>
-                    <a href="#">T</a>
+                    <a href="#" ng-click="clickOnLetter('T')">T</a>
                 </li>
                 <li>
-                    <a href="#">U</a>
+                    <a href="#" ng-click="clickOnLetter('U')">U</a>
                 </li>
                 <li>
-                    <a href="#">V</a>
+                    <a href="#" ng-click="clickOnLetter('V')">V</a>
                 </li>
                 <li>
-                    <a href="#">W</a>
+                    <a href="#" ng-click="clickOnLetter('W')">W</a>
                 </li>
                 <li>
-                    <a href="#">X</a>
+                    <a href="#" ng-click="clickOnLetter('X')">X</a>
                 </li>
                 <li>
-                    <a href="#">Y</a>
+                    <a href="#" ng-click="clickOnLetter('Y')">Y</a>
                 </li>
                 <li>
-                    <a href="#">Z</a>
+                    <a href="#" ng-click="clickOnLetter('Z')">Z</a>
                 </li>
             </ul>
         </div>
     </div>
     <div class="row">
         <!-- Content box Section -->
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        Title<br />
-                        <input type="text"
-                               placeholder="Search.."
-                               ng-model="userInputFilterTitle" />
-                    </th>
-                    <th>
-                        Artist<br />
-                        <input type="text"
-                               placeholder="Search.."
-                               ng-model="userInputFilterArtist" />
-                    </th>
-                    <th>
-                        Album<br />
-                        <input type="text"
-                               placeholder="Search.."
-                               ng-model="userInputFilterAlbum" />
-                    </th>
-                    <th>
-                        Genre<br />
-                        <input type="text"
-                               placeholder="Search.."
-                               ng-model="userInputFilterGenre" />
-                    </th>
-                    <th>
-                        Year<br />
-                        <!--Metti direttiva per inserire solo numeri (4 numeri)-->
-                        <input type="text"
-                               placeholder="Search.."
-                               ng-model="userInputFilterYear" />
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="song in songList | filter : {TitleLabel : userInputFilterTitle, 
-                                                            ArtistLabel : userInputFilterArtist, 
-                                                            AlbumLabel : userInputFilterAlbum,
-                                                            GenreLabel : userInputFilterGenre,
-                                                            YearNumber : userInputFilterYear}">
-                    <td>
-                        <a ng-href="{{song.songDetailLink}}" title="Go to Song Details">
-                            <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
-                        </a>
-                        {{song.TitleLabel}}
-                    </td>
-                    <td>
-                        <a ng-href="{{song.artistDetailLink}}" title="Go to Artist Details">
-                            <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
-                        </a>
-                        {{song.ArtistLabel}}
-                    </td>
-                    <td>
-                        <a ng-href="{{song.albumDetailLink}}" title="Go to Album Details">
-                            <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
-                        </a>
-                        {{song.AlbumLabel}}
-                    </td>
-                    <td>
-                        {{song.GenreLabel}}
-                    </td>
-                    <td>
-                        {{song.YearNumber}}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Title<br />
+                            <input type="text"
+                                   placeholder="Search.."
+                                   ng-model="userInputFilterTitle" />
+                        </th>
+                        <th>
+                            Artist<br />
+                            <input type="text"
+                                   placeholder="Search.."
+                                   ng-model="userInputFilterArtist" />
+                        </th>
+                        <th>
+                            Album<br />
+                            <input type="text"
+                                   placeholder="Search.."
+                                   ng-model="userInputFilterAlbum" />
+                        </th>
+                        <th>
+                            Genre<br />
+                            <input type="text"
+                                   placeholder="Search.."
+                                   ng-model="userInputFilterGenre" />
+                        </th>
+                        <th>
+                            Year<br />
+                            <!--Metti direttiva per inserire solo numeri (4 numeri)-->
+                            <input type="text"
+                                   placeholder="Search.."
+                                   ng-model="userInputFilterYear" />
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="song in songList | filter : {titleLabel : userInputFilterTitle,
+                                                            artistLabel : userInputFilterArtist,
+                                                            albumLabel : userInputFilterAlbum,
+                                                            genreLabel : userInputFilterGenre,
+                                                            yearNumber : userInputFilterYear}">
+                        <td>
+                            <a ng-href="{{song.songDetailLink}}" title="Go to Song Details">
+                                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                            </a>
+                            {{song.titleLabel}}
+                        </td>
+                        <td>
+                            <a ng-href="{{song.artistDetailLink}}" title="Go to Artist Details">
+                                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                            </a>
+                            {{song.artistLabel}}
+                        </td>
+                        <td>
+                            <a ng-href="{{song.albumDetailLink}}" title="Go to Album Details">
+                                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                            </a>
+                            {{song.albumLabel}}
+                        </td>
+                        <td>
+                            {{song.genreLabel}}
+                        </td>
+                        <td>
+                            {{song.yearNumber}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </section>
 

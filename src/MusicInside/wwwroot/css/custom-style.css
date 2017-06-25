@@ -15,6 +15,9 @@ body .page-list.song-list .table input {
   border-radius: 12px;
   padding-left: 40px;
 }
+body #page-content-wrapper {
+  /*position: fixed;*/
+}
 body #page-content-wrapper .detail-common .container-fluid .row .img-reduced {
   width: 100%;
 }

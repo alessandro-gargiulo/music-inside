@@ -25,13 +25,11 @@ namespace MusicInside.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index(string firstLetter = "A")
+        public IActionResult Index()
         {
             try
             {
-                //List<SongRowViewModel> allSong = _songManager.GetAllTable();
-                List<SongRowViewModel> allSong = _songManager.GetTablePart(firstLetter);
-                return View(allSong);
+                return View();
             }
             catch (Exception ex)
             {
@@ -115,6 +113,21 @@ namespace MusicInside.Controllers
                 _logger.ErrorFormat("SongController | DoPlaySong: A generic error occurred [{0}]", ex.Message);
                 return Json(-1);
             }
+        }
+
+        [HttpGet]
+        public JsonResult GetSongListByLetter(string firstLetter = "A")
+        {
+            List<SongRowViewModel> songList = new List<SongRowViewModel>();
+            try
+            {
+                songList = _songManager.GetTablePart(firstLetter);
+            }catch(Exception ex)
+            {
+                _logger.ErrorFormat("SongController | GetSongListByLetter: A generic error occurred [{0}]", ex.Message);
+                return Json(-1);
+            }
+            return Json(songList);
         }
     }
 }
