@@ -10,10 +10,6 @@ MusicInsideApp.controller('SongSearchController', ['$scope', 'SongService', func
     $scope.clickOnLetter = function (letter) {
         // Clean all input filters
         $scope.userInputFilterTitle = '';
-        $scope.userInputFilterArtist = '';
-        $scope.userInputFilterAlbum = '';
-        $scope.userInputFilterGenre = '';
-        $scope.userInputFilterYear = '';
         // Retrieve songs
         $songService.retrieveSongList(letter).then(function (response) {
             // Success callback

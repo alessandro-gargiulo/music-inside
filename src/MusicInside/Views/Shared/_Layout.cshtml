@@ -92,23 +92,6 @@
         <!-- Page Content -->
         @RenderBody()
     </div>
-
-    <script>
-
-            $(function () {
-
-                var links = $('.sidebar-links > a');
-
-                links.on('click', function () {
-
-                    links.removeClass('selected');
-                    $(this).addClass('selected');
-
-                })
-            });
-
-    </script>
-
     @RenderSection("scripts", required: false)
 </body>
 </html>
