@@ -11,17 +11,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot/css\layout\demo.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Remove="Properties\PublishProfiles\FolderProfile.pubxml" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="wwwroot\app\app.module.js" />
-    <Content Include="wwwroot\app\components\home\homeController.js" />
-    <Content Include="wwwroot\app\components\song\songSearchController.js" />
+    <Content Include="wwwroot\app\components\home\home.controller.js" />
+    <Content Include="wwwroot\app\components\song\song-search.controller.js" />
+    <Content Include="wwwroot\app\components\song\song-search.service.js" />
     <Content Include="wwwroot\js\app.module.js" />
-    <Content Include="wwwroot\app\components\homeController.js" />
-    <Content Include="wwwroot\app\components\landingPageController.js" />
     <Content Include="wwwroot\js\musicInsideAngularApp.js" />
   </ItemGroup>
 

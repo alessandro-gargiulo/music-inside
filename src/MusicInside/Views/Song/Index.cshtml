@@ -1,6 +1,6 @@
 ﻿@section scripts{
-    <script src="~/app/components/song/songSearchController.js"></script>
-    <script src="~/app/components/song/songSearchServices.js"></script>
+    <script src="~/app/components/song/song-search.controller.js"></script>
+    <script src="~/app/components/song/song-search.service.js"></script>
 }
 
 <section class="page-list song-list" 
@@ -89,77 +89,28 @@
         </div>
     </div>
     <div class="row">
+        <input type="text"
+               placeholder="Search.."
+               ng-model="userInputFilterTitle" />
+    </div>
+    <div class="row">
         <!-- Content box Section -->
         <div class="col-md-12">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            Title<br />
-                            <input type="text"
-                                   placeholder="Search.."
-                                   ng-model="userInputFilterTitle" />
-                        </th>
-                        <th>
-                            Artist<br />
-                            <input type="text"
-                                   placeholder="Search.."
-                                   ng-model="userInputFilterArtist" />
-                        </th>
-                        <th>
-                            Album<br />
-                            <input type="text"
-                                   placeholder="Search.."
-                                   ng-model="userInputFilterAlbum" />
-                        </th>
-                        <th>
-                            Genre<br />
-                            <input type="text"
-                                   placeholder="Search.."
-                                   ng-model="userInputFilterGenre" />
-                        </th>
-                        <th>
-                            Year<br />
-                            <!--Metti direttiva per inserire solo numeri (4 numeri)-->
-                            <input type="text"
-                                   placeholder="Search.."
-                                   ng-model="userInputFilterYear" />
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="song in songList | filter : {titleLabel : userInputFilterTitle,
-                                                            artistLabel : userInputFilterArtist,
-                                                            albumLabel : userInputFilterAlbum,
-                                                            genreLabel : userInputFilterGenre,
-                                                            yearNumber : userInputFilterYear}">
-                        <td>
-                            <a ng-href="{{song.songDetailLink}}" title="Go to Song Details">
-                                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
-                            </a>
-                            {{song.titleLabel}}
-                        </td>
-                        <td>
-                            <a ng-href="{{song.artistDetailLink}}" title="Go to Artist Details">
-                                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
-                            </a>
-                            {{song.artistLabel}}
-                        </td>
-                        <td>
-                            <a ng-href="{{song.albumDetailLink}}" title="Go to Album Details">
-                                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
-                            </a>
-                            {{song.albumLabel}}
-                        </td>
-                        <td>
-                            {{song.genreLabel}}
-                        </td>
-                        <td>
-                            {{song.yearNumber}}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="wrapper" ng-repeat="song in songList | filter : {titleLabel : userInputFilterTitle}">
+                <div ng-bind="::song.genreLabel" class="box genre genre-rock"></div>
+                <div class="box">
+                    <div class="title">
+                        <i class="fa fa-caret-right" aria-hidden="true"></i>
+                        <a ng-href="{{::song.songDetailLink}}"
+                           ng-bind="::song.titleLabel"
+                           title="Go to Song Details">
+                        </a>
+                    </div><br />
+                    <div class="artist">
+                        <i class="fa fa-microphone" aria-hidden="true"></i> {{::song.artistLabel}}</div><br />
+                    <div class="album"><i class="fa fa-circle-thin" aria-hidden="true"></i> {{::song.albumLabel}} ({{::song.yearNumber}})</div><br />
+                </div>
+            </div>
         </div>
     </div>
 </section>

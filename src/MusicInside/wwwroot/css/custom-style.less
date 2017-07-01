@@ -1,19 +1,81 @@
 ﻿body {
-    .site-header {
-        background: black;
-        position: relative;
-        bottom: 50px;
-    }
-
-    .site-content {
-        position: relative;
-        bottom: 50px;
-    }
 
     .page-list {
         &.song-list {
-            .table {
+            .row {
+                ul {
+                    &.pagination {
+                        li {
+                            a {
+                                background-color: #ccc;
+                                padding: 12px;
+                                border: 1px solid black;
+                            }
+                        }
+                    }
+                }
 
+                .wrapper {
+                    display: grid;
+                    margin: 5px;
+                    grid-gap: 10px;
+                    grid-template-columns: 1fr 18fr;
+
+                    .box {
+                        background-color: #444;
+                        color: #fff;
+                        border-radius: 5px;
+                        padding: 20px;
+                        font-size: 150%;
+                        line-height: 0.271429;
+
+                        &:nth-child(even) {
+                            background-color: #ccc;
+                            color: #000;
+                            border-left: #444 10px solid;
+                        }
+
+                        &.genre {
+                            font-size: 16px;
+                            text-align: center;
+
+                            &.genre-rock {
+                                background: url(./guitar.png) center center no-repeat #444;
+                                background-size: contain;
+                            }
+                        }
+
+                        .fa {
+                            padding-left: 7px;
+                            padding-top: 1px;
+                        }
+
+                        div {
+                            &.title {
+                                border-bottom: 1px solid;
+                                top: -10px;
+                                position: relative;
+
+                                a {
+                                    color: #000;
+
+                                    &:hover {
+                                        color: #23527c;
+                                        text-decoration: none;
+                                    }
+                                }
+                            }
+
+                            &.artist {
+                                font-size: 13px;
+                            }
+
+                            &.album {
+                                font-size: 11px;
+                            }
+                        }
+                    }
+                }
 
                 input {
                     background-color: white;
@@ -26,9 +88,9 @@
             }
         }
     }
-
-    #page-content-wrapper {
-        /*position: fixed;*/
+    /*#page-content-wrapper {*/
+    .main-content {
+        width: 80%;
 
         .detail-common {
             .container-fluid {
@@ -46,12 +108,6 @@
                     padding-top: 25px;
                 }
             }
-        }
-
-        .footer {
-            width: 100%;
-            position: fixed;
-            bottom: 0px;
         }
 
         .table {

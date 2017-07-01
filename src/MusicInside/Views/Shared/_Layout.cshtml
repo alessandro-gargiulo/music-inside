@@ -11,18 +11,31 @@
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+              integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+              crossorigin="anonymous">
+        <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Cookie'
+              type='text/css'>
         <!-- Custom CSS -->
-        <link href="~/css/simple-sidebar.css" rel="stylesheet" />
         <link href="~/css/custom-style.css" rel="stylesheet" />
+        <!-- Sidebar Left CSS -->
+        <link rel="stylesheet" href="~/css/layout/sidebar-left.css">
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/site.min.css" 
+              asp-append-version="true" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" 
+              integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" 
+              crossorigin="anonymous">
+        <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Cookie' 
+              type='text/css'>
         <!-- Custom CSS -->
-        <link href="~/css/simple-sidebar.css" rel="stylesheet" />
         <link href="~/css/custom-style.css" rel="stylesheet" />
+        <!-- Sidebar Left CSS -->
+        <link rel="stylesheet" href="~/css/layout/sidebar-left.css">
     </environment>
 
     <!-- SCRIPT ENVIRONMENT DECLARATION AND INCLUSION -->
@@ -50,57 +63,52 @@
     </environment>
 </head>
 <body ng-app="MusicInsideApp">
-    <div class="container-fluid">
-        <div class="row site-header">
-            <div class="col-md-12">
-                <div class="page-header">
-                    <h1>MUSIC INSIDE</h1>
-                </div>
-            </div>
+    <aside class="sidebar-left">
+        <a class="company-logo" href="@Url.Action("Index","Home")">Logo</a>
+        <div class="sidebar-links">
+            <a class="link-blue" href="@Url.Action("Index","Song")">
+                <i class="fa fa-music"></i>
+                Songs
+            </a>
+            <a class="link-red" href="@Url.Action("Index","Artist")">
+                <i class="fa fa-user"></i>
+                Artists
+            </a>
+            <a class="link-yellow" href="@Url.Action("Index","Album")">
+                <i class="fa fa-circle-o-notch"></i>
+                Albums
+            </a>
+            <a class="link-green" href="@Url.Action("Index","Search")">
+                <i class="fa fa-search"></i>
+                Advanced Search
+            </a>
+            <a class="link-orange" href="@Url.Action("Contact","Home")">
+                <i class="fa fa-address-card"></i>
+                Contacts
+            </a>
         </div>
-        <div class="row site-content">
-            <div id="wrapper">
-                <!-- Sidebar -->
-                <div id="sidebar-wrapper">
-                    <ul class="sidebar-nav">
-                        <li class="sidebar-brand">
-                            <a href="@Url.Action("Index","Home")">
-                                Home Page
-                            </a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Index","Song")">Songs</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Index","Artist")">Artists</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Index","Album")">Albums</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Index","Search")">Advanced Search</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Contact","Home")">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /#sidebar-wrapper -->
-                <!-- Page Content -->
-                <div id="page-content-wrapper">
-                    @RenderBody()
-                    @*<div class="footer">
-                        <hr />
-                        <footer>
-                            <p>&copy; 2017 - MusicInside</p>
-                        </footer>
-                    </div>*@
-                </div>
-                <!-- /#page-content-wrapper -->
-            </div>
-            <!-- /#wrapper -->
-        </div>
+    </aside>
+    <div class="main-content">
+        <!-- Page Content -->
+        @RenderBody()
     </div>
+
+    <script>
+
+            $(function () {
+
+                var links = $('.sidebar-links > a');
+
+                links.on('click', function () {
+
+                    links.removeClass('selected');
+                    $(this).addClass('selected');
+
+                })
+            });
+
+    </script>
+
     @RenderSection("scripts", required: false)
 </body>
 </html>
