@@ -91,6 +91,35 @@
     <div class="main-content">
         <!-- Page Content -->
         @RenderBody()
+        <div class="container-fluid">
+            <div class="row playlist-audio-control">
+                <div id="playlist" class="collapse">
+                    <ul id="list">
+                        <li>
+                            <a href="./prova1.mp3">Lucio Dalla - Ciao</a>
+                        </li>
+                        <li>
+                            <a href="./prova2.mp3">System of a Down - Chop Suey</a>
+                        </li>
+                        <li>
+                            <a href="./prova3.mp3">Gianluca Grignani - La mia storia tra le dita</a>
+                        </li>
+                        <li>
+                            <a href="./prova4.mp3">Coldplay - Yellow</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 audio">
+                        <audio id="audio" controls>
+                            <source src="./prova1.mp3" type="audio/mp3">
+                            Your browser does not support the audio tag.
+                        </audio>
+                        <i id="playlist-opener" onclick='displayHidePlaylist()' class="fa fa-expand" aria-hidden="true" data-toggle="collapse" data-target="#playlist"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     @RenderSection("scripts", required: false)
 </body>
