@@ -3,34 +3,59 @@
 <div class="detail-common">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-9">
-                <h2>@Html.DisplayFor(x => x.ArtistLabel) - @Html.DisplayFor(x => x.TitleLabel)</h2>
-                <p>Album: @Html.DisplayFor(x => x.AlbumLabel)</p>
-                <p>Anno: @Html.DisplayFor(x => x.Year)</p>
-                <p>Track # @Html.DisplayFor(x => x.TrackNo)</p>
-                <p>Genere: @Html.DisplayFor(x => x.GenreLabel)</p>
-                <p>
-                    Last Play: 
-                    @if(Model.LastPlay.Year == 1)
-                    {
-                        <i> Never</i>
-                    }
-                    else
-                    {
-                        Html.DisplayFor(x => x.LastPlay);
-                    }
-                </p>
-                <p>Played @Html.DisplayFor(x => x.NumOfPlays) times</p>
-            </div>
-            <div class="col-xs-3">
+            <div class="col-md-12 cover">
                 <img class="img-rounded img-reduced" src="@Url.Action("GetCoverImage", "Album", new { id = Model.AlbumCoverFileId})" />
             </div>
         </div>
-        <div class="row spaced">
-            <div class="col-xs-12">
-                <audio controls class="audio-streaming">
-                    <source src="@Url.Action("GetStreamingAudio","Song", new { id = Model.SongId })" type="audio/mp3" />
-                </audio>
+        <div class="row">
+            <div class="col-md-12 title">
+                <a link="#" data-toggle="collapse" data-target="#details-row">@Html.DisplayFor(x => x.ArtistLabel) - @Html.DisplayFor(x => x.TitleLabel) (@Html.DisplayFor(x => x.Year))</a>
+            </div>
+        </div>
+        <div id="details-row" class="collapse in">
+            <div class="row details">
+                <table>
+                    <tr>
+                        <td class="label-column">
+                            Album:&nbsp &nbsp
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => x.AlbumLabel)
+                            #@Html.DisplayFor(x => x.TrackNo)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label-column">
+                            Genre:&nbsp &nbsp
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => x.GenreLabel)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label-column">
+                            Last Play:&nbsp &nbsp
+                        </td>
+                        <td>
+                            @if (Model.LastPlay.Year == 1)
+                            {
+                                <i> Never</i>
+                            }
+                            else
+                            {
+                                Html.DisplayFor(x => x.LastPlay);
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label-column">
+                            Played:&nbsp &nbsp
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => x.NumOfPlays) Times
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

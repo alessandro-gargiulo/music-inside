@@ -1,4 +1,5 @@
 body {
+  background-color: grey;
   /*#page-content-wrapper {*/
 }
 body .page-list.song-list .row ul.pagination li a {
@@ -66,14 +67,37 @@ body .page-list.song-list .row input {
 body .main-content {
   width: 80%;
 }
-body .main-content .detail-common .container-fluid .row .img-reduced {
-  width: 100%;
+body .main-content .detail-common .container-fluid .row .cover {
+  margin-top: 14px;
 }
-body .main-content .detail-common .container-fluid .row .audio-streaming {
-  width: 100%;
+body .main-content .detail-common .container-fluid .row .cover .img-reduced {
+  display: block;
+  margin: auto;
+  width: 20%;
+  border-radius: 100px;
 }
-body .main-content .detail-common .container-fluid .spaced {
-  padding-top: 25px;
+body .main-content .detail-common .container-fluid .row .title {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 1.4vw;
+  letter-spacing: 4px;
+  text-decoration: underline;
+}
+body .main-content .detail-common .container-fluid .row .title a {
+  color: #000;
+}
+body .main-content .detail-common .container-fluid .row .title a:hover {
+  color: #c3c0be;
+}
+body .main-content .detail-common .container-fluid .row.details {
+  display: flex;
+  justify-content: center;
+}
+body .main-content .detail-common .container-fluid .row.details table tbody {
+  font-size: 1vw;
+}
+body .main-content .detail-common .container-fluid .row.details table tbody tr td.label-column {
+  float: right;
 }
 body .main-content .table tbody tr td.border-right-solid {
   border-right: 1px solid #ddd;
