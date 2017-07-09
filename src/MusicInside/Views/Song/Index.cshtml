@@ -96,7 +96,8 @@
     <div class="row">
         <!-- Content box Section -->
         <div class="col-md-12">
-            <div class="wrapper" ng-repeat="song in songList | filter : {titleLabel : userInputFilterTitle}">
+            <div class="wrapper" 
+                 ng-repeat="song in songList | filter : {titleLabel : userInputFilterTitle}">
                 <div ng-bind="::song.genreLabel" class="box genre genre-rock"></div>
                 <div class="box">
                     <div class="title">
