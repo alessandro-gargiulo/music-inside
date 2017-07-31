@@ -1,8 +1,9 @@
 body {
   background-color: grey;
+  overflow-x: hidden;
 }
 body .main-content {
-  width: 80%;
+  width: 100%;
 }
 body .main-content .page-list {
   margin-left: 30px;
@@ -12,54 +13,17 @@ body .main-content .page-list.song-list .row ul.pagination li a {
   padding: 12px;
   border: 1px solid black;
 }
-body .main-content .page-list.song-list .row .wrapper {
-  display: grid;
-  margin: 5px;
-  grid-gap: 10px;
-  grid-template-columns: 1fr 18fr;
+body .main-content .page-list.song-list .row .music-grid {
+  padding-top: 20px;
 }
-body .main-content .page-list.song-list .row .wrapper .box {
-  background-color: #444;
-  color: #fff;
-  border-radius: 5px;
-  padding: 20px;
-  font-size: 150%;
-  line-height: 0.271429;
-}
-body .main-content .page-list.song-list .row .wrapper .box:nth-child(even) {
-  background-color: #ccc;
-  color: #000;
-  border-left: #444 10px solid;
-}
-body .main-content .page-list.song-list .row .wrapper .box.genre {
-  font-size: 16px;
-  text-align: center;
-}
-body .main-content .page-list.song-list .row .wrapper .box.genre.genre-rock {
-  background: url(guitar.png) center center no-repeat #444444;
-  background-size: contain;
-}
-body .main-content .page-list.song-list .row .wrapper .box .fa {
-  padding-left: 7px;
-  padding-top: 1px;
-}
-body .main-content .page-list.song-list .row .wrapper .box div.title {
-  border-bottom: 1px solid;
-  top: -10px;
+body .main-content .page-list.song-list .row .music-grid .music-grid-item {
+  width: 150px;
+  height: 150px;
+  border: 1px solid black;
   position: relative;
-}
-body .main-content .page-list.song-list .row .wrapper .box div.title a {
-  color: #000;
-}
-body .main-content .page-list.song-list .row .wrapper .box div.title a:hover {
-  color: #23527c;
-  text-decoration: none;
-}
-body .main-content .page-list.song-list .row .wrapper .box div.artist {
-  font-size: 13px;
-}
-body .main-content .page-list.song-list .row .wrapper .box div.album {
-  font-size: 11px;
+  float: left;
+  margin: 4px;
+  text-align: center;
 }
 body .main-content .page-list.song-list .row input {
   background-color: white;

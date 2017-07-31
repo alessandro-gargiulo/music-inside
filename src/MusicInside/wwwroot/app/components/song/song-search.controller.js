@@ -32,4 +32,14 @@ MusicInsideApp.controller('SongSearchController', ['$scope', 'SongService', func
         }
         return songList;
     }
+
+    // On DOM ready function
+    $(function () {
+        // Call isotope
+        $('.music-grid').isotope({
+            // options
+            itemSelector: '.music-grid-item',
+            layoutMode: 'fitRows'
+        });
+    });
 }]);

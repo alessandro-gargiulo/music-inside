@@ -1,6 +1,7 @@
 ﻿@section scripts{
     <script src="~/app/components/song/song-search.controller.js"></script>
     <script src="~/app/components/song/song-search.service.js"></script>
+    <script src="~/lib/isotope/isotope.pkgd.min.js"></script>
 }
 
 <section class="page-list song-list" 
@@ -89,27 +90,29 @@
         </div>
     </div>
     <div class="row">
-        <input type="text"
-               placeholder="Search.."
-               ng-model="userInputFilterTitle" />
+        <div class="col-md-12">
+            <input type="text"
+                   placeholder="Search.."
+                   ng-model="userInputFilterTitle" />
+        </div>
     </div>
     <div class="row">
         <!-- Content box Section -->
         <div class="col-md-12">
-            <div class="wrapper" 
-                 ng-repeat="song in songList | filter : {titleLabel : userInputFilterTitle}">
-                <div ng-bind="::song.genreLabel" class="box genre genre-rock"></div>
-                <div class="box">
+            <div class="music-grid">
+                <div class="music-grid-item" ng-repeat="song in songList | filter : {titleLabel : userInputFilterTitle}">
                     <div class="title">
-                        <i class="fa fa-caret-right" aria-hidden="true"></i>
                         <a ng-href="{{::song.songDetailLink}}"
                            ng-bind="::song.titleLabel"
                            title="Go to Song Details">
                         </a>
-                    </div><br />
+                    </div>
                     <div class="artist">
-                        <i class="fa fa-microphone" aria-hidden="true"></i> {{::song.artistLabel}}</div><br />
-                    <div class="album"><i class="fa fa-circle-thin" aria-hidden="true"></i> {{::song.albumLabel}} ({{::song.yearNumber}})</div><br />
+                        <i class="fa fa-microphone" aria-hidden="true"></i> {{::song.artistLabel}}
+                    </div>
+                    <div class="album">
+                        <i class="fa fa-circle-thin" aria-hidden="true"></i> {{::song.albumLabel}} ({{::song.yearNumber}})
+                    </div>
                 </div>
             </div>
         </div>
