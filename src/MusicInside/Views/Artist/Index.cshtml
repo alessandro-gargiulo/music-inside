@@ -1,7 +1,7 @@
 ﻿@model List<MusicInside.ModelView.ArtistRowViewModel>
 
 <div class="row">
-    <table class="table">
+    @*<table class="table">
         <thead>
             <tr>
                 <th>
@@ -34,5 +34,18 @@
                 </tr>
             }
         </tbody>
-    </table>
+    </table>*@
+    <div class="artist-grid">
+        <div class="artist-grid-item" ng-repeat="artist in artistList | filter : {artname : userInputFilterTable} ">
+            <div class="artname">
+                <a ng-href="{{::artist.}}"
+                   ng-bind="::artist."
+                   title="Go to Artist Details">
+                </a>
+            </div>
+            <div class="number-song">
+
+            </div>
+        </div>
+    </div>
 </div>

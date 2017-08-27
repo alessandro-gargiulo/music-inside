@@ -25,8 +25,7 @@ namespace MusicInside.Controllers
         {
             try
             {
-                List<ArtistRowViewModel> allArtists = _artistManager.GetAllTable();
-                return View(allArtists);
+                return View();
             }
             catch (Exception ex)
             {
@@ -57,6 +56,22 @@ namespace MusicInside.Controllers
                 _logger.ErrorFormat("ArtistController | Detail: A generic error occurred [{0}]", ex.Message);
                 return null;
             }
+        }
+
+        [HttpGet]
+        public JsonResult GetArtistList()
+        {
+            List<ArtistRowViewModel> artistList = new List<ArtistRowViewModel>();
+            try
+            {
+                artistList = _artistManager.GetAllTable();
+            }
+            catch (Exception ex)
+            {
+                _logger.ErrorFormat("ArtistController | GetArtistList: A generic error occurred [{0}]", ex.Message);
+                return Json(-1);
+            }
+            return Json(artistList);
         }
     }
 }

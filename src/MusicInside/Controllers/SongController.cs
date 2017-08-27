@@ -101,7 +101,7 @@ namespace MusicInside.Controllers
             return File(stream, Response.ContentType);
         }
 
-        public ActionResult DoPlaySong(int id = -1)
+        public ActionResult AddPlayToSong(int id = -1)
         {
             try
             {

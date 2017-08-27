@@ -9,5 +9,4 @@ MusicInsideApp.service('SongService', function ($http) {
             params: { firstLetter: letter } 
         })
     };
-
 });
