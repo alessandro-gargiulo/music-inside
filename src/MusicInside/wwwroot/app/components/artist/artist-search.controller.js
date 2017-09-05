@@ -8,8 +8,30 @@ MusicInsideApp.controller('ArtistSearchController', ['$scope', 'ArtistService', 
 
 
     /*
+     * INITIALIZATION CODE
+     */
+    // Retrieve artists
+    $artistService.retrieveCompleteArtistList().then(function (response) {
+        // Success callback
+        if (response.data !== -1) {
+            $scope.artistList = createDetailLinks(response.data);
+        } else {
+            // Something goes wrong on server side
+        }
+    }, function (error) {
+        // Error callback
+    });
+
+    /*
      * OTHER JS FUNCTIONS
      */
+    // Take a list and create the fields for linking details based on ids
+    var createDetailLinks = function (artistList) {
+        for (var i = 0; i < artistList.length; i++) {
+            artistList[i].artistDetailLink = '/Artist/Detail/' + artistList[i].artistId;
+        }
+        return artistList;
+    }
 
     // On DOM ready function
     $(function () {

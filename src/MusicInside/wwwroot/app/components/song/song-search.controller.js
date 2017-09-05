@@ -13,11 +13,20 @@ MusicInsideApp.controller('SongSearchController', ['$scope', 'SongService', func
         // Retrieve songs
         $songService.retrieveSongList(letter).then(function (response) {
             // Success callback
-            $scope.songList = createDetailLinks(response.data);
+            if (response.data !== -1) {
+                $scope.songList = createDetailLinks(response.data);
+            } else {
+                // Something goes wrong on serve side
+            }
         }, function (error) {
             // Error callback
         });
     };
+
+    /*
+     * INITIALIZATION CODE
+     */
+    $scope.clickOnLetter("A");
 
     /*
      * OTHER JS FUNCTIONS
@@ -27,8 +36,8 @@ MusicInsideApp.controller('SongSearchController', ['$scope', 'SongService', func
     var createDetailLinks = function (songList) {
         for (var i = 0; i < songList.length; i++) {
             songList[i].songDetailLink = '/Song/Detail/' + songList[i].songId;
-            songList[i].artistDetailLink = '/Album/Detail/' + songList[i].albumId;
-            songList[i].albumDetailLink = '/Artist/Detail/' + songList[i].artistId;
+            songList[i].albumDetailLink = '/Album/Detail/' + songList[i].albumId;
+            songList[i].artistDetailLink = '/Artist/Detail/' + songList[i].artistId;
         }
         return songList;
     }

@@ -1,51 +1,25 @@
-﻿@model List<MusicInside.ModelView.ArtistRowViewModel>
+﻿@section scripts{
+    <script src="~/app/components/artist/artist-search.controller.js"></script>
+    <script src="~/app/components/artist/artist-search.service.js"></script>
+    <script src="~/lib/isotope/isotope.pkgd.min.js"></script>
+}
 
-<div class="row">
-    @*<table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Art Name
-                </th>
-                <th>
-                    Number of Songs
-                </th>
-                <th>
-                    Go to Details
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var artist in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => artist.ArtName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => artist.NumberSong)
-                    </td>
-                    <td>
-                        <a href="@Url.Action("Detail", "Artist", new { id = artist.ArtistId })">
-                            Go to Artist
-                            <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
-                        </a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>*@
-    <div class="artist-grid">
-        <div class="artist-grid-item" ng-repeat="artist in artistList | filter : {artname : userInputFilterTable} ">
-            <div class="artname">
-                <a ng-href="{{::artist.}}"
-                   ng-bind="::artist."
-                   title="Go to Artist Details">
-                </a>
-            </div>
-            <div class="number-song">
+<section class="page-list artist-list"
+         ng-controller="ArtistSearchController">
+    <div class="row">
+        <div class="artist-grid">
+            <div class="artist-grid-item" ng-repeat="artist in artistList | filter : {artname : userInputFilterTable} ">
+                <div class="artname">
+                    <a ng-href="{{::artist.artistDetailLink}}"
+                       ng-bind="::artist.artName"
+                       title="Go to Artist Details">
+                    </a>
+                </div>
+                <div class="number-song" ng-bind="::artist.numberSong">
 
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
+
