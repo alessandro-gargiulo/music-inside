@@ -12,8 +12,10 @@ namespace MusicInside.Controllers
 {
     public class ArtistController : Controller
     {
+        #region Members
         private readonly IArtistManager _artistManager;
         private readonly ILog _logger;
+        #endregion
 
         public ArtistController(IArtistManager artistManager, ILog logger)
         {
@@ -21,6 +23,7 @@ namespace MusicInside.Controllers
             _logger = logger;
         }
 
+        #region Page Resolvers
         public IActionResult Index()
         {
             try
@@ -30,7 +33,7 @@ namespace MusicInside.Controllers
             catch (Exception ex)
             {
                 _logger.ErrorFormat("ArtistController | Index: Error occurred [{0}]", ex.Message);
-                return null;
+                return null; // Redirect to error screen
             }
         }
 
@@ -57,7 +60,9 @@ namespace MusicInside.Controllers
                 return null;
             }
         }
+        #endregion
 
+        #region Controller Service Methods
         [HttpGet]
         public JsonResult GetArtistList()
         {
@@ -73,5 +78,6 @@ namespace MusicInside.Controllers
             }
             return Json(artistList);
         }
+        #endregion
     }
 }

@@ -8,10 +8,12 @@ namespace MusicInside.Controllers
 {
     public class SearchController : Controller
     {
-        // GET: /<controller>/
+
+        #region Page Resolvers
         public IActionResult Index()
         {
             return View();
         }
+        #endregion
     }
 }

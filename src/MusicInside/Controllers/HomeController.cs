@@ -8,6 +8,7 @@ namespace MusicInside.Controllers
 {
     public class HomeController : Controller
     {
+        #region Page Resolvers
         public IActionResult Index()
         {
             return View();
@@ -23,5 +24,6 @@ namespace MusicInside.Controllers
         {
             return View();
         }
+        #endregion
     }
 }

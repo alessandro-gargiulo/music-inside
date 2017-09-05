@@ -12,8 +12,10 @@ namespace MusicInside.Controllers
 {
     public class AlbumController : Controller
     {
+        #region Members
         private readonly IAlbumManager _albumManager;
         private readonly ILog _logger;
+        #endregion
 
         public AlbumController(IAlbumManager albumManager, ILog logger)
         {
@@ -21,6 +23,7 @@ namespace MusicInside.Controllers
             _logger = logger;
         }
 
+        #region Page Resolvers
         public IActionResult Index()
         {
             try
@@ -58,7 +61,9 @@ namespace MusicInside.Controllers
                 return null;
             }
         }
+        #endregion
 
+        #region Controller Service Methods
         public ActionResult GetCoverImage(int id = -1)
         {
             try
@@ -69,12 +74,12 @@ namespace MusicInside.Controllers
             catch (InvalidIdException iiex)
             {
                 _logger.ErrorFormat("AlbumController | GetCoverImage: Error occurred [{0}]", iiex.Message);
-                return null; // Redirect to error screen
+                return null;
             }
             catch (EntryNotPresentException enpex)
             {
                 _logger.ErrorFormat("AlbumController | GetCoverImage: Error occurred [{0}]", enpex.Message);
-                return null; // Redirect to error screen
+                return null;
             }
             catch (Exception ex)
             {
@@ -82,5 +87,6 @@ namespace MusicInside.Controllers
                 return null;
             }
         }
+        #endregion
     }
 }

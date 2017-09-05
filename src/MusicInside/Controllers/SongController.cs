@@ -17,14 +17,17 @@ namespace MusicInside.Controllers
 {
     public class SongController : Controller
     {
+        #region Members
         private readonly ISongManager _songManager;
         private readonly ILog _logger;
+        #endregion
 
         public SongController(ISongManager manager, ILog logger) {
             _songManager = manager;
             _logger = logger;
         }
 
+        #region Page Resolvers
         public IActionResult Index()
         {
             try
@@ -34,7 +37,7 @@ namespace MusicInside.Controllers
             catch (Exception ex)
             {
                 _logger.ErrorFormat("SongController | Index: Error occurred [{0}]", ex.Message);
-                return null;
+                return null; // Redirect to error screen
             }
         }
 
@@ -61,7 +64,9 @@ namespace MusicInside.Controllers
                 return null;
             }
         }
+        #endregion
 
+        #region Controller Service Methods
         [HttpGet]
         public ActionResult GetStreamingAudio(int id = -1)
         {
@@ -101,20 +106,6 @@ namespace MusicInside.Controllers
             return File(stream, Response.ContentType);
         }
 
-        public ActionResult AddPlayToSong(int id = -1)
-        {
-            try
-            {
-                _songManager.AddPlayToSongId(id);
-                return Json(0);
-            }
-            catch (Exception ex)
-            {
-                _logger.ErrorFormat("SongController | DoPlaySong: A generic error occurred [{0}]", ex.Message);
-                return Json(-1);
-            }
-        }
-
         [HttpGet]
         public JsonResult GetSongListByLetter(string firstLetter = "A")
         {
@@ -129,5 +120,20 @@ namespace MusicInside.Controllers
             }
             return Json(songList);
         }
+
+        public ActionResult AddPlayToSong(int id = -1)
+        {
+            try
+            {
+                _songManager.AddPlayToSongId(id);
+                return Json(0);
+            }
+            catch (Exception ex)
+            {
+                _logger.ErrorFormat("SongController | DoPlaySong: A generic error occurred [{0}]", ex.Message);
+                return Json(-1);
+            }
+        }
+        #endregion
     }
 }
