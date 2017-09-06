@@ -3,12 +3,34 @@
     overflow-x: hidden;
 
     .main-content {
-        width: 100%;
-
+        // Generic index page with list of elements
         .page-list {
             margin-left: 30px;
-
+            // Generic grid
+            .music-grid {
+                padding-top: 20px;
+                // Generic grid-item
+                .music-grid-item {
+                    width: 150px;
+                    height: 150px;
+                    border: 1px solid black;
+                    position: relative;
+                    float: left;
+                    margin: 4px;
+                    text-align: center;
+                    background-color: cadetblue;
+                }
+            }
+            // Specific MUSIC page index rules
             &.song-list {
+
+                .music-grid .music-grid-item {
+                    .title {
+                        background-color: black;
+                        border-bottom-left-radius: 10px;
+                    }
+                }
+
                 .row {
                     ul {
                         &.pagination {
@@ -22,20 +44,6 @@
                         }
                     }
 
-                    .music-grid {
-                        padding-top: 20px;
-
-                        .music-grid-item {
-                            width: 150px;
-                            height: 150px;
-                            border: 1px solid black;
-                            position: relative;
-                            float: left;
-                            margin: 4px;
-                            text-align: center;
-                        }
-                    }
-
                     input {
                         background-color: white;
                         background-image: url('../images/icons/searchicon.png');
@@ -43,6 +51,16 @@
                         background-repeat: no-repeat;
                         border-radius: 12px;
                         padding-left: 40px;
+                    }
+                }
+            }
+            // Specific ARTIST page index rules
+            &.artist-list {
+
+                .music-grid .music-grid-item {
+                    .artname {
+                        background-color: black;
+                        border-bottom-left-radius: 10px;
                     }
                 }
             }
@@ -122,21 +140,37 @@
                 position: fixed;
                 bottom: 0;
 
-                .audio {
-                    display: inline-flex;
-                    width: 100%;
+                .audio-control {
+                    right: 15px;
 
-                    audio {
-                        width: 100%;
-                        zoom: 1.2;
+                    .audio-container {
+                        display: inline;
+                        width: 92%;
+                        float: left;
+                        top: 4px;
+                        position: relative;
+
+                        #audio {
+                            width: 100%;
+                        }
+                    }
+
+                    .opener-container {
+                        display: inline;
+                        width: 8%;
+                        float: right;
+                        position: relative;
+                        top: 4px;
                     }
 
                     i {
                         &.fa {
                             background-color: #fff;
-                            padding-right: 4px;
+                            padding-left: 6px;
                             padding-top: 3px;
-                            zoom: 1.9;
+                            font-size: 24px;
+                            height: 32px;
+                            width: 100%;
                         }
                     }
                 }

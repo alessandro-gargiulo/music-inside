@@ -109,14 +109,16 @@
                         </li>
                     </ul>
                 </div>
-                <div class="row">
-                    <div class="col-md-12 audio">
+                <div class="audio-control col-md-12">
+                    <div class="audio-container">
                         <audio id="audio" controls>
                             <source src="./prova1.mp3" type="audio/mp3">
                             Your browser does not support the audio tag.
                         </audio>
-                        <i id="playlist-opener" onclick='displayHidePlaylist()' class="fa fa-expand" aria-hidden="true" data-toggle="collapse" data-target="#playlist"></i>
                     </div>
+                    <div class="opener-container">
+                        <i id="playlist-opener" onclick='displayHidePlaylist()' class="fa fa-expand" aria-hidden="true" data-toggle="collapse" data-target="#playlist"></i>
+                    </div>                 
                 </div>
             </div>
         </div>

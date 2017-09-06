@@ -1,11 +1,12 @@
 /* The main content */
 
 .main-content {
-	font-family: Arial, Helvetica, sans-serif;
-	padding-top: 40px;
-	margin: 0 0 40px 120px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 40px;
+    left: 121px;
+    position: relative;
+    width: calc(100% - 120px);
 }
-
 
 /* The left sidebar */
 

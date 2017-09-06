@@ -2,21 +2,13 @@ body {
   background-color: grey;
   overflow-x: hidden;
 }
-body .main-content {
-  width: 100%;
-}
 body .main-content .page-list {
   margin-left: 30px;
 }
-body .main-content .page-list.song-list .row ul.pagination li a {
-  background-color: #ccc;
-  padding: 12px;
-  border: 1px solid black;
-}
-body .main-content .page-list.song-list .row .music-grid {
+body .main-content .page-list .music-grid {
   padding-top: 20px;
 }
-body .main-content .page-list.song-list .row .music-grid .music-grid-item {
+body .main-content .page-list .music-grid .music-grid-item {
   width: 150px;
   height: 150px;
   border: 1px solid black;
@@ -24,6 +16,16 @@ body .main-content .page-list.song-list .row .music-grid .music-grid-item {
   float: left;
   margin: 4px;
   text-align: center;
+  background-color: cadetblue;
+}
+body .main-content .page-list.song-list .music-grid .music-grid-item .title {
+  background-color: black;
+  border-bottom-left-radius: 10px;
+}
+body .main-content .page-list.song-list .row ul.pagination li a {
+  background-color: #ccc;
+  padding: 12px;
+  border: 1px solid black;
 }
 body .main-content .page-list.song-list .row input {
   background-color: white;
@@ -32,6 +34,10 @@ body .main-content .page-list.song-list .row input {
   background-repeat: no-repeat;
   border-radius: 12px;
   padding-left: 40px;
+}
+body .main-content .page-list.artist-list .music-grid .music-grid-item .artname {
+  background-color: black;
+  border-bottom-left-radius: 10px;
 }
 body .main-content .detail-common .container-fluid .row .cover {
   margin-top: 14px;
@@ -76,19 +82,33 @@ body .main-content .row.playlist-audio-control {
   position: fixed;
   bottom: 0;
 }
-body .main-content .row.playlist-audio-control .audio {
-  display: inline-flex;
+body .main-content .row.playlist-audio-control .audio-control {
+  right: 15px;
+}
+body .main-content .row.playlist-audio-control .audio-control .audio-container {
+  display: inline;
+  width: 92%;
+  float: left;
+  top: 4px;
+  position: relative;
+}
+body .main-content .row.playlist-audio-control .audio-control .audio-container #audio {
   width: 100%;
 }
-body .main-content .row.playlist-audio-control .audio audio {
-  width: 100%;
-  zoom: 1.2;
+body .main-content .row.playlist-audio-control .audio-control .opener-container {
+  display: inline;
+  width: 8%;
+  float: right;
+  position: relative;
+  top: 4px;
 }
-body .main-content .row.playlist-audio-control .audio i.fa {
+body .main-content .row.playlist-audio-control .audio-control i.fa {
   background-color: #fff;
-  padding-right: 4px;
+  padding-left: 6px;
   padding-top: 3px;
-  zoom: 1.9;
+  font-size: 24px;
+  height: 32px;
+  width: 100%;
 }
 body .main-content .row.playlist-audio-control #playlist {
   background-color: #ffffff;
