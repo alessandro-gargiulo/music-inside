@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using log4net;
 using Microsoft.AspNetCore.Mvc;
-using MusicInside.Models;
+using MusicInside.Exceptions;
 using MusicInside.ManagerInterfaces;
 using MusicInside.ModelView;
-using log4net;
-using MusicInside.Exceptions;
-using Microsoft.Net.Http.Headers;
+using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Net.Http;
-using System.Net;
 
 namespace MusicInside.Controllers
 {

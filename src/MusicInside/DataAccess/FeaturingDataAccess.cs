@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using log4net;
+﻿using log4net;
 using Microsoft.Extensions.Configuration;
-using MusicInside.Models;
 using MusicInside.DataAccessInterfaces;
 using MusicInside.Exceptions;
+using MusicInside.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MusicInside.DataAccess
 {

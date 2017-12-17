@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace MusicInside.ModelView
+﻿namespace MusicInside.ModelView
 {
     public class ShortInfoViewModel
     {

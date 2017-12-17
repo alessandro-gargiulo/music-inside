@@ -1,13 +1,11 @@
 ﻿using log4net;
 using MusicInside.DataAccessInterfaces;
+using MusicInside.Exceptions;
 using MusicInside.ManagerInterfaces;
+using MusicInside.Models;
+using MusicInside.ModelView;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MusicInside.ModelView;
-using MusicInside.Exceptions;
-using MusicInside.Models;
 
 namespace MusicInside.Business
 {
