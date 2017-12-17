@@ -8,7 +8,8 @@
          ng-controller="ArtistSearchController">
     <div class="row">
         <div class="music-grid">
-            <div class="music-grid-item" ng-repeat="artist in artistList | filter : {artname : userInputFilterTable} ">
+            <div class="music-grid-item" 
+                 ng-repeat="artist in artistList | filter : {artname : userInputFilterTable} ">
                 <div class="artname">
                     <a ng-href="{{::artist.artistDetailLink}}"
                        ng-bind="::artist.artName"
@@ -16,7 +17,6 @@
                     </a>
                 </div>
                 <div class="number-song" ng-bind="::artist.numberSong">
-
                 </div>
             </div>
         </div>

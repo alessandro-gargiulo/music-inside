@@ -1,5 +1,26 @@
 ﻿@model List<MusicInside.ModelView.AlbumRowViewModel>
 
+@section scripts{ 
+
+}
+
+<section class="page-list album-list"
+         ng-controller="AlbumSearchController">
+    <div class="row">
+        <div class="music-grid">
+            <div class="music-grid-item"
+                 ng-repeat="album in albumList">
+                <div class="albumTitle">
+                    <a ng-href="#"
+                       ng-bind=""
+                       title="Go to Album Details">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <div class="row">
     <table class="table">
         <thead>

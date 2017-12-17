@@ -82,9 +82,6 @@ body .main-content .row.playlist-audio-control {
   position: fixed;
   bottom: 0;
 }
-body .main-content .row.playlist-audio-control .audio-control {
-  right: 15px;
-}
 body .main-content .row.playlist-audio-control .audio-control .audio-container {
   display: inline;
   width: 92%;
@@ -98,7 +95,7 @@ body .main-content .row.playlist-audio-control .audio-control .audio-container #
 body .main-content .row.playlist-audio-control .audio-control .opener-container {
   display: inline;
   width: 8%;
-  float: right;
+  float: left;
   position: relative;
   top: 4px;
 }

@@ -11,29 +11,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\app\components\Nuova cartella\**" />
+    <Content Remove="wwwroot\app\components\Nuova cartella\**" />
+    <EmbeddedResource Remove="wwwroot\app\components\Nuova cartella\**" />
+    <None Remove="wwwroot\app\components\Nuova cartella\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="wwwroot/css\layout\demo.css" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Remove="Properties\PublishProfiles\FolderProfile.pubxml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="wwwroot\app\app.module.js" />
-    <Content Include="wwwroot\app\components\artist\artist-search.controller.js" />
-    <Content Include="wwwroot\app\components\artist\artist-search.service.js" />
-    <Content Include="wwwroot\app\components\home\home.controller.js" />
-    <Content Include="wwwroot\app\components\song\song-search.controller.js" />
-    <Content Include="wwwroot\app\components\song\song-search.service.js" />
-    <Content Include="wwwroot\js\app.module.js" />
-    <Content Include="wwwroot\js\musicInsideAngularApp.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="wwwroot\**\*">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -71,7 +61,47 @@
   <ItemGroup>
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Properties\PublishProfiles\" />
-    <Folder Include="wwwroot\images\icons\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\app\app.module.js" />
+    <None Include="wwwroot\app\components\album\album-search.controller.js" />
+    <None Include="wwwroot\app\components\album\album-search.service.js" />
+    <None Include="wwwroot\app\components\artist\artist-search.controller.js" />
+    <None Include="wwwroot\app\components\artist\artist-search.service.js" />
+    <None Include="wwwroot\app\components\home\home.controller.js" />
+    <None Include="wwwroot\app\components\song\song-detail.controller.js" />
+    <None Include="wwwroot\app\components\song\song-functionalities.service.js" />
+    <None Include="wwwroot\app\components\song\song-search.controller.js" />
+    <None Include="wwwroot\app\components\song\song-search.service.js" />
+    <None Include="wwwroot\css\custom-style.less" />
+    <None Include="wwwroot\images\Thumbs.db" />
+    <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\js\site.min.js" />
+    <None Include="wwwroot\lib\angular-js\angular.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\npm.js" />
+    <None Include="wwwroot\lib\bootstrap\LICENSE" />
+    <None Include="wwwroot\lib\isotope\isotope.pkgd.min.js" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\LICENSE.md" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.min.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
+    <None Include="wwwroot\Thumbs.db" />
+    <None Include="wwwroot\_references.js" />
   </ItemGroup>
 
 </Project>

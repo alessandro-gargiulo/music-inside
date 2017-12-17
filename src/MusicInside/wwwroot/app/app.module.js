@@ -1,5 +1,23 @@
 ﻿var MusicInsideApp = angular.module('MusicInsideApp', []);
 
+MusicInsideApp.controller('AppController', ['$scope', function ($scope) {
+
+    /*
+     * ANGULAR JS FUNCTIONS
+     */
+
+
+    /*
+     * INITIALIZATION CODE
+     */
+
+
+    /*
+     * OTHER JS FUNCTIONS
+     */
+
+}]);
+
 // Sidebar Link Selection
 $(function () {
     var links = $('.sidebar-links > a');
@@ -28,7 +46,7 @@ function initAudioBar() {
     });
     audio[0].addEventListener('ended', function (e) {
         current++;
-        if (current == len) {
+        if (current === len) {
             current = 0;
             link = playlist.find('a')[0];
         } else {
@@ -50,7 +68,7 @@ function run(link, player) {
 var status = 0; // 0 = Expand, 1 = Compress
 // Handler for display/hide playlist
 function displayHidePlaylist() {
-    if (status == 0) {
+    if (status === 0) {
         $('#playlist-opener').removeClass("fa-expand").addClass("fa-compress");
         status = 1;
     } else {

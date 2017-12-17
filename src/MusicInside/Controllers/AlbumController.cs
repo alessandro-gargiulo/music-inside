@@ -87,6 +87,20 @@ namespace MusicInside.Controllers
                 return null;
             }
         }
+
+        public JsonResult GetAllAlbums()
+        {
+            try
+            {
+                List<AlbumRowViewModel> albumList = _albumManager.GetAllTable();
+                return Json(albumList);
+            }
+            catch (Exception ex)
+            {
+                _logger.ErrorFormat("AlbumController | GetAllAlbums: A generic error occurred [{0}]", ex.Message);
+                return null;
+            }
+        }
         #endregion
     }
 }
