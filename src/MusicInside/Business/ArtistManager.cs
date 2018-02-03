@@ -11,11 +11,13 @@ namespace MusicInside.Business
 {
     public class ArtistManager : IArtistManager
     {
+        #region Members
         private readonly IArtistDataAccess _artistDataAccess;
         private readonly IAlbumDataAccess _albumDataAccess;
         private readonly IFeaturingDataAccess _featuringDataAccess;
         private readonly ISongDataAccess _songDataAccess;
         private readonly ILog _logger;
+        #endregion
 
         public ArtistManager(IArtistDataAccess artistDataAccess, IAlbumDataAccess albumDataAccess, IFeaturingDataAccess featuringDataAccess, ISongDataAccess songDataAccess, ILog logger)
         {
@@ -26,6 +28,7 @@ namespace MusicInside.Business
             _logger = logger;
         }
 
+        #region Methods
         public List<ArtistRowViewModel> GetAllTable()
         {
             List<ArtistRowViewModel> artists = new List<ArtistRowViewModel>();
@@ -89,5 +92,6 @@ namespace MusicInside.Business
             }
             return advm;
         }
+        #endregion
     }
 }

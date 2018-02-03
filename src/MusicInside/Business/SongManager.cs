@@ -12,6 +12,7 @@ namespace MusicInside.Business
 {
     public class SongManager : ISongManager
     {
+        #region Members
         private readonly ISongDataAccess _songDataAccess;
         private readonly IAlbumDataAccess _albumDataAccess;
         private readonly IArtistDataAccess _artistDataAccess;
@@ -20,6 +21,7 @@ namespace MusicInside.Business
         private readonly IFileDataAccess _fileDataAccess;
         private readonly IFeaturingDataAccess _featuringDataAccess;
         private readonly ILog _logger;
+        #endregion
 
         public SongManager(ISongDataAccess songDataAccess, 
                             IAlbumDataAccess albumDataAccess,
@@ -39,6 +41,7 @@ namespace MusicInside.Business
             _logger = logger;
         }
 
+        #region Methods
         public List<SongRowViewModel> GetAllTable()
         {
             List<SongRowViewModel> songs = new List<SongRowViewModel>();
@@ -50,6 +53,21 @@ namespace MusicInside.Business
             catch (Exception ex)
             {
                 _logger.ErrorFormat("SongManager | GetAllTable: A generic error occurred [{0}]", ex.Message);
+                throw ex;
+            }
+        }
+
+        public List<SongRowViewModel> GetTablePart(string letter)
+        {
+            List<SongRowViewModel> songs = new List<SongRowViewModel>();
+            try
+            {
+                songs = _songDataAccess.sp_GetAllByLetter(letter);
+                return songs;
+            }
+            catch (Exception ex)
+            {
+                _logger.ErrorFormat("SongManager | GetTablePart: A generic error occurred [{0}]", ex.Message);
                 throw ex;
             }
         }
@@ -143,20 +161,6 @@ namespace MusicInside.Business
                 throw ex;
             }
         }
-
-        public List<SongRowViewModel> GetTablePart(string letter)
-        {
-            List<SongRowViewModel> songs = new List<SongRowViewModel>();
-            try
-            {
-                songs = _songDataAccess.sp_GetAllByLetter(letter);
-                return songs;
-            }
-            catch(Exception ex)
-            {
-                _logger.ErrorFormat("SongManager | GetTablePart: A generic error occurred [{0}]", ex.Message);
-                throw ex;
-            }
-        }
+        #endregion
     }
 }

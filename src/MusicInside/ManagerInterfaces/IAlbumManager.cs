@@ -5,8 +5,8 @@ namespace MusicInside.ManagerInterfaces
 {
     public interface IAlbumManager
     {
-        AlbumDetailViewModel GetDetailById(int id);
         List<AlbumRowViewModel> GetAllTable();
+        AlbumDetailViewModel GetDetailById(int id);
         byte[] GetAlbumCoverFile(int id);
     }
 }

@@ -11,15 +11,33 @@ namespace MusicInside.Business
 {
     public class AlbumManager : IAlbumManager
     {
+        #region Members
         private readonly IAlbumDataAccess _albumDataAccess;
         private readonly IArtistDataAccess _artistDataAccess;
         private readonly ILog _logger;
+        #endregion
 
         public AlbumManager(IAlbumDataAccess albumDataAccess, IArtistDataAccess artistDataAccess, ILog logger)
         {
             _albumDataAccess = albumDataAccess;
             _artistDataAccess = artistDataAccess;
             _logger = logger;
+        }
+
+        #region Methods
+        public List<AlbumRowViewModel> GetAllTable()
+        {
+            List<AlbumRowViewModel> albums = new List<AlbumRowViewModel>();
+            try
+            {
+                albums = _albumDataAccess.sp_GetAll();
+                return albums;
+            }
+            catch (Exception ex)
+            {
+                _logger.ErrorFormat("AlbumManager | GetAllTable: A generic error occurred [{0}]", ex.Message);
+                throw ex;
+            }
         }
 
         public AlbumDetailViewModel GetDetailById(int id)
@@ -86,20 +104,6 @@ namespace MusicInside.Business
             }
             return data;
         }
-
-        public List<AlbumRowViewModel> GetAllTable()
-        {
-            List<AlbumRowViewModel> albums = new List<AlbumRowViewModel>();
-            try
-            {
-                albums = _albumDataAccess.sp_GetAll();
-                return albums;
-            }
-            catch (Exception ex)
-            {
-                _logger.ErrorFormat("AlbumManager | GetAllTable: A generic error occurred [{0}]", ex.Message);
-                throw ex;
-            }
-        }
+        #endregion
     }
 }

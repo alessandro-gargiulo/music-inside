@@ -7,6 +7,7 @@ namespace MusicInside.Controllers
     {
         private readonly ILog _logger;
 
+        #region Page Resolvers
         public ErrorController(ILog logger)
         {
             _logger = logger;
@@ -26,5 +27,6 @@ namespace MusicInside.Controllers
         {
             return View();
         }
+        #endregion
     }
 }
