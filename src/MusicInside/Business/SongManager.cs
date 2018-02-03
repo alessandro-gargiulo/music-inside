@@ -44,7 +44,7 @@ namespace MusicInside.Business
             List<SongRowViewModel> songs = new List<SongRowViewModel>();
             try
             {
-                songs = _songDataAccess.GetAll();
+                songs = _songDataAccess.sp_GetAll();
                 return songs;
             }
             catch (Exception ex)
@@ -149,7 +149,7 @@ namespace MusicInside.Business
             List<SongRowViewModel> songs = new List<SongRowViewModel>();
             try
             {
-                songs = _songDataAccess.GetAllByLetter(letter);
+                songs = _songDataAccess.sp_GetAllByLetter(letter);
                 return songs;
             }
             catch(Exception ex)

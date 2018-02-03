@@ -95,7 +95,7 @@ namespace MusicInside.DataAccess
             return arrayByte;
         }
 
-        public List<AlbumRowViewModel> GetAll()
+        public List<AlbumRowViewModel> sp_GetAll()
         {
             List<AlbumRowViewModel> albums = new List<AlbumRowViewModel>();
             try

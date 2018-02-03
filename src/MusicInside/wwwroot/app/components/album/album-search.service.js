@@ -5,7 +5,7 @@ MusicInsideApp.service('AlbumService', function ($http) {
     this.retrieveCompleteAlbumList = function () {
         return $http({
             method: 'GET',
-            url: '/Artist/GetAllAlbums'
+            url: '/Album/GetAlbumList'
         })
     };
 });

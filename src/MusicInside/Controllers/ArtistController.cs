@@ -31,7 +31,7 @@ namespace MusicInside.Controllers
             catch (Exception ex)
             {
                 _logger.ErrorFormat("ArtistController | Index: Error occurred [{0}]", ex.Message);
-                return null; // Redirect to error screen
+                return RedirectToRoute("Error", "GenericError");
             }
         }
 
@@ -45,17 +45,17 @@ namespace MusicInside.Controllers
             catch (InvalidIdException iiex)
             {
                 _logger.ErrorFormat("ArtistController | Detail: Error occurred [{0}]", iiex.Message);
-                return null; // Redirect to error screen
+                return RedirectToRoute("Error", "InvalidIdError");
             }
             catch (EntryNotPresentException enpex)
             {
                 _logger.ErrorFormat("ArtistController | Detail: Error occurred [{0}]", enpex.Message);
-                return null; // Redirect to error screen
+                return RedirectToRoute("Error", "EntryNotPresentError");
             }
             catch (Exception ex)
             {
                 _logger.ErrorFormat("ArtistController | Detail: A generic error occurred [{0}]", ex.Message);
-                return null;
+                return RedirectToRoute("Error", "GenericError");
             }
         }
         #endregion

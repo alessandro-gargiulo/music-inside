@@ -24,6 +24,6 @@ namespace MusicInside.DataAccessInterfaces
         /// Return all the song in database formatted as model want
         /// </summary>
         /// <returns>A list of ArtistRowViewModel</returns>
-        List<ArtistRowViewModel> GetAll();
+        List<ArtistRowViewModel> sp_GetAll();
     }
 }

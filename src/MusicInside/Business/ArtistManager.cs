@@ -31,7 +31,7 @@ namespace MusicInside.Business
             List<ArtistRowViewModel> artists = new List<ArtistRowViewModel>();
             try
             {
-                artists = _artistDataAccess.GetAll();
+                artists = _artistDataAccess.sp_GetAll();
                 return artists;
             }
             catch (Exception ex)

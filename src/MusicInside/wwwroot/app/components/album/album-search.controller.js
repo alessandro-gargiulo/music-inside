@@ -1,6 +1,6 @@
 ﻿var MusicInsideApp = angular.module('MusicInsideApp');
 
-MusicInsideApp.controller('AlbumSearchController', ['$scope', 'AlbumService', function ($scope, albumService) {
+MusicInsideApp.controller('AlbumSearchController', ['$scope', 'AlbumService', function ($scope, $albumService) {
 
     /*
      * ANGULAR JS FUNCTIONS
@@ -11,10 +11,10 @@ MusicInsideApp.controller('AlbumSearchController', ['$scope', 'AlbumService', fu
      * INITIALIZATION CODE
      */
     // Retrieve artists
-    $artistService.retrieveCompleteArtistList().then(function (response) {
+    $albumService.retrieveCompleteAlbumList().then(function (response) {
         // Success callback
         if (response.data !== -1) {
-            $scope.artistList = createDetailLinks(response.data);
+            $scope.albumList = createDetailLinks(response.data);
         } else {
             // Something goes wrong on server side
         }
@@ -26,11 +26,11 @@ MusicInsideApp.controller('AlbumSearchController', ['$scope', 'AlbumService', fu
      * OTHER JS FUNCTIONS
      */
     // Take a list and create the fields for linking details based on ids
-    var createDetailLinks = function (artistList) {
-        for (var i = 0; i < artistList.length; i++) {
-            artistList[i].artistDetailLink = '/Album/Detail/' + artistList[i].artistId;
+    var createDetailLinks = function (albumList) {
+        for (var i = 0; i < albumList.length; i++) {
+            albumList[i].albumDetailLink = '/Album/Detail/' + albumList[i].albumId;
         }
-        return artistList;
+        return albumList;
     }
 
     // On DOM ready function

@@ -31,7 +31,7 @@ namespace MusicInside.Controllers
             catch (Exception ex)
             {
                 _logger.ErrorFormat("SongController | Index: Error occurred [{0}]", ex.Message);
-                return null; // Redirect to error screen
+                return RedirectToRoute("Error", "GenericError");
             }
         }
 
@@ -45,17 +45,17 @@ namespace MusicInside.Controllers
             catch (InvalidIdException iiex)
             {
                 _logger.ErrorFormat("SongController | Detail: Error occurred [{0}]", iiex.Message);
-                return null; // Redirect to error screen
+                return RedirectToRoute("Error", "InvalidIdError");
             }
             catch (EntryNotPresentException enpex)
             {
                 _logger.ErrorFormat("SongController | Detail: Error occurred [{0}]", enpex.Message);
-                return null; // Redirect to error screen
+                return RedirectToRoute("Error", "EntryNotPresentError");
             }
             catch (Exception ex)
             {
                 _logger.ErrorFormat("SongController | Detail: A generic error occurred [{0}]", ex.Message);
-                return null;
+                return RedirectToRoute("Error", "GenericError");
             }
         }
         #endregion
@@ -107,7 +107,8 @@ namespace MusicInside.Controllers
             try
             {
                 songList = _songManager.GetTablePart(firstLetter);
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 _logger.ErrorFormat("SongController | GetSongListByLetter: A generic error occurred [{0}]", ex.Message);
                 return Json(-1);

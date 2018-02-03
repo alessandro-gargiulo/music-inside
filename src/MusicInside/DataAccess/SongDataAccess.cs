@@ -15,7 +15,7 @@ namespace MusicInside.DataAccess
     {
         public SongDataAccess(SongDBContext context, IConfiguration conf, ILog logger) : base(context, conf, logger) { }
 
-        public List<SongRowViewModel> GetAll()
+        public List<SongRowViewModel> sp_GetAll()
         {
             List<SongRowViewModel> songs = new List<SongRowViewModel>();
             try
@@ -47,7 +47,7 @@ namespace MusicInside.DataAccess
             return songs;
         }
 
-        public List<SongRowViewModel> GetAllByLetter(string letter)
+        public List<SongRowViewModel> sp_GetAllByLetter(string letter)
         {
             List<SongRowViewModel> songs = new List<SongRowViewModel>();
             try

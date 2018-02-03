@@ -92,7 +92,7 @@ namespace MusicInside.Business
             List<AlbumRowViewModel> albums = new List<AlbumRowViewModel>();
             try
             {
-                albums = _albumDataAccess.GetAll();
+                albums = _albumDataAccess.sp_GetAll();
                 return albums;
             }
             catch (Exception ex)

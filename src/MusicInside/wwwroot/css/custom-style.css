@@ -39,6 +39,10 @@ body .main-content .page-list.artist-list .music-grid .music-grid-item .artname 
   background-color: black;
   border-bottom-left-radius: 10px;
 }
+body .main-content .page-list.album-list .music-grid .music-grid-item .album-title {
+  background-color: black;
+  border-bottom-left-radius: 10px;
+}
 body .main-content .detail-common .container-fluid .row .cover {
   margin-top: 14px;
 }

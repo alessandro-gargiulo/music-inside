@@ -32,7 +32,7 @@ namespace MusicInside.Controllers
             catch (Exception ex)
             {
                 _logger.ErrorFormat("AlbumController | Index: Error occurred [{0}]", ex.Message);
-                return null;
+                return RedirectToRoute("Error", "GenericError");
             }
         }
 
@@ -46,17 +46,17 @@ namespace MusicInside.Controllers
             catch (InvalidIdException iiex)
             {
                 _logger.ErrorFormat("AlbumController | Detail: Error occurred [{0}]", iiex.Message);
-                return null; // Redirect to error screen
+                return RedirectToRoute("Error", "InvalidIdError");
             }
             catch (EntryNotPresentException enpex)
             {
                 _logger.ErrorFormat("AlbumController | Detail: Error occurred [{0}]", enpex.Message);
-                return null; // Redirect to error screen
+                return RedirectToRoute("Error", "EntryNotPresentError");
             }
             catch (Exception ex)
             {
                 _logger.ErrorFormat("AlbumController | Detail: A generic error occurred [{0}]", ex.Message);
-                return null;
+                return RedirectToRoute("Error", "GenericError");
             }
         }
         #endregion
@@ -69,16 +69,6 @@ namespace MusicInside.Controllers
                 byte[] imageBytes = _albumManager.GetAlbumCoverFile(id);
                 return base.File(imageBytes, "image/png");
             }
-            catch (InvalidIdException iiex)
-            {
-                _logger.ErrorFormat("AlbumController | GetCoverImage: Error occurred [{0}]", iiex.Message);
-                return null;
-            }
-            catch (EntryNotPresentException enpex)
-            {
-                _logger.ErrorFormat("AlbumController | GetCoverImage: Error occurred [{0}]", enpex.Message);
-                return null;
-            }
             catch (Exception ex)
             {
                 _logger.ErrorFormat("AlbumController | GetCoverImage: A generic error occurred [{0}]", ex.Message);
@@ -86,7 +76,8 @@ namespace MusicInside.Controllers
             }
         }
 
-        public JsonResult GetAllAlbums()
+        [HttpGet]
+        public JsonResult GetAlbumList()
         {
             try
             {

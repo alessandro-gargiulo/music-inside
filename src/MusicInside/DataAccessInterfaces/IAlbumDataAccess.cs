@@ -38,6 +38,6 @@ namespace MusicInside.DataAccessInterfaces
         /// Get the list of all albums in the database
         /// </summary>
         /// <returns>List of all album</returns>
-        List<AlbumRowViewModel> GetAll();
+        List<AlbumRowViewModel> sp_GetAll();
     }
 }

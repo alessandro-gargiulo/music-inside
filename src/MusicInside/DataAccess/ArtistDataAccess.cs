@@ -15,7 +15,7 @@ namespace MusicInside.DataAccess
     {
         public ArtistDataAccess(SongDBContext context, IConfiguration conf, ILog logger) : base(context, conf, logger) { }
 
-        public List<ArtistRowViewModel> GetAll()
+        public List<ArtistRowViewModel> sp_GetAll()
         {
             List<ArtistRowViewModel> artists = new List<ArtistRowViewModel>();
             try
