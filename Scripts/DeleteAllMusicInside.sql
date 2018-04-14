@@ -1,0 +1,11 @@
+USE [MusicInside]
+DELETE FROM Album
+DELETE FROM Artist
+DELETE FROM Featuring
+--DELETE FROM [MusicInside].[dbo].File
+DELETE FROM Genre
+DELETE FROM Moment
+DELETE FROM Song
+DELETE FROM SongGenre
+DELETE FROM SongMoment
+DELETE FROM Statistic
