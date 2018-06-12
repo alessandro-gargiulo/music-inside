@@ -11,6 +11,7 @@ using MusicInside.DataAccess;
 using MusicInside.Business;
 using System.Xml;
 using System.Reflection;
+using MusicInside.Models.Context;
 
 namespace MusicInside
 {
@@ -46,7 +47,10 @@ namespace MusicInside
             services.AddMvc();
 
             // Dependency injection for DBContext
-            services.AddDbContext<SongDBContext>(options =>
+            //services.AddDbContext<SongDBContext>(options =>
+            //    options.UseSqlServer(Configuration.GetConnectionString("MusicInsideDatabase")));
+
+            services.AddDbContext<MusicInsideDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MusicInsideDatabase")));
 
             // Dependency injection for Configuration File

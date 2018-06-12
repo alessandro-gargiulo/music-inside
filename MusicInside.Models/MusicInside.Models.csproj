@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20180612223651_first-migration.cs" />
+    <Compile Remove="Migrations\20180612224539_first1-migration.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.0" />
+  </ItemGroup>
+
+</Project>
