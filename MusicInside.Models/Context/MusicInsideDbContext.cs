@@ -27,6 +27,10 @@ namespace MusicInside.Models.Context
             modelBuilder.ApplyConfiguration(new AlbumConfiguration());
             modelBuilder.ApplyConfiguration(new MediaFileConfiguration());
             modelBuilder.ApplyConfiguration(new CoverFileConfiguration());
+            modelBuilder.ApplyConfiguration(new ArtistConfiguration());
+            modelBuilder.ApplyConfiguration(new GenreConfiguration());
+            modelBuilder.ApplyConfiguration(new MomentConfiguration());
+            modelBuilder.ApplyConfiguration(new StatisticConfiguration());
 
             modelBuilder.ApplyConfiguration(new SongGenreConfiguration());
             modelBuilder.ApplyConfiguration(new SongArtistConfiguration());

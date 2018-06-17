@@ -101,6 +101,38 @@ namespace MusicInside.Models.Context
             #endregion
         }
     }
+
+    public class ArtistConfiguration : IEntityTypeConfiguration<Artist>
+    {
+        public void Configure(EntityTypeBuilder<Artist> builder)
+        {
+            builder.ToTable("Artist");
+        }
+    }
+
+    public class GenreConfiguration : IEntityTypeConfiguration<Genre>
+    {
+        public void Configure(EntityTypeBuilder<Genre> builder)
+        {
+            builder.ToTable("Genre");
+        }
+    }
+
+    public class MomentConfiguration : IEntityTypeConfiguration<Moment>
+    {
+        public void Configure(EntityTypeBuilder<Moment> builder)
+        {
+            builder.ToTable("Moment");
+        }
+    }
+
+    public class StatisticConfiguration : IEntityTypeConfiguration<Statistic>
+    {
+        public void Configure(EntityTypeBuilder<Statistic> builder)
+        {
+            builder.ToTable("Statistic");
+        }
+    }
     #endregion
 
     #region Association Class Configurations
