@@ -10,6 +10,8 @@ namespace MusicInside.Models.Context
     {
         public void Configure(EntityTypeBuilder<Song> builder)
         {
+            builder.ToTable("Song");
+
             #region Property Configurations
             builder.Property(p => p.Title)
                 .IsRequired();
@@ -49,6 +51,8 @@ namespace MusicInside.Models.Context
     {
         public void Configure(EntityTypeBuilder<Album> builder)
         {
+            builder.ToTable("Album");
+
             #region Property Configurations
             builder.Property(p => p.Title)
                 .IsRequired();
@@ -74,6 +78,8 @@ namespace MusicInside.Models.Context
     {
         public void Configure(EntityTypeBuilder<CoverFile> builder)
         {
+            builder.ToTable("CoverFile");
+
             #region Property Configurations
             builder.Property(p => p.Path).IsRequired();
             builder.Property(p => p.FileName).IsRequired();
@@ -86,6 +92,8 @@ namespace MusicInside.Models.Context
     {
         public void Configure(EntityTypeBuilder<MediaFile> builder)
         {
+            builder.ToTable("MediaFile");
+
             #region Property Configurations
             builder.Property(p => p.Path).IsRequired();
             builder.Property(p => p.FileName).IsRequired();
@@ -100,6 +108,8 @@ namespace MusicInside.Models.Context
     {
         public void Configure(EntityTypeBuilder<SongGenre> builder)
         {
+            builder.ToTable("SongGenre");
+
             #region Property Configurations
             builder.HasKey(k => new { k.SongId, k.GenreId });
             #endregion
@@ -122,6 +132,8 @@ namespace MusicInside.Models.Context
     {
         public void Configure(EntityTypeBuilder<SongArtist> builder)
         {
+            builder.ToTable("SongArtist");
+
             #region Property Configurations
             builder.HasKey(k => new { k.SongId, k.ArtistId });
             builder.Property(p => p.IsPrincipalArtist).IsRequired();
@@ -145,6 +157,8 @@ namespace MusicInside.Models.Context
     {
         public void Configure(EntityTypeBuilder<SongMoment> builder)
         {
+            builder.ToTable("SongMoment");
+
             #region Property Configurations
             builder.HasKey(k => new { k.SongId, k.MomentId });
             #endregion
