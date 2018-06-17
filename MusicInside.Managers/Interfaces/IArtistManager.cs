@@ -17,17 +17,12 @@ namespace MusicInside.Managers.Interfaces
         /// <returns>A single artist</returns>
         EArtist GetArtistById(int id);
         /// <summary>
-        /// Retrieve all the song performed by the artist
-        /// </summary>
-        /// <param name="id">The identifier of the artist</param>
-        /// <returns>A list of songs performed by the artist</returns>
-        List<ESong> GetSongsForArtist(int id);
-        /// <summary>
         /// Retrieve all the song performed in featuring by the artist
         /// </summary>
         /// <param name="id">The identifier of the artist</param>
+        /// <param name="isPrincipalArtist">Set true if you want the song which the performer is principal artist, false otherwise</param>
         /// <returns>A list of songs performed in featuring by the artist</returns>
-        List<ESong> GetFeaturingSongsForArtist(int id);
+        List<ESong> GetFeaturingSongsForArtist(int id, bool isPrincipalArtist);
         /// <summary>
         /// Calculate how many song are performed by the artist
         /// </summary>
