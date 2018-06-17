@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MusicInside.Managers.Interfaces
+﻿namespace MusicInside.Managers.Interfaces
 {
-    class IArtistManager
+    public interface IArtistManager
     {
     }
 }
