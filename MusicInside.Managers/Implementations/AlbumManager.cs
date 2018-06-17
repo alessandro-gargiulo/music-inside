@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using MusicInside.Managers.Entities;
 using MusicInside.Managers.Exceptions;
 using MusicInside.Managers.Interfaces;
-using MusicInside.Models.Context;
+using MusicInside.Managers.Context;
 using MusicInside.Models.Models;
 using System;
 using System.Collections.Generic;

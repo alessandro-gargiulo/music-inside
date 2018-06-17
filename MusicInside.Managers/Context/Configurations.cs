@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MusicInside.Models.AssociationClasses;
 using MusicInside.Models.Models;
 
-namespace MusicInside.Models.Context
+namespace MusicInside.Managers.Context
 {
     #region Single Class Configurations
     public class SongConfiguration : IEntityTypeConfiguration<Song>

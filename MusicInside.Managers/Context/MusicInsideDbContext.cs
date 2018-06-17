@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MusicInside.Models.Models;
 
-namespace MusicInside.Models.Context
+namespace MusicInside.Managers.Context
 {
     public class MusicInsideDbContext : DbContext
     {
+        public MusicInsideDbContext(DbContextOptions<MusicInsideDbContext> options) : base(options) { }
+
         #region Declaration Of DbSet
         public DbSet<Song> Songs { get; set; }
         public DbSet<Moment> Moments { get; set; }

@@ -104,6 +104,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\MusicInside.Managers\MusicInside.Managers.csproj" />
     <ProjectReference Include="..\..\MusicInside.Models\MusicInside.Models.csproj" />
   </ItemGroup>
 

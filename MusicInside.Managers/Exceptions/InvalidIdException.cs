@@ -3,7 +3,7 @@
 namespace MusicInside.Managers.Exceptions
 {
     [Serializable]
-    internal class InvalidIdException : Exception
+    public class InvalidIdException : Exception
     {
         public InvalidIdException() : base("Invalid album id value. Value must be non-negative") { }
 

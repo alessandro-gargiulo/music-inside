@@ -3,7 +3,7 @@
 namespace MusicInside.Managers.Exceptions
 {
     [Serializable]
-    internal class EntryNotPresentException : Exception
+    public class EntryNotPresentException : Exception
     {
         public EntryNotPresentException() : base("Can't found an album with chosen id") { }
 

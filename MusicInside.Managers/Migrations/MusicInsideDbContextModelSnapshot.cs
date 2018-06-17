@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MusicInside.Models.Context;
+using MusicInside.Managers.Context;
 
 namespace MusicInside.Models.Migrations
 {
     [DbContext(typeof(MusicInsideDbContext))]
-    [Migration("20180617131410_first-migration")]
-    partial class firstmigration
+    partial class MusicInsideDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,7 +99,7 @@ namespace MusicInside.Models.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Artists");
+                    b.ToTable("Artist");
                 });
 
             modelBuilder.Entity("MusicInside.Models.Models.CoverFile", b =>
@@ -134,7 +132,7 @@ namespace MusicInside.Models.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genres");
+                    b.ToTable("Genre");
                 });
 
             modelBuilder.Entity("MusicInside.Models.Models.MediaFile", b =>
@@ -167,7 +165,7 @@ namespace MusicInside.Models.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Moments");
+                    b.ToTable("Moment");
                 });
 
             modelBuilder.Entity("MusicInside.Models.Models.Song", b =>
@@ -216,7 +214,7 @@ namespace MusicInside.Models.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Statistics");
+                    b.ToTable("Statistic");
                 });
 
             modelBuilder.Entity("MusicInside.Models.AssociationClasses.SongArtist", b =>

@@ -5,16 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20180612223651_first-migration.cs" />
-    <Compile Remove="Migrations\20180612224539_first1-migration.cs" />
-    <Compile Remove="Migrations\20180612224945_first1-migration.cs" />
-    <Compile Remove="Migrations\20180617123854_first-migration.cs" />
-    <Compile Remove="Migrations\20180617124311_first-migration.cs" />
-    <Compile Remove="Migrations\20180617130422_first-migration.cs" />
-    <Compile Remove="Migrations\20180617132123_add-naming-convention-to-tables.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.0" />
   </ItemGroup>

@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicInside", "src\MusicIns
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicUpdateBatch", "MusicUpdateBatch\MusicUpdateBatch.csproj", "{2776BA45-FF72-44BD-AFC2-2DBEB387C861}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicInside.Models", "MusicInside.Models\MusicInside.Models.csproj", "{C468234D-8F0D-4027-B483-FE9A7966CA8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicInside.Models", "MusicInside.Models\MusicInside.Models.csproj", "{C468234D-8F0D-4027-B483-FE9A7966CA8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicInside.Managers", "MusicInside.Managers\MusicInside.Managers.csproj", "{578044C5-6C43-42B9-9BEA-934A93A61379}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicInside.Managers", "MusicInside.Managers\MusicInside.Managers.csproj", "{578044C5-6C43-42B9-9BEA-934A93A61379}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicInside.WebApi", "MusicInside.WebApi\MusicInside.WebApi.csproj", "{0221164D-463F-4438-B095-8AA6C8341272}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{578044C5-6C43-42B9-9BEA-934A93A61379}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{578044C5-6C43-42B9-9BEA-934A93A61379}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{578044C5-6C43-42B9-9BEA-934A93A61379}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0221164D-463F-4438-B095-8AA6C8341272}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0221164D-463F-4438-B095-8AA6C8341272}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0221164D-463F-4438-B095-8AA6C8341272}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0221164D-463F-4438-B095-8AA6C8341272}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
