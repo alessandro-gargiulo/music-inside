@@ -12,8 +12,8 @@ namespace MusicInside.Models.Context
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Album> Albums { get; set; }
-        public DbSet<Cover> Covers { get; set; }
-        public DbSet<Media> Medias { get; set; }
+        public DbSet<CoverFile> Covers { get; set; }
+        public DbSet<MediaFile> Medias { get; set; }
         #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -25,7 +25,8 @@ namespace MusicInside.Models.Context
         {
             modelBuilder.ApplyConfiguration(new SongConfiguration());
             modelBuilder.ApplyConfiguration(new AlbumConfiguration());
-            modelBuilder.ApplyConfiguration(new MusicFileConfiguration());
+            modelBuilder.ApplyConfiguration(new MediaFileConfiguration());
+            modelBuilder.ApplyConfiguration(new CoverFileConfiguration());
 
             modelBuilder.ApplyConfiguration(new SongGenreConfiguration());
             modelBuilder.ApplyConfiguration(new SongArtistConfiguration());

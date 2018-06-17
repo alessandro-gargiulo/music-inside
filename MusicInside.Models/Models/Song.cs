@@ -17,7 +17,7 @@ namespace MusicInside.Models.Models
         public int StatisticId { get; set; }
         public Album Album { get; set; }
         public int AlbumId { get; set; }
-        public Media Media { get; set; }
+        public MediaFile Media { get; set; }
         public int MediaId { get; set; }
 
         public IList<SongGenre> Genres { get; set; }

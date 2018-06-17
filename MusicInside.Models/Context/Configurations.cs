@@ -29,6 +29,11 @@ namespace MusicInside.Models.Context
                 .WithOne(p => p.Song)
                 .HasForeignKey<Song>(p => p.MediaId)
                 .IsRequired();
+
+            builder.HasOne(p => p.Media)
+                .WithOne(p => p.Song)
+                .HasForeignKey<Song>(p => p.MediaId)
+                .IsRequired();
             #endregion
 
             #region One-To-Many Navigation Configurations
@@ -49,6 +54,13 @@ namespace MusicInside.Models.Context
                 .IsRequired();
             #endregion
 
+            #region One-To-One Navigation Configurations
+            builder.HasOne(p => p.Cover)
+                .WithOne(p => p.Album)
+                .HasForeignKey<Album>(p => p.CoverId)
+                .IsRequired();
+            #endregion
+
             #region One-To-Many Navigation Configurations
             builder.HasOne(p => p.Cover)
                 .WithOne(p => p.Album)
@@ -58,9 +70,21 @@ namespace MusicInside.Models.Context
         }
     }
 
-    public class MusicFileConfiguration : IEntityTypeConfiguration<MusicFile>
+    public class CoverFileConfiguration : IEntityTypeConfiguration<CoverFile>
     {
-        public void Configure(EntityTypeBuilder<MusicFile> builder)
+        public void Configure(EntityTypeBuilder<CoverFile> builder)
+        {
+            #region Property Configurations
+            builder.Property(p => p.Path).IsRequired();
+            builder.Property(p => p.FileName).IsRequired();
+            builder.Property(p => p.Extension).IsRequired();
+            #endregion
+        }
+    }
+
+    public class MediaFileConfiguration : IEntityTypeConfiguration<MediaFile>
+    {
+        public void Configure(EntityTypeBuilder<MediaFile> builder)
         {
             #region Property Configurations
             builder.Property(p => p.Path).IsRequired();

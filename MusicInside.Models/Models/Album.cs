@@ -12,7 +12,7 @@ namespace MusicInside.Models.Models
         #region Navigation Properties
         public IList<Song> Songs { get; set; }
 
-        public Cover Cover { get; set; }
+        public CoverFile Cover { get; set; }
         public int CoverId { get; set; }
         #endregion
     }
