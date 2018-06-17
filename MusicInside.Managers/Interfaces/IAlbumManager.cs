@@ -26,7 +26,7 @@ namespace MusicInside.Managers.Interfaces
         /// Retrieve the cover file for the album
         /// </summary>
         /// <param name="id">The identifier of the album</param>
-        /// <returns>The byte file represented the album</returns>
+        /// <returns>The byte file represented the album cover</returns>
         byte[] GetCoverFile(int id);
         /// <summary>
         /// Calculate how many song are contained into the album
