@@ -26,43 +26,6 @@ namespace MusicInside.Managers.Implementations
             _fileMusicRoot = fileMusicRoot;
         }
 
-        public void AddPlayToSongId(int id, DateTime when)
-        {
-            if (id < 0) throw new InvalidIdException(id);
-            ESong eSong = new ESong();
-            try
-            {
-                Song song = _dbContext.Songs.Where(x => x.Id == id).Include(y => y.Statistic).FirstOrDefault();
-                if (song != null)
-                {
-                    if(song.Statistic != null)
-                    {
-                        // Exist, update
-                        song.Statistic.NumPlay++;
-                        song.Statistic.LastPlay = when;
-                        _dbContext.SaveChanges();
-                    }
-                    else
-                    {
-                        // Does not exist, create a new one
-                        Statistic statistic = new Statistic();
-                        statistic.NumPlay = 1;
-                        statistic.LastPlay = when;
-                        song.Statistic = statistic;
-                        _dbContext.SaveChanges();
-                    }
-                }
-                else
-                {
-                    throw new EntryNotPresentException(id);
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
         public ESong GetSongById(int id)
         {
             if (id < 0) throw new InvalidIdException(id);
@@ -84,6 +47,32 @@ namespace MusicInside.Managers.Implementations
                 throw;
             }
             return eSong;
+        }
+
+        public EArtist GetArtistInfo(int id)
+        {
+            if (id < 0) throw new InvalidIdException(id);
+            EArtist eArtist = new EArtist();
+            try
+            {
+                // Retrieve the first song of the album
+                Song song = _dbContext.Songs.Where(x => x.Id == id).FirstOrDefault();
+                if (song != null)
+                {
+                    int artistId = song.Artists.FirstOrDefault(x => x.IsPrincipalArtist == true).ArtistId;
+                    Artist artist = _dbContext.Artists.Where(x => x.Id == artistId).FirstOrDefault();
+                    eArtist.CopyFromModel(artist);
+                }
+                else
+                {
+                    throw new EntryNotPresentException(id);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return eArtist;
         }
 
         public List<ESong> GetAll()
@@ -223,6 +212,43 @@ namespace MusicInside.Managers.Implementations
                 throw;
             }
             return arrayByte;
+        }
+
+        public void AddPlayToSongId(int id, DateTime when)
+        {
+            if (id < 0) throw new InvalidIdException(id);
+            ESong eSong = new ESong();
+            try
+            {
+                Song song = _dbContext.Songs.Where(x => x.Id == id).Include(y => y.Statistic).FirstOrDefault();
+                if (song != null)
+                {
+                    if (song.Statistic != null)
+                    {
+                        // Exist, update
+                        song.Statistic.NumPlay++;
+                        song.Statistic.LastPlay = when;
+                        _dbContext.SaveChanges();
+                    }
+                    else
+                    {
+                        // Does not exist, create a new one
+                        Statistic statistic = new Statistic();
+                        statistic.NumPlay = 1;
+                        statistic.LastPlay = when;
+                        song.Statistic = statistic;
+                        _dbContext.SaveChanges();
+                    }
+                }
+                else
+                {
+                    throw new EntryNotPresentException(id);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

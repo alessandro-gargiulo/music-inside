@@ -31,6 +31,12 @@ namespace MusicInside.Managers.Interfaces
         /// <returns>A sigle song</returns>
         ESong GetSongById(int id);
         /// <summary>
+        /// Retrieve the artist information about the song
+        /// </summary>
+        /// <param name="id">The identifier of the song</param>
+        /// <returns>A single artist, the principal artist</returns>
+        EArtist GetArtistInfo(int id);
+        /// <summary>
         /// Retrieve the media file for the album
         /// </summary>
         /// <param name="id">The identifier of the song</param>
