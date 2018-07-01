@@ -84,11 +84,6 @@ namespace MusicInside.Managers.Implementations
                 {
                     EAlbum eAlbum = new EAlbum();
                     eAlbum.CopyFromModel(album);
-                    eAlbum.NumberSong = GetNumberOfSongs(album.Id);
-                    EArtist artist = GetArtistInfo(album.Id);
-                    eAlbum.ArtistId = artist.Id;
-                    eAlbum.ArtistName = string.Concat(artist.Name, " ", artist.Surname);
-                    eAlbumList.Add(eAlbum);
                 }
             }
             catch (Exception)

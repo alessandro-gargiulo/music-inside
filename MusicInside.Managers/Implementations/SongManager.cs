@@ -1,9 +1,9 @@
 ﻿using log4net;
 using Microsoft.EntityFrameworkCore;
+using MusicInside.Managers.Context;
 using MusicInside.Managers.Entities;
 using MusicInside.Managers.Exceptions;
 using MusicInside.Managers.Interfaces;
-using MusicInside.Managers.Context;
 using MusicInside.Models.Models;
 using System;
 using System.Collections.Generic;
@@ -63,6 +63,29 @@ namespace MusicInside.Managers.Implementations
             }
         }
 
+        public ESong GetSongById(int id)
+        {
+            if (id < 0) throw new InvalidIdException(id);
+            ESong eSong = new ESong();
+            try
+            {
+                Song song = _dbContext.Songs.Where(x => x.Id == id).FirstOrDefault();
+                if (song != null)
+                {
+                    eSong.CopyFromModel(song);
+                }
+                else
+                {
+                    throw new EntryNotPresentException(id);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return eSong;
+        }
+
         public List<ESong> GetAll()
         {
             List<ESong> eSongList = new List<ESong>();
@@ -83,25 +106,44 @@ namespace MusicInside.Managers.Implementations
             return eSongList;
         }
 
-        public byte[] GetFileBytes(int id)
+        public List<ESong> GetStartingWithString(string initialString)
         {
-            if (id < 0) throw new InvalidIdException(id);
-            byte[] arrayByte = null;
+            List<ESong> eSongList = new List<ESong>();
             try
             {
-                MediaFile file = _dbContext.Medias.Where(x => x.Id == id).FirstOrDefault();
-                if (file == null)
+                List<Song> songs = _dbContext.Songs.Where(x => x.Title.StartsWith(initialString)).ToList();
+                foreach (Song song in songs)
                 {
-                    throw new EntryNotPresentException(id);
+                    ESong eSong = new ESong();
+                    eSong.CopyFromModel(song);
+                    eSongList.Add(eSong);
                 }
-                string path = Path.Combine(_fileMusicRoot, file.Path, file.FileName + "." + file.Extension);
-                arrayByte = File.ReadAllBytes(path);
             }
             catch (Exception)
             {
                 throw;
             }
-            return arrayByte;
+            return eSongList;
+        }
+
+        public List<ESong> GetMatchingRegex(Regex regex)
+        {
+            List<ESong> eSongList = new List<ESong>();
+            try
+            {
+                List<Song> songs = _dbContext.Songs.Where(x => regex.IsMatch(x.Title)).ToList();
+                foreach (Song song in songs)
+                {
+                    ESong eSong = new ESong();
+                    eSong.CopyFromModel(song);
+                    eSongList.Add(eSong);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return eSongList;
         }
 
         public List<EGenre> GetGenresForSong(int id)
@@ -133,26 +175,6 @@ namespace MusicInside.Managers.Implementations
             return eGenreList;
         }
 
-        public List<ESong> GetMatchingRegex(Regex regex)
-        {
-            List<ESong> eSongList = new List<ESong>();
-            try
-            {
-                List<Song> songs = _dbContext.Songs.Where(x => regex.IsMatch(x.Title)).ToList();
-                foreach (Song song in songs)
-                {
-                    ESong eSong = new ESong();
-                    eSong.CopyFromModel(song);
-                    eSongList.Add(eSong);
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            return eSongList;
-        }
-
         public List<EMoment> GetMomentsForSong(int id)
         {
             if (id < 0) throw new InvalidIdException(id);
@@ -182,47 +204,25 @@ namespace MusicInside.Managers.Implementations
             return eMomentList;
         }
 
-        public ESong GetSongById(int id)
+        public byte[] GetFileBytes(int id)
         {
             if (id < 0) throw new InvalidIdException(id);
-            ESong eSong = new ESong();
+            byte[] arrayByte = null;
             try
             {
-                Song song = _dbContext.Songs.Where(x => x.Id == id).FirstOrDefault();
-                if (song != null)
-                {
-                    eSong.CopyFromModel(song);
-                }
-                else
+                MediaFile file = _dbContext.Medias.Where(x => x.Id == id).FirstOrDefault();
+                if (file == null)
                 {
                     throw new EntryNotPresentException(id);
                 }
+                string path = Path.Combine(_fileMusicRoot, file.Path, file.FileName + "." + file.Extension);
+                arrayByte = File.ReadAllBytes(path);
             }
             catch (Exception)
             {
                 throw;
             }
-            return eSong;
-        }
-
-        public List<ESong> GetStartingWithString(string initialString)
-        {
-            List<ESong> eSongList = new List<ESong>();
-            try
-            {
-                List<Song> songs = _dbContext.Songs.Where(x => x.Title.StartsWith(initialString)).ToList();
-                foreach (Song song in songs)
-                {
-                    ESong eSong = new ESong();
-                    eSong.CopyFromModel(song);
-                    eSongList.Add(eSong);
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            return eSongList;
+            return arrayByte;
         }
     }
 }

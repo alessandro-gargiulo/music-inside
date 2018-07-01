@@ -6,9 +6,6 @@ namespace MusicInside.Managers.Entities
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public int NumberSong { get; set; }
-        public string ArtistName { get; set; }
-        public int ArtistId { get; set; }
 
         public void CopyFromModel(Album album)
         {

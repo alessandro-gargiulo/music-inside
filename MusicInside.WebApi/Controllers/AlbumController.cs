@@ -61,13 +61,14 @@ namespace MusicInside.WebApi.Controllers
                 List<EAlbum> albums = _albumManager.GetAll();
                 foreach(EAlbum album in albums)
                 {
+                    EArtist artist = _albumManager.GetArtistInfo(album.Id);
                     result.Add(new CAlbumListEntry
                     {
                         Id = album.Id,
                         Name = album.Title,
-                        ArtistId = album.ArtistId,
-                        ArtistName = album.ArtistName,
-                        NumberSong = album.NumberSong
+                        ArtistId = artist.Id,
+                        ArtistName = artist.ArtName,
+                        NumberSong = _albumManager.GetNumberOfSongs(album.Id)
                     });
                 }
             }catch(Exception ex)
