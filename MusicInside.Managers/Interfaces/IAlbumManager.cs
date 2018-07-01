@@ -34,5 +34,11 @@ namespace MusicInside.Managers.Interfaces
         /// <param name="id">The identifier of the album</param>
         /// <returns>Number of song contained into the album</returns>
         int GetNumberOfSongs(int id);
+        /// <summary>
+        /// Get the artist information for the album
+        /// </summary>
+        /// <param name="id">The identifier of the album</param>
+        /// <returns>An artist entity</returns>
+        EArtist GetArtistInfo(int id);
     }
 }

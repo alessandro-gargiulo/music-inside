@@ -24,7 +24,7 @@ namespace MusicInside.WebApi.Controllers
             _logger = logger;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet(WebConstants.ROUTES.ALBUM_SUB_COVER_ROUTE)]
         public ActionResult GetCoverImage(int id = -1)
         {
             try
@@ -52,7 +52,7 @@ namespace MusicInside.WebApi.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet(WebConstants.ROUTES.ALBUM_SUB_LIST_ROUTE)]
         public IList<CAlbumListEntry> GetList()
         {
             IList<CAlbumListEntry> result = new List<CAlbumListEntry>();
@@ -64,11 +64,54 @@ namespace MusicInside.WebApi.Controllers
                     result.Add(new CAlbumListEntry
                     {
                         Id = album.Id,
-                        Name = album.Title
-                        // Other properties
+                        Name = album.Title,
+                        ArtistId = album.ArtistId,
+                        ArtistName = album.ArtistName,
+                        NumberSong = album.NumberSong
                     });
                 }
             }catch(Exception ex)
+            {
+                _logger.ErrorFormat("{0} | {1}: An error occurred [{2}]", this.GetType().Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
+                Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            }
+            return result;
+        }
+
+        [HttpGet(WebConstants.ROUTES.ALBUM_SUB_DETAIL_ROUTE)]
+        public CAlbumDetail GetAlbum(int id = -1)
+        {
+            CAlbumDetail result = new CAlbumDetail();
+            try
+            {
+                EAlbum album = _albumManager.GetAlbumById(id);
+                if(album != null)
+                {
+                    result.Id = album.Id;
+                    result.Title = album.Title;
+                    result.Artist = album.ArtistName;
+                    List<ESong> songs = _albumManager.GetSongsInAlbum(id);
+                    foreach(ESong sng in songs)
+                    {
+                        result.SongList.Add(new SongShortInfo
+                        {
+                            ID = sng.Id,
+                            Title = sng.Title
+                        });
+                    }
+                }
+            }
+            catch (InvalidIdException iidex)
+            {
+                _logger.ErrorFormat("{0} | {1}: An error occurred [{2}]", this.GetType().Name, MethodInfo.GetCurrentMethod().Name, iidex.Message);
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            }
+            catch (EntryNotPresentException enpex)
+            {
+                _logger.ErrorFormat("{0} | {1}: An error occurred [{2}]", this.GetType().Name, MethodInfo.GetCurrentMethod().Name, enpex.Message);
+                Response.StatusCode = (int)HttpStatusCode.NotFound;
+            }
+            catch (Exception ex)
             {
                 _logger.ErrorFormat("{0} | {1}: An error occurred [{2}]", this.GetType().Name, MethodInfo.GetCurrentMethod().Name, ex.Message);
                 Response.StatusCode = (int)HttpStatusCode.InternalServerError;

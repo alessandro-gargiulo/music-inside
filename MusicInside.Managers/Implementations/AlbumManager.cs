@@ -1,9 +1,9 @@
 ﻿using log4net;
 using Microsoft.EntityFrameworkCore;
+using MusicInside.Managers.Context;
 using MusicInside.Managers.Entities;
 using MusicInside.Managers.Exceptions;
 using MusicInside.Managers.Interfaces;
-using MusicInside.Managers.Context;
 using MusicInside.Models.Models;
 using System;
 using System.Collections.Generic;
@@ -48,6 +48,32 @@ namespace MusicInside.Managers.Implementations
             return eAlbum;
         }
 
+        public EArtist GetArtistInfo(int id)
+        {
+            if (id < 0) throw new InvalidIdException(id);
+            EArtist eArtist = new EArtist();
+            try
+            {
+                // Retrieve the first song of the album
+                Song firstSong = _dbContext.Albums.Where(x => x.Id == id).FirstOrDefault().Songs.FirstOrDefault();
+                if (firstSong != null)
+                {
+                    int artistId = firstSong.Artists.FirstOrDefault(x => x.IsPrincipalArtist == true).ArtistId;
+                    Artist artist = _dbContext.Artists.Where(x => x.Id == artistId).FirstOrDefault();
+                    eArtist.CopyFromModel(artist);
+                }
+                else
+                {
+                    throw new EntryNotPresentException(id);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return eArtist;
+        }
+
         public List<EAlbum> GetAll()
         {
             List<EAlbum> eAlbumList = new List<EAlbum>();
@@ -58,6 +84,10 @@ namespace MusicInside.Managers.Implementations
                 {
                     EAlbum eAlbum = new EAlbum();
                     eAlbum.CopyFromModel(album);
+                    eAlbum.NumberSong = GetNumberOfSongs(album.Id);
+                    EArtist artist = GetArtistInfo(album.Id);
+                    eAlbum.ArtistId = artist.Id;
+                    eAlbum.ArtistName = string.Concat(artist.Name, " ", artist.Surname);
                     eAlbumList.Add(eAlbum);
                 }
             }
@@ -66,6 +96,34 @@ namespace MusicInside.Managers.Implementations
                 throw;
             }
             return eAlbumList;
+        }
+
+        public List<ESong> GetSongsInAlbum(int id)
+        {
+            if (id < 0) throw new InvalidIdException(id);
+            List<ESong> songs = new List<ESong>();
+            try
+            {
+                Album album = _dbContext.Albums.Where(x => x.Id == id).Include(y => y.Songs).FirstOrDefault();
+                if (album != null)
+                {
+                    foreach (Song song in album.Songs)
+                    {
+                        ESong eSong = new ESong();
+                        eSong.CopyFromModel(song);
+                        songs.Add(eSong);
+                    }
+                }
+                else
+                {
+                    throw new EntryNotPresentException(id);
+                }
+                return songs;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public byte[] GetCoverFile(int id)
@@ -110,34 +168,6 @@ namespace MusicInside.Managers.Implementations
                 throw;
             }
             return number;
-        }
-
-        public List<ESong> GetSongsInAlbum(int id)
-        {
-            if (id < 0) throw new InvalidIdException(id);
-            List<ESong> songs = new List<ESong>();
-            try
-            {
-                Album album = _dbContext.Albums.Where(x => x.Id == id).Include(y => y.Songs).FirstOrDefault();
-                if (album != null)
-                {
-                    foreach(Song song in album.Songs)
-                    {
-                        ESong eSong = new ESong();
-                        eSong.CopyFromModel(song);
-                        songs.Add(eSong);
-                    }
-                }
-                else
-                {
-                    throw new EntryNotPresentException(id);
-                }
-                return songs;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
         }
     }
 }
