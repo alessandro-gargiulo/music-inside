@@ -75,6 +75,29 @@ namespace MusicInside.Managers.Implementations
             return eArtist;
         }
 
+        public EAlbum GetAlbumInfo(int id)
+        {
+            if (id < 0) throw new InvalidIdException(id);
+            EAlbum eAlbum = new EAlbum();
+            try
+            {
+                Album album = _dbContext.Songs.Where(x => x.Id == id).FirstOrDefault().Album;
+                if (album != null)
+                {
+                    eAlbum.CopyFromModel(album);
+                }
+                else
+                {
+                    throw new EntryNotPresentException(id);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return eAlbum;
+        }
+
         public List<ESong> GetAll()
         {
             List<ESong> eSongList = new List<ESong>();

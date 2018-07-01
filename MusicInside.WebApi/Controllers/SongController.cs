@@ -33,12 +33,18 @@ namespace MusicInside.WebApi.Controllers
                 foreach (ESong song in songs)
                 {
                     List<EGenre> genres = _songManager.GetGenresForSong(song.Id);
+                    EAlbum eAlbum = _songManager.GetAlbumInfo(song.Id);
+                    EArtist eArtist = _songManager.GetArtistInfo(song.Id);
                     result.Add(new CSongListEntry
                     {
                         Id = song.Id,
                         Title = song.Title,
+                        ArtistName = string.Concat(eArtist.Name, " ", eArtist.Surname),
+                        AlbumName = eAlbum.Title,
+                        Genre = string.Join(" ,", genres),
                         Year = song.Year,
-                        Genre = string.Join(" ,", genres)
+                        ArtistId = eArtist.Id,
+                        AlbumId = eAlbum.Id
                     });
                 }
             }

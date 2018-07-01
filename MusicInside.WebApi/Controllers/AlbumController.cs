@@ -86,11 +86,12 @@ namespace MusicInside.WebApi.Controllers
             try
             {
                 EAlbum album = _albumManager.GetAlbumById(id);
+                EArtist artist = _albumManager.GetArtistInfo(id);
                 if(album != null)
                 {
                     result.Id = album.Id;
                     result.Title = album.Title;
-                    result.Artist = album.ArtistName;
+                    result.Artist = string.Concat(artist.Name, " ", artist.Surname);
                     List<ESong> songs = _albumManager.GetSongsInAlbum(id);
                     foreach(ESong sng in songs)
                     {

@@ -37,6 +37,12 @@ namespace MusicInside.Managers.Interfaces
         /// <returns>A single artist, the principal artist</returns>
         EArtist GetArtistInfo(int id);
         /// <summary>
+        /// Retrieve the album information which contains the song
+        /// </summary>
+        /// <param name="id">The identifier of the song</param>
+        /// <returns>A single album entity</returns>
+        EAlbum GetAlbumInfo(int id);
+        /// <summary>
         /// Retrieve the media file for the album
         /// </summary>
         /// <param name="id">The identifier of the song</param>
