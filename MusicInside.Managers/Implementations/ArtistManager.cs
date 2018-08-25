@@ -13,15 +13,20 @@ namespace MusicInside.Managers.Implementations
 {
     public class ArtistManager : IArtistManager
     {
+        #region Private Members
         private MusicInsideDbContext _dbContext;
         private ILog _logger;
+        #endregion
 
+        #region Constructors
         public ArtistManager(MusicInsideDbContext context, ILog logger)
         {
             _dbContext = context;
             _logger = logger;
         }
+        #endregion
 
+        #region Manager Implementation
         public List<EArtist> GetAll()
         {
             List<EArtist> eArtistList = new List<EArtist>();
@@ -117,5 +122,6 @@ namespace MusicInside.Managers.Implementations
             }
             return number;
         }
+        #endregion
     }
 }

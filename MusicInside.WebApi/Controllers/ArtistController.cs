@@ -4,9 +4,13 @@ namespace MusicInside.WebApi.Controllers
 {
     public class ArtistController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        #region Private Members
+        #endregion
+
+        #region Constructors
+        #endregion
+
+        #region API Methods
+        #endregion
     }
 }

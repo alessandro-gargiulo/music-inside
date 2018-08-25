@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MusicInside.Managers.Context;
 using MusicInside.Managers.Entities;
-using MusicInside.Managers.Exceptions;
+using MusicInside.Managers.Exceptions;  
 using MusicInside.Managers.Interfaces;
 using MusicInside.Models.Models;
 using System;
@@ -15,17 +15,22 @@ namespace MusicInside.Managers.Implementations
 {
     public class SongManager : ISongManager
     {
+        #region Private Members
         private MusicInsideDbContext _dbContext;
         private ILog _logger;
         private string _fileMusicRoot;
+        #endregion
 
+        #region Constructors
         public SongManager(MusicInsideDbContext context, ILog logger, string fileMusicRoot)
         {
             _dbContext = context;
             _logger = logger;
             _fileMusicRoot = fileMusicRoot;
         }
+        #endregion
 
+        #region Manager Implementation
         public ESong GetSongById(int id)
         {
             if (id < 0) throw new InvalidIdException(id);
@@ -273,5 +278,6 @@ namespace MusicInside.Managers.Implementations
                 throw;
             }
         }
+        #endregion
     }
 }

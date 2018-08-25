@@ -14,17 +14,22 @@ namespace MusicInside.Managers.Implementations
 {
     public class AlbumManager : IAlbumManager
     {
+        #region Private Members
         private MusicInsideDbContext _dbContext;
         private ILog _logger;
         private string _fileMusicRoot;
+        #endregion
 
+        #region Constructors
         public AlbumManager(MusicInsideDbContext context, ILog logger, string fileMusicRoot)
         {
             _dbContext = context;
             _logger = logger;
             _fileMusicRoot = fileMusicRoot;
         }
+        #endregion
 
+        #region Manager Implementation
         public EAlbum GetAlbumById(int id)
         {
             if (id < 0) throw new InvalidIdException(id);
@@ -164,5 +169,6 @@ namespace MusicInside.Managers.Implementations
             }
             return number;
         }
+        #endregion
     }
 }

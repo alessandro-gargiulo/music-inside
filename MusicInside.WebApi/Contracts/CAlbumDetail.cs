@@ -12,12 +12,13 @@ namespace MusicInside.WebApi.Contracts
         public int Id { get; set; }
         public string Title { get; set; }
         public string Artist { get; set; }
+        public int ArtistId { get; set; }
         public IList<SongShortInfo> SongList { get; set; }
     }
 
     public class SongShortInfo
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Title { get; set; }
     }
 }
